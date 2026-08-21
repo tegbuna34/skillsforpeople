@@ -1,0 +1,3 @@
+# Committed .skill / .md files live under /public/skills/<slug>/.
+# Vercel serves anything in /public at a real URL, so the Notion "Skill File URL"
+# and "Prompt File URL" fields should hold `/skills/<slug>/<file>` once ready.

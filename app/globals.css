@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --navy: #24366e;
+  --blue: #5e749e;
+  --peach: #eabfa8;
+  --mint: #f0f5f6;
+  --white: #ffffff;
+
+  --color-text: var(--navy);
+  --color-text-muted: rgba(36, 54, 110, 0.7);
+  --color-bg: var(--mint);
+  --color-surface: var(--white);
+  --color-surface-border: rgba(36, 54, 110, 0.1);
+  --color-accent: var(--blue);
+  --color-accent-tint: rgba(94, 116, 158, 0.12);
+  --color-cta-bg: var(--navy);
+  --color-cta-bg-hover: var(--blue);
+  --color-inverse-bg: var(--navy);
+  --color-inverse-text: var(--mint);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sora), -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* Utility: clamp text to N lines */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
