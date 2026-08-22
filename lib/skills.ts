@@ -155,7 +155,9 @@ async function queryAllPublishedSkillPages(): Promise<any[]> {
         property: "Status",
         select: { equals: "Published" },
       },
-      sorts: [{ property: "Date Published", direction: "descending" }],
+      // Sort intentionally omitted — the property name "Date Published" from
+      // the schema doc did not match Notion's actual property. If a specific
+      // order matters later, confirm the exact property name and re-add.
     });
     pages.push(...res.results);
     cursor = res.has_more ? res.next_cursor : undefined;
