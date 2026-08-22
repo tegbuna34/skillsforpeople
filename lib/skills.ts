@@ -17,6 +17,8 @@
  * or generateStaticParams; there are no per-request Notion calls.
  */
 
+import { existsSync } from "node:fs";
+import path from "node:path";
 import { Client } from "@notionhq/client";
 import { MOCK_SKILLS } from "./skills.mock";
 
@@ -100,6 +102,35 @@ function readRelationIds(prop: any): string[] {
   return (prop?.relation ?? []).map((r: any) => r.id).filter(Boolean);
 }
 
+// Prefer the on-disk file at /public/skills/<slug>/<slug>.<ext> over Notion's
+// URL field: the file's existence on disk is the ground truth for whether the
+// download button should be enabled, and this removes an entire class of
+// "Notion property renamed and my read returns null" failures. Notion's field
+// is still honored when it points at an external URL (someone hosts a version
+// off-site).
+function resolveDownloadUrl(
+  slug: string,
+  ext: "skill" | "md",
+  notionUrl: string | null
+): string | null {
+  const conventionalRel = `/skills/${slug}/${slug}.${ext}`;
+  const diskPath = path.join(process.cwd(), "public", conventionalRel);
+  if (existsSync(diskPath)) return conventionalRel;
+  if (notionUrl && !notionUrl.startsWith("/skills/")) return notionUrl;
+  return null;
+}
+
+// Notion property names for the episode URL have drifted before ("userDefined:URL"
+// vs "URL" vs "Episode URL"). Try a small set of the most likely names.
+function readEpisodeUrl(p: any): string {
+  const candidates = ["userDefined:URL", "URL", "Episode URL", "Link", "url"];
+  for (const name of candidates) {
+    const v = readUrl(p[name]);
+    if (v) return v;
+  }
+  return "";
+}
+
 // Split a text block into an ordered list of steps. Accepts:
 //   "1. Do X\n2. Do Y"  or  "- Do X\n- Do Y"  or  plain newline-separated lines.
 function parseSteps(raw: string): string[] {
@@ -123,7 +154,7 @@ async function fetchEpisodesByIds(ids: string[]): Promise<Map<string, Episode>> 
     map.set(page.id, {
       podcast: readRichText(p["Podcast Name"]) || readSelect(p["Podcast Name"]),
       title: readTitle(p["Episode Title"]),
-      url: readUrl(p["userDefined:URL"]) ?? "",
+      url: readEpisodeUrl(p),
       guest: {
         name: readRichText(p["Guest Name"]) || readTitle(p["Guest Name"]),
         // NB: Notion property is literally "Guest TItle" — do not "fix" the typo,
@@ -184,8 +215,8 @@ function mapSkillPage(page: any, episodeMap: Map<string, Episode>): Skill | null
     definitionOfDone: readRichText(p["Definition of Done"]),
     commonPitfalls: readRichText(p["Common Pitfalls (display)"]),
     fullDescription: readRichText(p["Full Description"]),
-    skillFileUrl: readUrl(p["Skill File URL"]),
-    promptFileUrl: readUrl(p["Prompt File URL"]),
+    skillFileUrl: resolveDownloadUrl(slug, "skill", readUrl(p["Skill File URL"])),
+    promptFileUrl: resolveDownloadUrl(slug, "md", readUrl(p["Prompt File URL"])),
     compatibleTools: readMultiSelect(p["Compatible Tools"]),
     tags: readMultiSelect(p["Tags"]),
     datePublished: readDate(p["Date Published"]),
