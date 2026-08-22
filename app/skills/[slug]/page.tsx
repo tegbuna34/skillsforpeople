@@ -1,9 +1,26 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { promises as fs } from "node:fs";
+import path from "node:path";
 import { getPublishedSkills, getSkillBySlug } from "@/lib/skills";
 import { contributorRoleLine, initials, skillPromptMarkdown } from "@/lib/format";
 import DetailActions from "./DetailActions";
+
+// If the Notion Prompt File URL points into /public/skills/, read the real
+// .md file at build time and hand its contents to the Copy-prompt button.
+// The .md is authored to be a self-contained pasteable prompt with its own
+// framing, so falling back to a synthesized version silently would drop
+// that framing. Only used as fallback when the real file isn't there.
+async function readPublicPromptFile(promptFileUrl: string | null): Promise<string | null> {
+  if (!promptFileUrl || !promptFileUrl.startsWith("/skills/")) return null;
+  const filePath = path.join(process.cwd(), "public", promptFileUrl);
+  try {
+    return await fs.readFile(filePath, "utf8");
+  } catch {
+    return null;
+  }
+}
 
 export async function generateStaticParams() {
   const skills = await getPublishedSkills();
@@ -46,7 +63,9 @@ export default async function SkillDetailPage({ params }: { params: { slug: stri
   const skill = await getSkillBySlug(params.slug);
   if (!skill) notFound();
 
-  const promptMarkdown = skillPromptMarkdown(skill);
+  const realPromptFileContent = await readPublicPromptFile(skill.promptFileUrl);
+  const promptText = realPromptFileContent ?? skillPromptMarkdown(skill);
+  const promptTextIsGenerated = realPromptFileContent === null;
   const guest = skill.episode?.guest;
   const linkedinUrl = guest
     ? `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(
@@ -125,7 +144,8 @@ export default async function SkillDetailPage({ params }: { params: { slug: stri
           vertical={skill.vertical}
           skillFileUrl={skill.skillFileUrl}
           promptFileUrl={skill.promptFileUrl}
-          promptMarkdown={promptMarkdown}
+          promptText={promptText}
+          promptTextIsGenerated={promptTextIsGenerated}
           compatibleTools={skill.compatibleTools}
         />
       </section>

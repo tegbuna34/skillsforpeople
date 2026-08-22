@@ -20,14 +20,25 @@ export default function DetailActions({
   vertical,
   skillFileUrl,
   promptFileUrl,
-  promptMarkdown,
+  promptText,
+  promptTextIsGenerated,
   compatibleTools,
 }: {
   slug: string;
   vertical: string;
+  // Direct link to a real .skill zip in /public/skills/<slug>/. If null, the
+  // Download-skill button is disabled — we cannot fabricate a valid zip
+  // client-side, so no fallback.
   skillFileUrl: string | null;
+  // Direct link to the real .md prompt in /public/skills/<slug>/. If null,
+  // Download-.md falls back to the synthesized markdown, since a plain-text
+  // prompt is safe to generate from Notion fields.
   promptFileUrl: string | null;
-  promptMarkdown: string;
+  // The text the "Copy prompt" button writes to the clipboard. If the real
+  // .md file exists in /public/skills/, this is that file's contents (read
+  // at build time). Otherwise it's the synthesized version.
+  promptText: string;
+  promptTextIsGenerated: boolean;
   compatibleTools: string[];
 }) {
   const [copied, setCopied] = useState(false);
@@ -38,24 +49,20 @@ export default function DetailActions({
   };
 
   const onCopy = async () => {
-    if (!promptMarkdown) return;
-    await navigator.clipboard.writeText(promptMarkdown);
+    if (!promptText) return;
+    await navigator.clipboard.writeText(promptText);
     flash(setCopied);
-    track("skill_copy_prompt", { slug, vertical });
+    track("skill_copy_prompt", {
+      slug,
+      vertical,
+      source: promptTextIsGenerated ? "generated" : "file",
+    });
   };
 
   const onDownloadSkill = () => {
-    if (skillFileUrl) {
-      track("skill_download", { slug, vertical, format: "skill" });
-      window.location.href = skillFileUrl;
-      return;
-    }
-    // Fall back to a generated .md-as-.skill so the button never leads nowhere
-    // when the file URL isn't populated. This mirrors the mock's behavior.
-    if (promptMarkdown) {
-      downloadText(`${slug}.skill`, promptMarkdown);
-      track("skill_download", { slug, vertical, format: "skill-generated" });
-    }
+    if (!skillFileUrl) return;
+    track("skill_download", { slug, vertical, format: "skill" });
+    window.location.href = skillFileUrl;
   };
 
   const onDownloadMd = () => {
@@ -64,15 +71,15 @@ export default function DetailActions({
       window.location.href = promptFileUrl;
       return;
     }
-    if (promptMarkdown) {
-      downloadText(`${slug}.md`, promptMarkdown);
+    if (promptText) {
+      downloadText(`${slug}.md`, promptText);
       track("skill_download", { slug, vertical, format: "md-generated" });
     }
   };
 
-  const canSkill = Boolean(skillFileUrl || promptMarkdown);
-  const canMd = Boolean(promptFileUrl || promptMarkdown);
-  const canCopy = Boolean(promptMarkdown);
+  const canSkill = Boolean(skillFileUrl);
+  const canMd = Boolean(promptFileUrl || promptText);
+  const canCopy = Boolean(promptText);
 
   const compatText =
     compatibleTools.length > 0 ? compatibleTools.join(", ") : "ChatGPT, Claude, Other";
