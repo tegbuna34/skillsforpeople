@@ -2,8 +2,16 @@ import Link from "next/link";
 import type { Skill } from "@/lib/skills";
 import { contributorRoleLine } from "@/lib/format";
 
-export default function SkillCard({ skill, showArrow = false }: { skill: Skill; showArrow?: boolean }) {
-  const guest = skill.episode?.guest;
+export default function SkillCard({
+  skill,
+  showArrow = false,
+  hideGuest = false,
+}: {
+  skill: Skill;
+  showArrow?: boolean;
+  hideGuest?: boolean;
+}) {
+  const guest = hideGuest ? undefined : skill.episode?.guest;
   return (
     <Link
       href={`/skills/${skill.slug}`}
@@ -18,12 +26,16 @@ export default function SkillCard({ skill, showArrow = false }: { skill: Skill; 
       {skill.description && (
         <div className="flex-1 text-[14px] text-navy/70">{skill.description}</div>
       )}
-      {guest && (
+      {(guest || showArrow) && (
         <div className="flex items-end justify-between gap-3 border-t border-navy/10 pt-3">
-          <div>
-            <div className="text-[12.5px] font-semibold text-navy">{guest.name}</div>
-            <div className="text-[11.5px] text-navy/50">{contributorRoleLine(guest)}</div>
-          </div>
+          {guest ? (
+            <div>
+              <div className="text-[12.5px] font-semibold text-navy">{guest.name}</div>
+              <div className="text-[11.5px] text-navy/50">{contributorRoleLine(guest)}</div>
+            </div>
+          ) : (
+            <div />
+          )}
           {showArrow && (
             <span className="whitespace-nowrap text-[13.5px] font-bold text-blue">View →</span>
           )}

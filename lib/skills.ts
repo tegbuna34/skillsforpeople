@@ -37,6 +37,7 @@ export interface Episode {
 }
 
 export interface Skill {
+  notionPageId?: string;
   slug: string;
   name: string;
   vertical: string;
@@ -206,6 +207,7 @@ function mapSkillPage(page: any, episodeMap: Map<string, Episode>): Skill | null
   const episode = episodeIds.length > 0 ? episodeMap.get(episodeIds[0]) ?? null : null;
 
   return {
+    notionPageId: page.id,
     slug,
     name,
     vertical: readSelect(p["HR Vertical"]),
@@ -290,6 +292,13 @@ export async function getPublishedSkills(): Promise<Skill[]> {
 export async function getSkillBySlug(slug: string): Promise<Skill | null> {
   const all = await getPublishedSkills();
   return all.find((s) => s.slug === slug) ?? null;
+}
+
+export async function getSkillsByNotionIds(ids: string[]): Promise<Skill[]> {
+  if (ids.length === 0) return [];
+  const wanted = new Set(ids);
+  const all = await getPublishedSkills();
+  return all.filter((s) => s.notionPageId && wanted.has(s.notionPageId));
 }
 
 export async function getVerticals(): Promise<string[]> {
