@@ -15,6 +15,24 @@ export function contributorRoleLine(c: Contributor): string {
   return parts.join(", ");
 }
 
+// Skills on this site are built by the Skills for People team from a guest's
+// public podcast remarks — the guest did not write, review, or approve the
+// skill. This framing must read as "inspired by," never as a byline
+// ("by [Name]"), anywhere a guest is named. See attribution wording brief,
+// 2026-08-25.
+export function inspiredByName(guest: Contributor): string {
+  return `Inspired by ${guest.name}`;
+}
+
+export function inspiredBySourceLine(guest: Contributor, podcast?: string): string {
+  const role =
+    guest.title && guest.company
+      ? `${guest.title} at ${guest.company}`
+      : guest.title || guest.company || "";
+  const base = role ? `Inspired by ${guest.name}, ${role}` : `Inspired by ${guest.name}`;
+  return podcast ? `${base} — heard on ${podcast}` : base;
+}
+
 export function skillPromptMarkdown(skill: {
   name: string;
   description: string;
@@ -23,14 +41,16 @@ export function skillPromptMarkdown(skill: {
   definitionOfDone: string;
   commonPitfalls: string;
   fullDescription: string;
-  episode: { guest: Contributor } | null;
+  episode: { guest: Contributor; podcast: string } | null;
 }): string {
   const lines: string[] = [];
   lines.push(`# ${skill.name}`, "");
   if (skill.description) lines.push(`**What it does:** ${skill.description}`, "");
   if (skill.episode) {
-    const g = skill.episode.guest;
-    lines.push(`**Source:** ${g.name}, ${contributorRoleLine(g)}`, "");
+    lines.push(
+      `**${inspiredBySourceLine(skill.episode.guest, skill.episode.podcast)}**`,
+      ""
+    );
   }
   if (skill.whatItDoes && skill.whatItDoes !== skill.description) {
     lines.push("## What this skill does", skill.whatItDoes, "");

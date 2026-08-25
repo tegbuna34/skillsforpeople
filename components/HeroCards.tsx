@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import type { Skill } from "@/lib/skills";
-import { contributorRoleLine, initials } from "@/lib/format";
+import { inspiredByName } from "@/lib/format";
+import PodcastMicIcon from "@/components/PodcastMicIcon";
 
 export default function HeroCards({ skills }: { skills: Skill[] }) {
   const [index, setIndex] = useState(0);
@@ -56,14 +57,9 @@ export default function HeroCards({ skills }: { skills: Skill[] }) {
           <div className="mb-4 text-[14.5px] text-navy/70">{front.description}</div>
         )}
         {guest && (
-          <div className="flex items-center gap-3 border-t border-navy/10 pt-4">
-            <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-navy text-[12px] font-bold text-mint">
-              {initials(guest.name)}
-            </div>
-            <div>
-              <div className="text-[13px] font-semibold">{guest.name}</div>
-              <div className="text-[12px] text-navy/55">{contributorRoleLine(guest)}</div>
-            </div>
+          <div className="flex items-center gap-1.5 border-t border-navy/10 pt-4 text-[12.5px] text-navy/65">
+            <PodcastMicIcon className="flex-shrink-0 text-navy/45" />
+            <span>{inspiredByName(guest)}</span>
           </div>
         )}
       </div>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Skill } from "@/lib/skills";
-import { contributorRoleLine } from "@/lib/format";
+import { inspiredByName } from "@/lib/format";
+import PodcastMicIcon from "@/components/PodcastMicIcon";
 
 export default function SkillCard({
   skill,
@@ -27,11 +28,11 @@ export default function SkillCard({
         <div className="flex-1 text-[14px] text-navy/70">{skill.description}</div>
       )}
       {(guest || showArrow) && (
-        <div className="flex items-end justify-between gap-3 border-t border-navy/10 pt-3">
+        <div className="flex items-center justify-between gap-3 border-t border-navy/10 pt-3">
           {guest ? (
-            <div>
-              <div className="text-[12.5px] font-semibold text-navy">{guest.name}</div>
-              <div className="text-[11.5px] text-navy/50">{contributorRoleLine(guest)}</div>
+            <div className="flex items-center gap-1.5 text-[12px] text-navy/60">
+              <PodcastMicIcon className="flex-shrink-0 text-navy/40" />
+              <span>{inspiredByName(guest)}</span>
             </div>
           ) : (
             <div />

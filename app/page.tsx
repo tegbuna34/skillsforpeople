@@ -38,8 +38,8 @@ export default async function LandingPage() {
             Practical AI skills for HR, built from what actually worked.
           </h1>
           <p className="mb-8 max-w-[520px] text-[19px] text-navy/75">
-            Every skill in this library comes from a real HR leader describing a real workflow on a
-            podcast — turned into a downloadable tool you can run with Claude or ChatGPT this week.
+            We turn real workflows HR leaders describe on podcasts into downloadable AI skills you
+            can run with Claude or ChatGPT this week.
           </p>
           <div className="flex flex-wrap items-center gap-4">
             <Link

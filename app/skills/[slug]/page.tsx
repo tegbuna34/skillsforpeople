@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import { getPublishedSkills, getSkillBySlug } from "@/lib/skills";
-import { contributorRoleLine, initials, skillPromptMarkdown } from "@/lib/format";
+import { inspiredBySourceLine, skillPromptMarkdown } from "@/lib/format";
+import PodcastMicIcon from "@/components/PodcastMicIcon";
 import DetailActions from "./DetailActions";
 
 // If the Notion Prompt File URL points into /public/skills/, read the real
@@ -110,31 +111,54 @@ export default async function SkillDetailPage({ params }: { params: { slug: stri
             <p className="mb-5 max-w-[620px] text-lg text-navy/75">{skill.description}</p>
           )}
           {guest && (
-            <div className="flex items-center gap-2.5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-navy text-[13px] font-bold text-mint">
-                {initials(guest.name)}
+            <div className="max-w-[620px]">
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[14px] text-navy/75">
+                <PodcastMicIcon className="flex-shrink-0 text-navy/50" />
+                <span>
+                  {inspiredBySourceLine(guest, skill.episode?.podcast)}
+                  {guest.slug && (
+                    <>
+                      {" · "}
+                      <Link
+                        href={`/contributors/${guest.slug}`}
+                        className="font-semibold text-blue no-underline hover:underline"
+                      >
+                        View profile
+                      </Link>
+                    </>
+                  )}
+                  {skill.episode?.url && (
+                    <>
+                      {" · "}
+                      <a
+                        href={skill.episode.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-semibold text-blue no-underline hover:underline"
+                      >
+                        Listen to episode ↗
+                      </a>
+                    </>
+                  )}
+                  {linkedinUrl && (
+                    <>
+                      {" · "}
+                      <a
+                        href={linkedinUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-semibold text-blue no-underline hover:underline"
+                      >
+                        Guest&apos;s LinkedIn ↗
+                      </a>
+                    </>
+                  )}
+                </span>
               </div>
-              <div>
-                <div className="text-[14.5px] font-semibold">{guest.name}</div>
-                <div className="text-[13px] text-navy/55">{contributorRoleLine(guest)}</div>
-              </div>
-              {linkedinUrl && (
-                <a
-                  href={linkedinUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="LinkedIn profile"
-                  className="ml-1 flex h-7 w-7 items-center justify-center rounded-md border border-navy/15 bg-white"
-                >
-                  <svg width="14" height="14" viewBox="0 0 76.624 65.326" aria-hidden="true">
-                    <path
-                      d="M958.98,112.559h-9.6V97.525c0-3.585-.064-8.2-4.993-8.2-5,0-5.765,3.906-5.765,7.939v15.294h-9.6V81.642h9.216v4.225h.129a10.1,10.1,0,0,1,9.093-4.994c9.73,0,11.524,6.4,11.524,14.726ZM918.19,77.416a5.571,5.571,0,1,1,5.57-5.572,5.571,5.571,0,0,1-5.57,5.572m4.8,35.143h-9.61V81.642h9.61Zm40.776-55.2h-55.21a4.728,4.728,0,0,0-4.781,4.67v55.439a4.731,4.731,0,0,0,4.781,4.675h55.21a4.741,4.741,0,0,0,4.8-4.675V62.025a4.738,4.738,0,0,0-4.8-4.67"
-                      transform="translate(-903.776 -57.355)"
-                      fill="#0A66C2"
-                    />
-                  </svg>
-                </a>
-              )}
+              <p className="mt-1.5 text-[12.5px] text-navy/50">
+                This skill was built by the Skills for People team based on {guest.name}&apos;s
+                public remarks — not written or reviewed by them.
+              </p>
             </div>
           )}
         </div>

@@ -26,6 +26,7 @@ export interface Contributor {
   name: string;
   title: string;
   company: string;
+  slug?: string;
 }
 
 export interface Episode {
@@ -169,6 +170,33 @@ async function fetchEpisodesByIds(ids: string[]): Promise<Map<string, Episode>> 
   return map;
 }
 
+// Skills used to carry the guest's name/title/company as flat text on the
+// Episode (Guest Name / Guest Title / Guest Company). Those fields were
+// renamed to "... (legacy - use Contributor relation)" when the Contributors
+// database was introduced, so they now read back empty. The Skill's new
+// "Contributor" relation is the current source of truth for who to display;
+// this reads it directly rather than depending on lib/contributors.ts, to
+// avoid a circular import between the two data modules.
+async function fetchContributorsByIds(ids: string[]): Promise<Map<string, Contributor>> {
+  const map = new Map<string, Contributor>();
+  if (ids.length === 0) return map;
+  const unique = Array.from(new Set(ids));
+  const results = await Promise.all(
+    unique.map((id) => notion().pages.retrieve({ page_id: id }).catch(() => null))
+  );
+  for (const page of results) {
+    if (!page || !("properties" in page)) continue;
+    const p: any = page.properties;
+    map.set(page.id, {
+      name: readTitle(p["Contributor Name"]),
+      title: readRichText(p["Current Title"]),
+      company: readRichText(p["Current Company"]),
+      slug: readRichText(p["Contributor Slug"]) || undefined,
+    });
+  }
+  return map;
+}
+
 async function queryAllPublishedSkillPages(): Promise<any[]> {
   if (!SKILLS_DS) return [];
   const pages: any[] = [];
@@ -197,14 +225,26 @@ async function queryAllPublishedSkillPages(): Promise<any[]> {
   return pages;
 }
 
-function mapSkillPage(page: any, episodeMap: Map<string, Episode>): Skill | null {
+function mapSkillPage(
+  page: any,
+  episodeMap: Map<string, Episode>,
+  contributorMap: Map<string, Contributor>
+): Skill | null {
   const p: any = page.properties;
   const slug = readRichText(p["Skill Slug"]);
   const name = readTitle(p["Skill Name"]);
   if (!slug || !name) return null;
 
   const episodeIds = readRelationIds(p["Source Episode"]);
-  const episode = episodeIds.length > 0 ? episodeMap.get(episodeIds[0]) ?? null : null;
+  const rawEpisode = episodeIds.length > 0 ? episodeMap.get(episodeIds[0]) ?? null : null;
+
+  // Prefer the Skill's own Contributor relation over the Episode's legacy flat
+  // guest fields (see fetchContributorsByIds above).
+  const contributorIds = readRelationIds(p["Contributor"]);
+  const contributor =
+    contributorIds.length > 0 ? contributorMap.get(contributorIds[0]) ?? null : null;
+  const episode =
+    rawEpisode && contributor ? { ...rawEpisode, guest: contributor } : rawEpisode;
 
   return {
     notionPageId: page.id,
@@ -265,6 +305,8 @@ async function loadSkills(): Promise<Skill[]> {
   const pages = await queryAllPublishedSkillPages();
   const episodeIds = pages.flatMap((p) => readRelationIds(p.properties["Source Episode"]));
   const episodeMap = EPISODES_DS ? await fetchEpisodesByIds(episodeIds) : new Map();
+  const contributorIds = pages.flatMap((p) => readRelationIds(p.properties["Contributor"]));
+  const contributorMap = await fetchContributorsByIds(contributorIds);
 
   // Attribution to a named source is the site's core credibility premise —
   // a Published skill with no Source Episode does not render (see
@@ -275,7 +317,7 @@ async function loadSkills(): Promise<Skill[]> {
   const mapped: Skill[] = [];
   const seenSlugs = new Set<string>();
   for (const page of pages) {
-    const skill = mapSkillPage(page, episodeMap);
+    const skill = mapSkillPage(page, episodeMap, contributorMap);
     if (!skill) continue;
     if (seenSlugs.has(skill.slug)) continue;
     seenSlugs.add(skill.slug);
