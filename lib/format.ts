@@ -10,26 +10,28 @@ export function initials(name: string): string {
     .toUpperCase();
 }
 
-export function contributorRoleLine(c: Contributor): string {
-  const parts = [c.title, c.company].filter(Boolean);
-  return parts.join(", ");
-}
-
 // Skills on this site are built by the Skills for People team from a guest's
 // public podcast remarks — the guest did not write, review, or approve the
 // skill. This framing must read as "inspired by," never as a byline
 // ("by [Name]"), anywhere a guest is named. See attribution wording brief,
-// 2026-08-25.
+// 2026-08-25, and the Skill Detail design update, 2026-08-25.
 export function inspiredByName(guest: Contributor): string {
   return `Inspired by ${guest.name}`;
 }
 
-export function inspiredBySourceLine(guest: Contributor, podcast?: string): string {
-  const role =
-    guest.title && guest.company
-      ? `${guest.title} at ${guest.company}`
-      : guest.title || guest.company || "";
-  const base = role ? `Inspired by ${guest.name}, ${role}` : `Inspired by ${guest.name}`;
+function roleAtCompany(guest: Contributor): string {
+  return guest.title && guest.company
+    ? `${guest.title} at ${guest.company}`
+    : guest.title || guest.company || "";
+}
+
+export function inspiredByLine(guest: Contributor): string {
+  const role = roleAtCompany(guest);
+  return role ? `Inspired by ${guest.name}, ${role}` : `Inspired by ${guest.name}`;
+}
+
+export function inspiredBySourceText(guest: Contributor, podcast?: string): string {
+  const base = inspiredByLine(guest);
   return podcast ? `${base} — heard on ${podcast}` : base;
 }
 
@@ -47,10 +49,7 @@ export function skillPromptMarkdown(skill: {
   lines.push(`# ${skill.name}`, "");
   if (skill.description) lines.push(`**What it does:** ${skill.description}`, "");
   if (skill.episode) {
-    lines.push(
-      `**${inspiredBySourceLine(skill.episode.guest, skill.episode.podcast)}**`,
-      ""
-    );
+    lines.push(`**${inspiredBySourceText(skill.episode.guest, skill.episode.podcast)}**`, "");
   }
   if (skill.whatItDoes && skill.whatItDoes !== skill.description) {
     lines.push("## What this skill does", skill.whatItDoes, "");

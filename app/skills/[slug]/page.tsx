@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import { Fragment } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import { getPublishedSkills, getSkillBySlug } from "@/lib/skills";
-import { inspiredBySourceLine, skillPromptMarkdown } from "@/lib/format";
+import { inspiredByLine, skillPromptMarkdown } from "@/lib/format";
 import PodcastMicIcon from "@/components/PodcastMicIcon";
 import DetailActions from "./DetailActions";
 
@@ -111,55 +112,19 @@ export default async function SkillDetailPage({ params }: { params: { slug: stri
             <p className="mb-5 max-w-[620px] text-lg text-navy/75">{skill.description}</p>
           )}
           {guest && (
-            <div className="max-w-[620px]">
-              <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[14px] text-navy/75">
-                <PodcastMicIcon className="flex-shrink-0 text-navy/50" />
-                <span>
-                  {inspiredBySourceLine(guest, skill.episode?.podcast)}
-                  {guest.slug && (
-                    <>
-                      {" · "}
-                      <Link
-                        href={`/contributors/${guest.slug}`}
-                        className="font-semibold text-blue no-underline hover:underline"
-                      >
-                        View profile
-                      </Link>
-                    </>
-                  )}
-                  {skill.episode?.url && (
-                    <>
-                      {" · "}
-                      <a
-                        href={skill.episode.url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="font-semibold text-blue no-underline hover:underline"
-                      >
-                        Listen to episode ↗
-                      </a>
-                    </>
-                  )}
-                  {linkedinUrl && (
-                    <>
-                      {" · "}
-                      <a
-                        href={linkedinUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="font-semibold text-blue no-underline hover:underline"
-                      >
-                        Guest&apos;s LinkedIn ↗
-                      </a>
-                    </>
-                  )}
-                </span>
-              </div>
-              <p className="mt-1.5 text-[12.5px] text-navy/50">
-                This skill was built by the Skills for People team based on {guest.name}&apos;s
-                public remarks — not written or reviewed by them.
-              </p>
-            </div>
+            <a
+              href="#source"
+              className="inline-flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] font-semibold text-navy/60 no-underline hover:text-navy"
+            >
+              <PodcastMicIcon className="flex-shrink-0" />
+              <span>Inspired by {guest.name}</span>
+              {[guest.title, guest.company].filter(Boolean).map((part, i) => (
+                <Fragment key={i}>
+                  <span className="opacity-50">·</span>
+                  <span>{part}</span>
+                </Fragment>
+              ))}
+            </a>
           )}
         </div>
 
@@ -222,27 +187,49 @@ export default async function SkillDetailPage({ params }: { params: { slug: stri
             </>
           )}
 
-          {skill.episode && (
+          {guest && (
             <>
-              <h2 className="mb-3 mt-8 text-[22px] font-bold">Source</h2>
-              <div className="flex items-center justify-between gap-3 rounded-2xl border border-navy/10 bg-white p-5">
-                <div>
-                  <span className="rounded-xl bg-blue/10 px-2 py-[3px] text-[10.5px] font-bold uppercase tracking-wide text-blue">
-                    Podcast
-                  </span>
-                  <div className="mt-2 text-[15px] font-bold">{skill.episode.podcast}</div>
-                  <div className="mt-0.5 text-[13.5px] text-navy/60">{skill.episode.title}</div>
+              <h2 id="source" className="mb-3 mt-8 text-[22px] font-bold">
+                Where this came from
+              </h2>
+              <div className="flex items-start gap-3.5 rounded-xl border border-navy/[0.08] bg-white p-5">
+                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-blue/[0.14] text-blue">
+                  <PodcastMicIcon />
                 </div>
-                {skill.episode.url && (
-                  <a
-                    href={skill.episode.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex flex-shrink-0 items-center gap-1 whitespace-nowrap text-[13.5px] font-bold text-blue no-underline"
-                  >
-                    View →
-                  </a>
-                )}
+                <div className="min-w-0 flex-1">
+                  <div className="text-[14.5px] font-bold">{inspiredByLine(guest)}</div>
+                  {skill.episode?.podcast && (
+                    <div className="mt-0.5 text-[13px] text-navy/55">
+                      Heard on {skill.episode.podcast}
+                    </div>
+                  )}
+                  <div className="mt-2 flex flex-wrap gap-4 text-[13px] font-bold">
+                    {skill.episode?.url && (
+                      <a
+                        href={skill.episode.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-blue no-underline hover:underline"
+                      >
+                        Listen to episode ↗
+                      </a>
+                    )}
+                    {linkedinUrl && (
+                      <a
+                        href={linkedinUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-blue no-underline hover:underline"
+                      >
+                        Guest&apos;s LinkedIn ↗
+                      </a>
+                    )}
+                  </div>
+                  <div className="mt-3 border-t border-navy/[0.08] pt-3 text-[12px] text-navy/50">
+                    This skill was built by the Skills for People team based on {guest.name}
+                    &apos;s public remarks — not written or reviewed by them.
+                  </div>
+                </div>
               </div>
             </>
           )}
