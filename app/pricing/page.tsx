@@ -29,7 +29,7 @@ const tiers = [
     eyebrow: "5+ seats",
     price: "$250",
     cadence: "/ person / year",
-    subnote: "20% off the individual price",
+    subnote: "Buy for your team and save",
     desc: "Full library access for your whole team, at a discount for 5 or more seats.",
   },
 ];

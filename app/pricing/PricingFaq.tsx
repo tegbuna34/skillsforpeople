@@ -13,7 +13,7 @@ const faqs = [
   },
   {
     q: "Do you offer discounts?",
-    a: "Teams of 5 or more get 20% off the individual price automatically.",
+    a: "Yes! Teams of 5 or more get a discount from the $300 individual price.",
   },
   {
     q: "Do I need a specific AI tool to use these?",
