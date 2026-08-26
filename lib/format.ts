@@ -35,6 +35,25 @@ export function inspiredBySourceText(guest: Contributor, podcast?: string): stri
   return podcast ? `${base} — heard on ${podcast}` : base;
 }
 
+const DAY_MS = 86400000;
+
+function daysSince(dateStr: string): number {
+  return Math.floor((Date.now() - new Date(dateStr).getTime()) / DAY_MS);
+}
+
+export function isRecentlyAdded(dateStr: string | null): boolean {
+  return dateStr !== null && daysSince(dateStr) < 7;
+}
+
+// "today" / "yesterday" / "{n}d ago" for the first week, then a plain date.
+export function addedLabel(dateStr: string): string {
+  const n = daysSince(dateStr);
+  if (n <= 0) return "today";
+  if (n === 1) return "yesterday";
+  if (n < 7) return `${n}d ago`;
+  return new Date(dateStr).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+}
+
 export function skillPromptMarkdown(skill: {
   name: string;
   description: string;

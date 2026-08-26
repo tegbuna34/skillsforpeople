@@ -38,8 +38,8 @@ export default async function LandingPage() {
             Practical AI skills for HR, built from what actually worked.
           </h1>
           <p className="mb-8 max-w-[520px] text-[19px] text-navy/75">
-            We turn real workflows HR leaders describe on podcasts into downloadable AI skills you
-            can run with Claude or ChatGPT this week.
+            We turn real workflows HR leaders share through thought leadership content into
+            downloadable AI skills you can run with Claude or ChatGPT this week.
           </p>
           <div className="flex flex-wrap items-center gap-4">
             <Link
@@ -66,7 +66,7 @@ export default async function LandingPage() {
             How it works
           </div>
           <h2 className="text-[clamp(28px,3.4vw,38px)] font-bold tracking-tight">
-            From podcast workflow to your own tool, in three steps.
+            Get access to the best workflows in just three steps.
           </h2>
         </div>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">

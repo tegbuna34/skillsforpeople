@@ -19,7 +19,7 @@ export default function DirectoryClient({
 
   const visible = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return skills.filter((s) => {
+    const filtered = skills.filter((s) => {
       if (vertical !== "All" && s.vertical !== vertical) return false;
       if (!q) return true;
       const haystack = [
@@ -34,6 +34,12 @@ export default function DirectoryClient({
         .join(" ")
         .toLowerCase();
       return haystack.includes(q);
+    });
+    // Newest-sourced skill first — skills without a date sort to the end.
+    return [...filtered].sort((a, b) => {
+      const at = a.datePublished ? new Date(a.datePublished).getTime() : 0;
+      const bt = b.datePublished ? new Date(b.datePublished).getTime() : 0;
+      return bt - at;
     });
   }, [skills, query, vertical]);
 
@@ -70,9 +76,9 @@ export default function DirectoryClient({
       </div>
 
       {visible.length > 0 ? (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 pt-3.5 sm:grid-cols-2 lg:grid-cols-3">
           {visible.map((s) => (
-            <SkillCard key={s.slug} skill={s} showArrow />
+            <SkillCard key={s.slug} skill={s} showArrow showDateInfo />
           ))}
         </div>
       ) : (

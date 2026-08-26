@@ -5,7 +5,7 @@ import { useState } from "react";
 const faqs = [
   {
     q: "How do you gather the skills?",
-    a: "Every skill comes from a real HR practitioner, most surfaced through interviews on HR podcasts. We take an actual workflow someone built and turn it into something you can use, not a generic AI prompt.",
+    a: "Every skill comes from a real HR practitioner, most surfaced through interviews and other thought leadership content. We take an actual workflow someone built and turn it into something you can use, not a generic AI prompt.",
   },
   {
     q: "How often do skills get added?",
