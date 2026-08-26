@@ -15,17 +15,21 @@ Copy everything below into ChatGPT, Gemini, or any other AI tool to use this ski
 - A list of employee benefits or programs worth featuring (tuition reimbursement, wellness apps, career pathing, etc.)
 - Any past employee spotlight or "day in the life" content already produced
 
-**Then ask me, one at a time, whatever isn't already answered:**
+**Then ask me, one at a time, whatever isn't already answered.** Every answer needs to be a real, typed sentence or backed by an uploaded document — not a one-word pick. If this interface offers quick-select buttons or chips for any of these, ignore that and ask me to elaborate in my own words instead.
 
 1. What company do I work for, and roughly what size (employee headcount, and how many locations or business units)?
-2. Who owns recruitment marketing/employer brand today — a dedicated team, a shared marketing function, or would I have to build this from scratch?
-3. What's my budget for this — do I have funds for professional photo/video production, or does this need to run on a near-zero budget using phone footage and internal volunteers?
-4. What tools do I currently use for recruitment marketing (careers site CMS, social media scheduling, ATS job ad templates)?
-5. What's my specific pain point in my own words — job ads feel generic, competitors seem to use the same stock photos, leadership wants a more authentic brand, candidates aren't engaging with our ads?
-6. How many employees would I realistically need to recruit as story contributors for an initial wave (e.g., one per major job family or location)?
-7. Do I have legal/HR sign-off already for using employee images and stories in external marketing, or would I need to build a waiver process from scratch?
-8. What's my realistic timeline — is this meant to launch quickly with a small pilot, or is leadership expecting a full campaign relaunch?
-9. Is there anything unique about my context — a unionized workforce, strict patient/client privacy rules, multiple brands under one company, high employee turnover — that should shape how I run this?
+2. Walk me through who owns recruitment marketing/employer brand today — a dedicated team, a shared marketing function, or would I have to build this from scratch? Describe how that ownership actually works in practice.
+3. Describe my budget situation for this — is there funding for professional photo/video production, or does this need to run on a near-zero budget using phone footage and internal volunteers? Give me the actual numbers or constraints I'm working with.
+4. Walk me through the tools I currently use for recruitment marketing — careers site CMS, social media scheduling, ATS job ad templates — and how they fit together today.
+5. Describe my specific pain point in my own words — do job ads feel generic, do competitors seem to use the same stock photos, does leadership want a more authentic brand, are candidates just not engaging with our ads? Tell me what I'm actually seeing, not just which one fits.
+6. Walk me through how many employees I'd realistically need as story contributors for an initial wave, and how I'd spread them — for example, one per major job family or location. Describe my actual thinking here, not just a number.
+7. Describe where I actually stand with legal/HR on using employee images and stories in external marketing — is there sign-off already, has it come up before, or would I need to build a waiver process from scratch?
+8. Walk me through my realistic timeline and what's driving it — is this meant to launch quickly as a small pilot, or is leadership expecting a full campaign relaunch? Tell me what's shaping that expectation.
+9. Is there anything unique about my context that should shape how I run this — a unionized workforce, strict patient/client privacy rules, multiple brands under one company, high employee turnover? Describe how that factor actually plays out for me.
+
+If any of my answers come back thin or generic — a single word, a vague generality, an obvious placeholder — you may nudge me once: name specifically what's missing, give one concrete example of the kind of detail that would help, and explicitly offer me the choice to add more or move on. Don't nudge a second time on the same question — take whatever I give you after that and proceed.
+
+**Before you start drafting anything, recap what you've gathered back to me in a compact list and ask me to confirm it's accurate or fix anything.** Only move into the framework below once I've confirmed.
 
 **Do not give me a generic template with blanks.** Every part of your output should visibly reflect my specific answers above.
 

@@ -15,17 +15,21 @@ Copy everything below into ChatGPT, Gemini, or any other AI tool to use this ski
 - Notes or agendas from the executive/leadership forums where this would live
 - Any prior workforce planning or headcount planning documentation
 
-**Then ask me, one at a time, whatever isn't already answered:**
+**Then ask me, one at a time, whatever isn't already answered.** Every answer needs to be a real, typed sentence or backed by an uploaded document — not a one-word pick. If this interface offers quick-select buttons or chips for any of these, ignore that and ask me to elaborate in my own words instead.
 
 1. What company do I work for, and roughly what size (total headcount, and headcount of the HR/people analytics team building this)?
-2. What's the makeup of my people analytics/HR ops capacity right now — mostly me, a small team, or dedicated analytics headcount and tooling support?
-3. What HRIS and reporting tools do I currently use, and can they refresh data automatically, or would this be manually assembled each cycle?
-4. Do I already send leadership some kind of people report or dashboard today, and if so, what's wrong with it in my own words?
-5. Which specific executive forum(s) exist today where this could be embedded, and how much time could realistically be claimed on the agenda?
-6. Who is my primary sponsor or champion for this, and how much air cover do I have to push this into their meetings?
-7. What are the 2-3 business priorities right now that workforce data should be helping leadership see clearly?
-8. What's my realistic timeline — do I need something in front of executives within weeks, or do I have a longer runway?
-9. Is there anything unique about my context that should shape which metrics matter most (layoffs, M&A, going public, rapid hiring, a remote/hybrid mix under scrutiny)?
+2. Walk me through the makeup of my people analytics/HR ops capacity right now — mostly me, a small team, or dedicated analytics headcount and tooling support? Describe what that team or person can actually take on.
+3. Walk me through what HRIS and reporting tools I currently use, and whether they can refresh data automatically or this would be manually assembled each cycle.
+4. Describe whether I already send leadership some kind of people report or dashboard today, and if so, what's actually wrong with it in my own words — ignored, too descriptive, no clear ask, arrives too late, something else.
+5. Walk me through which specific executive forum(s) exist today where this could be embedded, and how much time could realistically be claimed on the agenda. Describe how that forum actually runs.
+6. Describe who my primary sponsor or champion for this actually is, and how much air cover I have to push this into their meetings.
+7. Walk me through the 2-3 business priorities right now that workforce data should be helping leadership see clearly, and what's actually driving them.
+8. Describe my realistic timeline — do I need something in front of executives within weeks, or do I have a longer runway? Tell me what's actually setting that deadline, if anything.
+9. Is there anything unique about my context that should shape which metrics matter most — layoffs, M&A, going public, rapid hiring, a remote/hybrid mix under scrutiny? Walk me through how that factor actually plays out for me.
+
+If any of my answers come back thin or generic — a single word, a vague generality, an obvious placeholder — you may nudge me once: name specifically what's missing, give one concrete example of the kind of detail that would help, and explicitly offer me the choice to add more or move on. Don't nudge a second time on the same question — take whatever I give you after that and proceed.
+
+**Before you start drafting anything, recap what you've gathered back to me in a compact list and ask me to confirm it's accurate or fix anything.** Only move into the framework below once I've confirmed.
 
 **Do not give me a generic template with blanks.** Every part of your output should visibly reflect my specific company, metrics availability, forums, and priorities.
 

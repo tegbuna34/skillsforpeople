@@ -15,18 +15,22 @@ Copy everything below into ChatGPT, Gemini, or any other AI tool to use this ski
 - A budget document or approved amount
 - An org chart or list of current leaders
 
-**Then ask me, one at a time, whatever isn't already answered by my documents:**
+**Then ask me, one at a time, whatever isn't already answered by my documents.** Every answer needs to be a real, typed sentence or backed by an uploaded document — not a one-word pick. If this interface offers quick-select buttons or chips for any of these, ignore that and ask me to elaborate in my own words instead.
 
 1. What company/organization is this for, and roughly what size (employee headcount)?
-2. What kind of volunteer-led program is this specifically, and if it's an ERG, which community/identity group?
-3. How many volunteer leaders does this program currently have, and what's a realistic number of hours per week/month each can actually give (not the ideal — the real number)?
-4. What is the approved or likely budget for this program (even a rough range)?
-5. What communication channels and cadence do leaders already have access to?
-6. What's the current pain point in my own words — under-delivery, over-delivery, inconsistency, or something else?
-7. What administrative tasks do leaders currently forget or skip?
-8. Who is my least experienced or newest volunteer leader, realistically? (Write the MVQ for that person.)
-9. Do I have executive sponsors or a program manager involved in reviewing what leaders produce?
-10. Is there anything unique about my company culture, industry, or constraints that should shape what's realistic here?
+2. Walk me through what kind of volunteer-led program this specifically is — ERG, culture committee, mentorship program, something else — and if it's an ERG, which community or identity group it serves.
+3. Describe how many volunteer leaders this program currently has, and walk me through a realistic number of hours per week or month each can actually give — not the aspirational number, what actually happens.
+4. Walk me through the approved or likely budget for this program — give me a real range and where that number comes from, not just a figure.
+5. Describe the communication channels and cadence leaders already have access to — Slack, email, intranet, something else — and how they actually use them today.
+6. Describe the current pain point in my own words — under-delivery, over-delivery, inconsistency, or something else? Tell me what I'm actually seeing, not just which category fits.
+7. Walk me through the administrative tasks leaders currently forget or skip, and give me a real example of when that happened recently.
+8. Describe my least experienced or newest volunteer leader, realistically — walk me through what they know and don't know, since the MVQ needs to be written for that specific person.
+9. Walk me through whether I have executive sponsors or a program manager involved in this, and describe how involved they actually are in reviewing what leaders produce.
+10. Is there anything unique about my company culture, industry, or constraints that should shape what's realistic here? Walk me through how that factor actually plays out for me.
+
+If any of my answers come back thin or generic — a single word, a vague generality, an obvious placeholder — you may nudge me once: name specifically what's missing, give one concrete example of the kind of detail that would help, and explicitly offer me the choice to add more or move on. Don't nudge a second time on the same question — take whatever I give you after that and proceed.
+
+**Before you start drafting anything, recap what you've gathered back to me in a compact list and ask me to confirm it's accurate or fix anything.** Only move into the framework below once I've confirmed.
 
 **Do not give me a generic template with blanks.** Every part of your output should visibly reflect my specific answers — my actual company size, budget, team size, and constraints — not placeholder language.
 

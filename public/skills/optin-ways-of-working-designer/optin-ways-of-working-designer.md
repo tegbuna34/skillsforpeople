@@ -15,18 +15,22 @@ Copy everything below into ChatGPT, Gemini, or any other AI tool to use this ski
 - Current perks/stipend policy documentation
 - Any prior all-hands communication about office attendance
 
-**Then ask me, one at a time, whatever isn't already answered:**
+**Then ask me, one at a time, whatever isn't already answered.** Every answer needs to be a real, typed sentence or backed by an uploaded document — not a one-word pick. If this interface offers quick-select buttons or chips for any of these, ignore that and ask me to elaborate in my own words instead.
 
 1. What company do I work for, and roughly what size (total headcount, and headcount specifically near a physical office/hub)?
-2. How many office hubs or locations do I have, and roughly what's the current in-office attendance rate at each?
-3. Do I have an existing mandate in place today, and if so what is it, and how well is it actually being followed?
-4. What budget do I realistically have for incentives (stipends, dedicated desks, transportation, food)?
-5. What's my realistic bandwidth to run this — a full people team, or mostly just me?
-6. What tools do I use to communicate company-wide and to survey employees?
-7. What's my specific pain point in my own words — non-compliance, morale backlash, empty offices, leadership pressure, something else?
-8. What's my timeline — a leadership deadline to "fix RTO," or room to run a proper listening pass first?
-9. Are there employee segments with unique constraints I already know about (fully remote pandemic hires, international offices, accommodations)?
-10. Is there anything unique about my context — a recent acquisition/merger, a hub with unusually low or high energy already, strong union/works council presence, etc.?
+2. Walk me through how many office hubs or locations I have, and roughly what the current in-office attendance rate is at each — give me my best real estimate, not just a headline number.
+3. Describe whether I have an existing mandate in place today — what it actually says, and how well it's actually being followed. Walk me through the real compliance picture, not just the policy.
+4. Walk me through what budget I realistically have for incentives — stipends, dedicated desks, transportation, food. Give me a real number or range, and where that figure comes from.
+5. Describe who would realistically run this — a full people team, or mostly just me? Tell me what bandwidth I actually have for something like this.
+6. Walk me through the tools I use to communicate company-wide and to survey employees today.
+7. Describe my specific pain point in my own words — non-compliance, morale backlash, empty offices, leadership pressure, or something else? Tell me what I'm actually seeing, not just which category fits.
+8. Walk me through my timeline and what's driving it — a leadership deadline to "fix RTO," or room to run a proper listening pass first? Describe what's actually creating the pressure, if any.
+9. Describe any employee segments with unique constraints I already know about — fully remote pandemic hires, international offices, accommodations. Tell me what I actually know about each, not just the category.
+10. Is there anything unique about my context that should shape this — a recent acquisition/merger, a hub with unusually low or high energy already, strong union/works council presence? Walk me through how that factor actually plays out for me.
+
+If any of my answers come back thin or generic — a single word, a vague generality, an obvious placeholder — you may nudge me once: name specifically what's missing, give one concrete example of the kind of detail that would help, and explicitly offer me the choice to add more or move on. Don't nudge a second time on the same question — take whatever I give you after that and proceed.
+
+**Before you start drafting anything, recap what you've gathered back to me in a compact list and ask me to confirm it's accurate or fix anything.** Only move into the framework below once I've confirmed.
 
 **Do not give me a generic template with blanks.** Every part of your output should visibly reflect my specific answers.
 

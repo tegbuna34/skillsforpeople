@@ -15,18 +15,22 @@ Copy everything below into ChatGPT, Gemini, or any other AI tool to use this ski
 - Any prior pay equity analysis, audit, or scan
 - Existing employee-facing communication about pay
 
-**Then ask me, one at a time, whatever isn't already answered:**
+**Then ask me, one at a time, whatever isn't already answered.** Every answer needs to be a real, typed sentence or backed by an uploaded document — not a one-word pick. If this interface offers quick-select buttons or chips for any of these, ignore that and ask me to elaborate in my own words instead.
 
 1. What company do I work for, and roughly what size (total headcount, and how many countries/regions I operate pay in)?
-2. Which specific legislation or requirement is driving this (EU Pay Transparency Directive, a specific country's law, a US state disclosure law, internal pressure only), and what's the effective/compliance date?
-3. Do I currently run any kind of pay equity scan or audit today? If so, how often, at what scope, and for how long?
-4. What payroll/HRIS system(s) do I run today, and are they unified globally or fragmented by country/business unit?
-5. Do I have a documented job architecture (levels, job families, a defined method for matching one job to another as "comparable") today, or is leveling informal/inconsistent?
-6. Who owns this today — a total rewards/comp team, HR generally, legal/compliance, or is this new territory?
-7. What's my realistic team capacity and budget to do this work?
-8. Do I have union representation or works councils in any of the countries this needs to cover?
-9. What's my current pain point or trigger in my own words?
-10. Is there anything unique about my context (decentralized/multi-brand organization, M&A creating multiple legacy payroll systems, a highly public/reputation-sensitive brand, a unionized workforce) that should shape this?
+2. Walk me through which specific legislation or requirement is driving this — EU Pay Transparency Directive, a specific country's law, a US state disclosure law, internal pressure only — and what the effective or compliance date actually is.
+3. Describe whether I currently run any kind of pay equity scan or audit today — how often, at what scope, and for how long. Walk me through what that process actually looks like.
+4. Walk me through what payroll/HRIS system(s) I run today, and whether they're unified globally or fragmented by country/business unit.
+5. Describe my job architecture today — do I have documented levels, job families, a defined method for matching one job to another as "comparable," or is leveling informal and inconsistent?
+6. Walk me through who owns this today — a total rewards/comp team, HR generally, legal/compliance, or is this genuinely new territory?
+7. Describe my realistic team capacity and budget to do this work — a dedicated comp/rewards function, a small team, or mostly me? Tell me what that team or person can actually take on.
+8. Walk me through whether I have union representation or works councils in any of the countries this needs to cover, and describe what my relationship with them is actually like today.
+9. Describe my current pain point or trigger in my own words — an approaching legal deadline, an employee/union challenge already surfacing, leadership wanting to get ahead of this, or something else? Tell me what's actually happening.
+10. Is there anything unique about my context that should shape this — a decentralized/multi-brand organization, M&A creating multiple legacy payroll systems, a highly public/reputation-sensitive brand, a unionized workforce? Walk me through how that factor actually plays out for me.
+
+If any of my answers come back thin or generic — a single word, a vague generality, an obvious placeholder — you may nudge me once: name specifically what's missing, give one concrete example of the kind of detail that would help, and explicitly offer me the choice to add more or move on. Don't nudge a second time on the same question — take whatever I give you after that and proceed.
+
+**Before you start drafting anything, recap what you've gathered back to me in a compact list and ask me to confirm it's accurate or fix anything.** Only move into the framework below once I've confirmed.
 
 **Do not give me a generic template with blanks.** Every part of your output should visibly reflect my specific answers.
 

@@ -15,17 +15,21 @@ Copy everything below into ChatGPT, Gemini, or any other AI tool to use this ski
 - Any EEO/compliance guidance or legal review notes my organization has on interview documentation
 - Current interviewer training materials on what not to ask or document
 
-**Then ask me, one at a time, whatever isn't already answered:**
+**Then ask me, one at a time, whatever isn't already answered.** Every answer needs to be a real, typed sentence or backed by an uploaded document — not a one-word pick. If this interface offers quick-select buttons or chips for any of these, ignore that and ask me to elaborate in my own words instead.
 
 1. What company do I work for, and roughly what size (employee headcount, and how many interviews does my talent acquisition team run per month)?
-2. How many recruiters/interviewers would be involved in an initial pilot, and who owns the relationship with my AI notetaker vendor (if I have one) or would own vendor selection (if I don't)?
-3. What's my budget or approval status for an AI interview-intelligence tool — already purchased, budgeted but not selected, or do I need to build the business case first?
-4. What tools do I currently use to capture interview notes today (manual notes, a generic AI notetaker, nothing standardized)?
-5. What's my specific pain point in my own words — recruiters can't stay present with candidates while note-taking, hiring managers are seeing bias-coded details they shouldn't, a legal/compliance concern about documentation, or something else?
-6. Are there specific categories of language I'm most worried about leaking into notes (family/caregiving status, age, religion, health/disability, immigration status, something else specific to my industry)?
-7. What's my realistic timeline — do I need something running in weeks, or can this be a multi-month, two-pilot validation process?
-8. Who reviews and signs off on interview notes before they reach the hiring manager today, if anyone, and would that same person own quality-checking the AI's scrubbing accuracy during the pilot?
-9. Is there anything unique about my context — a regulated industry, a union environment, high-volume/hourly hiring, multilingual interviews — that should shape how I configure or validate this?
+2. Walk me through who'd actually be part of an initial pilot — how many recruiters/interviewers, and who owns (or would own) the relationship with my AI notetaker vendor?
+3. Describe where things stand on budget and approval for an AI interview-intelligence tool — has something already been purchased, is there budget set aside without a tool picked yet, or am I still building the case to get budget approved? Give me the specifics of that situation, not just which bucket it falls into.
+4. Walk me through how interview notes actually get captured today — what tool or process is in place, who's responsible for it, and how consistent it is across my interviewers.
+5. Describe the specific pain point driving this in my own words — is it that recruiters can't stay present with candidates while note-taking, that hiring managers are seeing bias-coded details they shouldn't, a legal/compliance concern about documentation, or something else entirely? Tell me what I'm actually observing, not just which category it falls into.
+6. Which categories of language am I most worried about leaking into notes — family/caregiving status, age, religion, health or disability, immigration status, something specific to my industry? Don't just name the category — describe what that actually looks like when it shows up in a real transcript for me.
+7. Walk me through my realistic timeline and what's driving it — is there a hard deadline forcing something to run in weeks, or is there room for a proper multi-month, two-pilot validation process? Tell me what's behind that constraint.
+8. Tell me who reviews and signs off on interview notes before they reach the hiring manager today, if anyone — and whether that same person would realistically own quality-checking the AI's scrubbing accuracy during the pilot.
+9. Is there anything unique about my context that should shape how I configure or validate this — a regulated industry, a union environment, high-volume/hourly hiring, multilingual interviews? Describe how that factor actually plays out for me, not just whether it applies.
+
+If any of my answers come back thin or generic — a single word, a vague generality, an obvious placeholder — you may nudge me once: name specifically what's missing, give one concrete example of the kind of detail that would help, and explicitly offer me the choice to add more or move on. Don't nudge a second time on the same question — take whatever I give you after that and proceed.
+
+**Before you start drafting anything, recap what you've gathered back to me in a compact list and ask me to confirm it's accurate or fix anything.** Only move into the framework below once I've confirmed.
 
 **Do not give me a generic template with blanks.** Every part of your output should visibly reflect my specific answers above.
 

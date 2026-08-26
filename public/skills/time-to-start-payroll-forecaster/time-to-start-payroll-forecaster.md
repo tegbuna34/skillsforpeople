@@ -15,18 +15,22 @@ Copy everything below into ChatGPT, Gemini, or any other AI tool to use this ski
 - Notice period or work-authorization/immigration policy references for the locations I hire in
 - The finance-facing headcount or budget template I currently report against
 
-**Then ask me, one at a time, whatever isn't already answered by my documents:**
+**Then ask me, one at a time, whatever isn't already answered by my documents.** Every answer needs to be a real, typed sentence or backed by an uploaded document — not a one-word pick. If this interface offers quick-select buttons or chips for any of these, ignore that and ask me to elaborate in my own words instead.
 
 1. What company do I work for, and roughly what size (total headcount, and headcount of the org this plan covers)?
-2. How many open or planned requisitions am I forecasting for, and over what time horizon (this quarter, this year)?
-3. What ATS or spreadsheet do I use to track requisition dates, and does it record req-open date, first-candidate-identified date, offer-accept date, and actual start date separately?
-4. Which locations or countries am I hiring in, and do any carry long notice periods (e.g., Germany, other EU markets) or require work visas/immigration processing?
-5. What's my current pain point in my own words — finance being surprised by late payroll adds, the recruiting team getting overwhelmed by simultaneous req openings, no visibility into first-time role profiles, or something else?
-6. Roughly how long does it typically take my team to source the first viable candidate for a new req (my rough "time to identify" baseline), even if it's a guess?
-7. Are any of the roles I'm forecasting a first-time profile — a role type my company has never filled before — and if so, which ones?
-8. What's my realistic capacity — how many requisitions can my recruiting team actively work at once without becoming the bottleneck?
-9. What's my timeline and urgency — an upcoming finance planning cycle, an active hiring surge, or ongoing operational tracking?
-10. Is there anything unique about my context (multiple business units with different hiring cadences, a mix of exempt/hourly roles, an unusually competitive niche market) that should shape this model?
+2. Walk me through how many open or planned requisitions I'm forecasting for, and over what time horizon.
+3. Describe what ATS or spreadsheet I use to track requisition dates, and whether it records req-open date, first-candidate-identified date, offer-accept date, and actual start date separately.
+4. Walk me through which locations or countries I'm hiring in, and describe whether any carry long notice periods or require work visas/immigration processing.
+5. Describe my current pain point in my own words — finance being surprised by late payroll adds, the recruiting team getting overwhelmed by simultaneous req openings, no visibility into first-time role profiles, or something else? Tell me what I'm actually seeing.
+6. Walk me through roughly how long it typically takes my team to source the first viable candidate for a new req — my rough "time to identify" baseline. Give me a real estimate, even if it's just a guess.
+7. Describe whether any of the roles I'm forecasting are first-time profiles — a role type my company has never filled before — and if so, walk me through which ones and why they're new.
+8. Walk me through my realistic capacity — how many requisitions can my recruiting team actively work at once before it becomes the bottleneck?
+9. Describe my timeline and urgency — an upcoming finance planning cycle, an active hiring surge, or ongoing operational tracking? Tell me what's actually driving the need now.
+10. Is there anything unique about my context that should shape this model — multiple business units with different hiring cadences, a mix of exempt/hourly roles, an unusually competitive niche market? Walk me through how that factor actually plays out for me.
+
+If any of my answers come back thin or generic — a single word, a vague generality, an obvious placeholder — you may nudge me once: name specifically what's missing, give one concrete example of the kind of detail that would help, and explicitly offer me the choice to add more or move on. Don't nudge a second time on the same question — take whatever I give you after that and proceed.
+
+**Before you start drafting anything, recap what you've gathered back to me in a compact list and ask me to confirm it's accurate or fix anything.** Only move into the framework below once I've confirmed.
 
 **Do not give me a generic template with blanks.** Every part of your output should visibly reflect my specific answers.
 

@@ -15,17 +15,21 @@ Copy everything below into ChatGPT, Gemini, or any other AI tool to use this ski
 - A budget document
 - Prior survey or feedback data from members or leaders
 
-**Then ask me, one at a time, whatever isn't already answered:**
+**Then ask me, one at a time, whatever isn't already answered.** Every answer needs to be a real, typed sentence or backed by an uploaded document — not a one-word pick. If this interface offers quick-select buttons or chips for any of these, ignore that and ask me to elaborate in my own words instead.
 
 1. What company/organization is this for, and roughly what size?
-2. What kind of program is this, and if it's an ERG, which community/identity group?
-3. What symptoms am I actually seeing? (List everything, even if some seem unrelated.)
-4. How many leaders/chapters does this program have, and how much variation is there between the best- and worst-performing?
-5. Do I have a program manager overseeing this, or does it run without central support?
-6. What is the approved or likely budget, and has budget ever been cited as a blocker?
-7. Who owns each of Purpose, Process, and Programming today — clearly assigned, or defaulting to one person?
-8. How long has this program existed, and has it changed significantly recently?
-9. What's driving the urgency to fix this now?
+2. Walk me through what kind of program this specifically is, and if it's an ERG, which community or identity group it serves.
+3. Describe the symptoms I'm actually seeing — list everything, even things that seem unrelated. Tell me what's actually happening, not just labels.
+4. Walk me through how many leaders/chapters this program has, and describe the real variation between the best- and worst-performing ones.
+5. Describe whether I have a program manager overseeing this, or if it runs without central support — walk me through what that oversight (or lack of it) actually looks like.
+6. Walk me through the approved or likely budget, and describe whether budget has ever actually been cited as a blocker — give me a real example if so.
+7. Describe who owns each of Purpose, Process, and Programming today — clearly assigned across different people, or defaulting to one overloaded person? Walk me through how that actually plays out.
+8. Walk me through how long this program has existed, and describe any significant recent changes.
+9. Describe what's driving the urgency to fix this now. Tell me what's actually creating the pressure, not just a label.
+
+If any of my answers come back thin or generic — a single word, a vague generality, an obvious placeholder — you may nudge me once: name specifically what's missing, give one concrete example of the kind of detail that would help, and explicitly offer me the choice to add more or move on. Don't nudge a second time on the same question — take whatever I give you after that and proceed.
+
+**Before you start scoring anything, recap what you've gathered back to me in a compact list and ask me to confirm it's accurate or fix anything.** Only move into the framework below once I've confirmed.
 
 **Do not give me a generic explainer of the three categories.** Score against my specific symptoms, size, and constraints, and reference my own words back in the diagnosis.
 

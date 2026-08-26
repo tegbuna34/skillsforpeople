@@ -15,18 +15,22 @@ Copy everything below into ChatGPT, Gemini, or any other AI tool to use this ski
 - Career ladder / career matrix documentation
 - Org chart or team structure documentation
 
-**Then ask me, one at a time, whatever isn't already answered:**
+**Then ask me, one at a time, whatever isn't already answered.** Every answer needs to be a real, typed sentence or backed by an uploaded document — not a one-word pick. If this interface offers quick-select buttons or chips for any of these, ignore that and ask me to elaborate in my own words instead.
 
 1. What company do I work for, and roughly what size (total headcount, and headcount of the group I'd pilot this with first)?
-2. What does my current performance process look like today — annual reviews, 360s, informal manager check-ins, nothing formal? How much participation and quality of documentation does it actually get?
-3. What's my specific pain point in my own words — no real-time data, performance issues surfacing without documentation, recency bias in annual cycles, or something else?
-4. Do I currently use any people analytics, ONA, or performance platform, or would this run as a plain survey (Google Forms, Culture Amp, a spreadsheet)?
-5. Is my organization structured primarily around individual roles, or around teams/pods — and do I want signals at the individual level, the team level, or both?
-6. What's my realistic bandwidth to run and process this — do I have someone (people ops, an OD/analytics person) who can own compiling and triaging results each cycle?
-7. What's my budget, if any, for a dedicated ONA/performance platform versus running this manually?
-8. How often do I want to run this — quarterly, monthly, or something else — and is there a specific business rhythm (a busy season) I need to avoid scheduling around?
-9. What's my timeline/urgency — is there a specific trigger (a bad review cycle, a leadership mandate, an upcoming reorg) driving this now?
-10. Is there anything unique about my context — a recent flattening of management layers, a highly matrixed org, remote/distributed teams, union considerations — that should shape rollout?
+2. Walk me through what my current performance process actually looks like — annual reviews, 360s, informal manager check-ins, nothing formal — and describe how much participation and quality of documentation it actually gets today.
+3. Describe my specific pain point in my own words — no real-time data, performance issues surfacing without documentation, recency bias in annual cycles, or something else? Tell me what I'm actually seeing, not just which category fits.
+4. Walk me through what I currently use, if anything, for people analytics, ONA, or performance tracking, or whether this would run as a plain survey through something like Google Forms, Culture Amp, or a spreadsheet. Tell me what's actually available to me.
+5. Describe how my organization is actually structured — primarily around individual roles, or around teams/pods — and tell me whether I want signals at the individual level, the team level, or both.
+6. Walk me through my realistic bandwidth to run and process this — is there a specific person, like someone in people ops or an OD/analytics role, who could own compiling and triaging results each cycle? Describe what that would actually look like.
+7. Describe my budget situation, if any, for a dedicated ONA/performance platform versus running this manually — give me the actual numbers or constraints I'm working with.
+8. Walk me through how often I'd want to run this — quarterly, monthly, something else — and describe any specific business rhythm, like a busy season, I'd need to avoid scheduling around.
+9. Describe my timeline and urgency — is there a specific trigger like a bad review cycle, a leadership mandate, or an upcoming reorg driving this now? Tell me what's actually behind the push.
+10. Is there anything unique about my context that should shape rollout — a recent flattening of management layers, a highly matrixed org, remote/distributed teams, union considerations? Walk me through how that factor actually plays out for me.
+
+If any of my answers come back thin or generic — a single word, a vague generality, an obvious placeholder — you may nudge me once: name specifically what's missing, give one concrete example of the kind of detail that would help, and explicitly offer me the choice to add more or move on. Don't nudge a second time on the same question — take whatever I give you after that and proceed.
+
+**Before you start drafting anything, recap what you've gathered back to me in a compact list and ask me to confirm it's accurate or fix anything.** Only move into the framework below once I've confirmed.
 
 **Do not give me a generic template with blanks.** Every part of your output should visibly reflect my specific answers.
 

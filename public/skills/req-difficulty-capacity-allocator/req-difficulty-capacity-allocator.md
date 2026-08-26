@@ -15,18 +15,22 @@ Copy everything below into ChatGPT, Gemini, or any other AI tool to use this ski
 - Historical time-to-fill data by role or function, if tracked anywhere
 - Recruiting team org chart / roster with current req load per recruiter
 
-**Then ask me, one at a time, whatever isn't already answered by my documents:**
+**Then ask me, one at a time, whatever isn't already answered by my documents.** Every answer needs to be a real, typed sentence or backed by an uploaded document — not a one-word pick. If this interface offers quick-select buttons or chips for any of these, ignore that and ask me to elaborate in my own words instead.
 
 1. What company do I work for, and roughly what size (total headcount, and headcount of the org I'm recruiting for)?
-2. How many recruiters are on my team today, and how many open requisitions do I have in total?
-3. What ATS or spreadsheet do I use to track requisitions today, and does it record level, function, and location per req?
-4. What's a realistic number of "standard difficulty" reqs one recruiter can carry at once, in my experience (not the ideal number — the real one)?
-5. Do I have budget or headcount plan for growing the recruiting team itself, or is the team size fixed regardless of req volume?
-6. What's my specific pain point in my own words — recruiters burning out, some recruiters idle while others drown, leadership assuming capacity is fine because req count looks even, or something else?
-7. Which roles or functions have historically been hardest to fill (new function, no comp benchmark, niche skill, executive level, competitive market), and which have been easiest?
-8. Is interview capacity (hiring manager/panelist availability) ever the real bottleneck rather than sourcing — and if so, for which teams?
-9. What's my timeline — do I need this in place for a specific planning cycle or hiring surge, or is this an ongoing operational fix?
-10. Is there anything unique about my hiring context (multiple business units, international hiring, a highly regulated or technical function) that should shape how difficulty is scored?
+2. Walk me through how many recruiters are on my team today, and how many open requisitions I have in total.
+3. Describe what ATS or spreadsheet I use to track requisitions today, and whether it records level, function, and location per req. Tell me what's actually captured.
+4. Walk me through a realistic number of "standard difficulty" reqs one recruiter can carry at once, based on my actual experience — not the ideal number, the real one.
+5. Describe my budget or headcount plan for growing the recruiting team itself — is there room to grow it, or is team size fixed regardless of req volume?
+6. Describe my specific pain point in my own words — recruiters burning out, some idle while others drown, leadership assuming capacity is fine because req count looks even, or something else? Tell me what I'm actually seeing.
+7. Walk me through which roles or functions have historically been hardest to fill, and which have been easiest — give me real examples with what made each one hard or easy, not just a category.
+8. Describe whether interview capacity — hiring manager or panelist availability — is ever the real bottleneck rather than sourcing, and if so, walk me through which teams and how that shows up.
+9. Walk me through my timeline — do I need this in place for a specific planning cycle or hiring surge, or is this more of an ongoing operational fix? Tell me what's actually driving the timing.
+10. Is there anything unique about my hiring context that should shape how difficulty is scored — multiple business units, international hiring, a highly regulated or technical function? Walk me through how that factor actually plays out for me.
+
+If any of my answers come back thin or generic — a single word, a vague generality, an obvious placeholder — you may nudge me once: name specifically what's missing, give one concrete example of the kind of detail that would help, and explicitly offer me the choice to add more or move on. Don't nudge a second time on the same question — take whatever I give you after that and proceed.
+
+**Before you start drafting anything, recap what you've gathered back to me in a compact list and ask me to confirm it's accurate or fix anything.** Only move into the framework below once I've confirmed.
 
 **Do not give me a generic template with blanks.** Every part of your output should visibly reflect my specific answers — not placeholder language.
 

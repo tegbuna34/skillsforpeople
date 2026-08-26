@@ -15,18 +15,22 @@ Copy everything below into ChatGPT, Gemini, or any other AI tool to use this ski
 - Existing integration architecture diagrams or a list of core systems (HRIS, payroll, ATS, LMS, etc.)
 - Any prior vendor contracts covering the same or an adjacent process
 
-**Then ask me, one at a time, whatever isn't already answered:**
+**Then ask me, one at a time, whatever isn't already answered.** Every answer needs to be a real, typed sentence or backed by an uploaded document — not a one-word pick. If this interface offers quick-select buttons or chips for any of these, ignore that and ask me to elaborate in my own words instead.
 
 1. What company do I work for, and roughly what size (employee headcount, and number of countries/regions if relevant)?
-2. What is the specific HR technology decision in front of me right now, and how many vendors are on my shortlist?
-3. What does my current systems landscape look like — how many HR applications do I run today, and do I know of existing duplication or overlap?
-4. What's the budget and who controls it — is finance already scrutinizing the ROI case, or is this discretionary?
-5. What's my team's realistic bandwidth to run a pilot — can I staff a lower-environment test with real users, or is everyone stretched thin?
-6. What's driving the urgency — a leadership mandate, a contract renewal deadline, competitive FOMO, or a genuine unmet need? Describe the pain point in my own words.
-7. What's my current tooling for the core systems this vendor would need to integrate with (payroll, time & attendance, talent, identity/SSO, etc.)?
-8. Is there a realistic future consolidation or transformation (even years away) that this decision should be evaluated against, and if so, roughly when?
-9. What's my timeline pressure — is there a signature deadline already on the calendar, and how much room do I actually have to slow this down?
-10. Is there anything unique about my context (regulated industry, highly decentralized/regional organization, prior failed vendor rollout, etc.) that should shape this?
+2. Walk me through the specific HR technology decision in front of me right now, and how many vendors are on my shortlist.
+3. Describe my current systems landscape — how many HR applications I run today, and whether I know of existing duplication or overlap.
+4. Walk me through the budget and who controls it — is finance already scrutinizing the ROI case, or is this discretionary?
+5. Describe my team's realistic bandwidth to run a pilot — can I staff a lower-environment test with real users, or is everyone stretched thin? Tell me what capacity actually exists.
+6. Describe what's driving the urgency — a leadership mandate, a contract renewal deadline, competitive FOMO, or a genuine unmet need? Tell me the pain point in my own words, not just which category fits.
+7. Walk me through my current tooling for the core systems this vendor would need to integrate with — payroll, time & attendance, talent, identity/SSO.
+8. Describe whether there's a realistic future consolidation or transformation this decision should be evaluated against, even if it's years away, and roughly when.
+9. Walk me through my timeline pressure — is there a signature deadline already on the calendar, and how much room do I actually have to slow this down? Tell me what's real versus assumed.
+10. Is there anything unique about my context that should shape this — a regulated industry, a highly decentralized/regional organization, a prior failed vendor rollout? Walk me through how that factor actually plays out for me.
+
+If any of my answers come back thin or generic — a single word, a vague generality, an obvious placeholder — you may nudge me once: name specifically what's missing, give one concrete example of the kind of detail that would help, and explicitly offer me the choice to add more or move on. Don't nudge a second time on the same question — take whatever I give you after that and proceed.
+
+**Before you start drafting anything, recap what you've gathered back to me in a compact list and ask me to confirm it's accurate or fix anything.** Only move into the framework below once I've confirmed.
 
 **Do not give me a generic template with blanks.** Every part of your output should visibly reflect my specific answers.
 

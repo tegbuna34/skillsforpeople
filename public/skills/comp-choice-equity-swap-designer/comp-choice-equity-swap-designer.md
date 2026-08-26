@@ -15,18 +15,22 @@ Copy everything below into ChatGPT, Gemini, or any other AI tool to use this ski
 - Any existing new-hire offer letter template
 - Board deck materials on comp or equity strategy, if any exist
 
-**Then ask me, one at a time, whatever isn't already answered:**
+**Then ask me, one at a time, whatever isn't already answered.** Every answer needs to be a real, typed sentence or backed by an uploaded document — not a one-word pick. If this interface offers quick-select buttons or chips for any of these, ignore that and ask me to elaborate in my own words instead.
 
 1. What company do I work for, and roughly what size (total headcount)?
-2. What stage is the company at (private/pre-IPO, recently acquired, public), and roughly how large is the equity pool relative to total comp today?
-3. What's the current split between cash and equity in typical offers, and does it vary a lot by function?
-4. Do I have a formal annual compensation review or refresh cycle today? If so, roughly when does it run?
-5. What's my realistic bandwidth to run this — a comp/total-rewards specialist, a small people team, or mostly me?
-6. Have I already gotten any board or CEO-level buy-in on shifting more comp toward equity, or is that a conversation I still need to have?
-7. What's my specific pain point in my own words — attrition tied to promotion frustration, employees not caring about equity, a mismatch between what leadership wants people focused on vs. what they actually chase, something else?
-8. What's my timeline — a specific trigger (acquisition, fundraise, retention crisis) forcing urgency, or a longer-term culture shift?
-9. Are there specific employee segments I suspect are equity-skeptical (a geography, a function like sales) that will need tailored education?
-10. Is there anything unique about my context — multiple equity types in play, tax/legal complexity by geography, or public company trading restrictions?
+2. Walk me through what stage the company's at — private/pre-IPO, recently acquired, public, or something else — and how large the equity pool is relative to total comp today. Give me the actual numbers or ranges I'm working with, not just the label.
+3. Describe the current split between cash and equity in typical offers today, and how much that varies by function — walk me through a real example, like what an engineer's offer looks like versus what a sales or ops offer looks like.
+4. Tell me about my compensation review or refresh cycle today — is there a formal annual process, and if so, walk me through when it runs and how it actually works in practice.
+5. Describe who would realistically run this — a dedicated comp/total-rewards specialist, a small people team splitting this across other work, or mostly me alone? Tell me what bandwidth that person or team actually has for something like this.
+6. Walk me through where I stand with the board or CEO on this — have I already gotten buy-in on shifting more comp toward equity, has it come up informally, or is this something I still need to raise from scratch?
+7. Describe my specific pain point in my own words — is it attrition tied to promotion/leveling frustration, employees not caring about equity, a mismatch between what leadership wants people focused on versus what people actually chase, or something else? Tell me what I'm actually seeing, not just which category fits.
+8. Walk me through my timeline and what's driving it — is there a specific trigger like a recent acquisition, a fundraise, or a retention crisis forcing urgency, or is this more of a longer-term culture shift? Describe what's actually creating the pressure, if any.
+9. Which employee segments do I suspect are equity-skeptical — a particular geography, a particular function like sales — and what makes me think that? Describe what I've actually observed, not just the segment name.
+10. Is there anything unique about my context that adds complexity here — multiple equity types in play, tax/legal complexity by geography, or public company trading restrictions? Walk me through how that actually shows up for me.
+
+If any of my answers come back thin or generic — a single word, a vague generality, an obvious placeholder — you may nudge me once: name specifically what's missing, give one concrete example of the kind of detail that would help, and explicitly offer me the choice to add more or move on. Don't nudge a second time on the same question — take whatever I give you after that and proceed.
+
+**Before you start drafting anything, recap what you've gathered back to me in a compact list and ask me to confirm it's accurate or fix anything.** Only move into the framework below once I've confirmed.
 
 **Do not give me a generic template with blanks.** Every part of your output should visibly reflect my specific answers.
 

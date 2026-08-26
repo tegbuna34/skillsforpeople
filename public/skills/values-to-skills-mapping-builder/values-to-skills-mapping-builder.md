@@ -15,18 +15,22 @@ Copy everything below into ChatGPT, Gemini, or any other AI tool to use this ski
 - Existing leadership development program outlines or curricula
 - A calendar of recurring people/culture motions (all-hands, leader check-ins, learning series, etc.)
 
-**Then ask me, one at a time, whatever isn't already answered by my documents:**
+**Then ask me, one at a time, whatever isn't already answered by my documents.** Every answer needs to be a real, typed sentence or backed by an uploaded document — not a one-word pick. If this interface offers quick-select buttons or chips for any of these, ignore that and ask me to elaborate in my own words instead.
 
 1. What company/organization is this for, and roughly what size (employee headcount)?
-2. What is my role and how much authority do I have to actually change how values are defined or communicated — am I driving this, or building a proposal to pitch upward?
-3. What are my current stated values or guiding principles, word for word if possible — and in my own words, why don't they currently drive behavior?
-4. Who needs to be involved in defining the skills underneath each value (ELT, a working group, HRBPs, employee listening data), and how much time/access do I realistically have with them?
-5. Do I have any budget or dedicated resourcing for this, or is this something I need to build largely on existing bandwidth?
-6. What recurring company motions already exist that this could be threaded into (all-hands cadence, leader check-ins, existing learning series, performance review cycles), rather than creating brand-new events?
-7. Is there an existing leadership development program this needs to connect to, or am I building leadership development from scratch alongside this?
-8. What's my timeline — is this tied to a specific launch moment (a re-brand, a town hall, a fiscal year kickoff), or is it more exploratory right now?
-9. How many values/guiding principles do I currently have, or plan to have (too many will work against the goal of keeping this tangible)?
-10. Is there anything unique about my culture or context that should shape this (highly matrixed org, recent M&A, distributed/global workforce, existing skepticism from past "values initiatives")?
+2. Walk me through my role and how much authority I actually have to change how values are defined or communicated — am I driving this directly, or building a proposal to pitch upward?
+3. Describe my current stated values or guiding principles, word for word if possible — and walk me through, in my own words, why they don't currently drive behavior.
+4. Walk me through who needs to be involved in defining the skills underneath each value — ELT, a working group, HRBPs, employee listening data — and describe how much time or access I realistically have with them.
+5. Describe my budget or dedicated resourcing situation for this — is there something set aside, or would I be building this largely on existing bandwidth?
+6. Walk me through what recurring company motions already exist that this could be threaded into — all-hands cadence, leader check-ins, existing learning series, performance review cycles. Describe how each of those actually runs today.
+7. Describe whether there's an existing leadership development program this needs to connect to, or if I'm building leadership development from scratch alongside this.
+8. Walk me through my timeline — is this tied to a specific launch moment like a re-brand, a town hall, or a fiscal year kickoff, or is it more exploratory right now?
+9. Walk me through how many values or guiding principles I currently have, or plan to have, and describe my thinking behind that number.
+10. Is there anything unique about my culture or context that should shape this — a highly matrixed org, recent M&A, a distributed/global workforce, existing skepticism from past "values initiatives"? Walk me through how that factor actually plays out for me.
+
+If any of my answers come back thin or generic — a single word, a vague generality, an obvious placeholder — you may nudge me once: name specifically what's missing, give one concrete example of the kind of detail that would help, and explicitly offer me the choice to add more or move on. Don't nudge a second time on the same question — take whatever I give you after that and proceed.
+
+**Before you start drafting anything, recap what you've gathered back to me in a compact list and ask me to confirm it's accurate or fix anything.** Only move into the framework below once I've confirmed.
 
 **Do not give me a generic template with blanks.** Every part of your output should visibly reflect my specific answers — my actual value names, company size, resourcing, and existing motions, not placeholder language.
 

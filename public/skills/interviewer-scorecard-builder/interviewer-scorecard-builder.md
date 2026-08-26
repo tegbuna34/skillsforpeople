@@ -14,18 +14,22 @@ Copy everything below into ChatGPT, Gemini, or any other AI tool to use this ski
 - My performance review template or cycle documentation
 - Any prior hiring bar or "quality of hire" initiative documentation
 
-**Then ask me, one at a time, whatever isn't already answered:**
+**Then ask me, one at a time, whatever isn't already answered.** Every answer needs to be a real, typed sentence or backed by an uploaded document — not a one-word pick. If this interface offers quick-select buttons or chips for any of these, ignore that and ask me to elaborate in my own words instead.
 
 1. What company do I work for, and roughly what size (employee headcount, and specifically headcount of the function I'd pilot with)?
-2. What ATS/HRIS do I use, and does it already store interview scorecards, interviewer names per stage, and hire outcomes (start date, 90-day status, performance ratings)?
-3. Which function or team would I pilot this with first, and how many active interviewers does that function currently have?
-4. Roughly how many roles does that function need to fill per quarter?
-5. Do I have a formal performance review cycle at 90 days, 6 months, and 12 months? If not, what's the closest substitute available?
-6. Who owns interviewer accountability today — nobody, the recruiter, the hiring manager, or TA leadership? How much political capital will I realistically need to introduce this?
-7. What's my current hiring bar pain point in my own words?
-8. What tools do I currently use for interview notes (AI notetaker, manual notes, nothing standardized)?
-9. What's my realistic timeline and appetite — is leadership expecting quick wins, or bought into a 12-18 month data-driven program?
-10. Is there anything unique about my hiring context (regulated industry, high-volume hiring, executive search only, etc.) that should shape this?
+2. Walk me through what ATS/HRIS I use, and how much of this it already captures — interview scorecards, interviewer names per stage, hire outcomes like start date, 90-day status, performance ratings. Tell me what's actually in there today, not just the product name.
+3. Describe which function or team I'd pilot this with first and why, and walk me through how many active interviewers that function currently has.
+4. Walk me through roughly how many roles that function needs to fill per quarter, and how that volume tends to fluctuate. Give me the real numbers, not a rough guess.
+5. Describe my performance review cycle — is there a formal check-in at 90 days, 6 months, and 12 months, or would I be working with a substitute like manager check-ins or pulse surveys? Walk me through what actually happens today.
+6. Walk me through who owns interviewer accountability today — is it nobody, the recruiter, the hiring manager, TA leadership? Describe how much political capital I'd realistically need to spend to introduce this.
+7. Describe my current hiring bar pain point in my own words — too many bad hires, inconsistent interviewer quality, no way to tell who my best interviewers are, or something else? Tell me what I'm actually seeing, not just which category fits.
+8. Walk me through what I currently use to capture interview notes — an AI notetaker, manual notes, nothing standardized — and how consistent that is across interviewers today.
+9. Describe my realistic timeline and appetite for this — is leadership expecting quick wins, or genuinely bought into a 12-18 month data-driven program? Tell me what's actually been communicated to me.
+10. Is there anything unique about my hiring context that should shape this — a regulated industry, high-volume hiring, executive search only, something else? Walk me through how that factor actually plays out for me.
+
+If any of my answers come back thin or generic — a single word, a vague generality, an obvious placeholder — you may nudge me once: name specifically what's missing, give one concrete example of the kind of detail that would help, and explicitly offer me the choice to add more or move on. Don't nudge a second time on the same question — take whatever I give you after that and proceed.
+
+**Before you start drafting anything, recap what you've gathered back to me in a compact list and ask me to confirm it's accurate or fix anything.** Only move into the framework below once I've confirmed.
 
 **Do not give me a generic scorecard template with blanks.** Every part of your output should visibly reflect my specific company, function, tooling, and constraints — not placeholder language.
 
