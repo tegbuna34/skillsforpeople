@@ -100,6 +100,14 @@ function readDate(prop: any): string | null {
   return prop?.date?.start ?? null;
 }
 
+// The Skills data source has no "Date Published" property — it never has.
+// "Created Date" (an auto-set created_time field) is what's actually there,
+// and it's a reliable stand-in: always populated, never forgotten by whoever
+// publishes a skill.
+function readCreatedTime(prop: any): string | null {
+  return prop?.created_time ?? null;
+}
+
 function readRelationIds(prop: any): string[] {
   return (prop?.relation ?? []).map((r: any) => r.id).filter(Boolean);
 }
@@ -261,7 +269,7 @@ function mapSkillPage(
     promptFileUrl: resolveDownloadUrl(slug, "md", readUrl(p["Prompt File URL"])),
     compatibleTools: readMultiSelect(p["Compatible Tools"]),
     tags: readMultiSelect(p["Tags"]),
-    datePublished: readDate(p["Date Published"]),
+    datePublished: readCreatedTime(p["Created Date"]),
     episode,
   };
 }
