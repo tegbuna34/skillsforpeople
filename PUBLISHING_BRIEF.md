@@ -218,7 +218,7 @@ episodes + 16 skills), see
 
 ## Do not touch
 
-- **`leads` and `sessions` tables.** These are the auth store for the library
+- **`users` and `sessions` tables.** These are the auth store for the library
   gate. Only [lib/session.ts](lib/session.ts) and the `/api/auth/*` routes
   should ever write to them.
 - **`notion_id` on existing rows.** It's the idempotency key for the

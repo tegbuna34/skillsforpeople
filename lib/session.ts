@@ -2,7 +2,7 @@
  * Session cookie + Supabase-backed session store.
  *
  * Model: signup/login mints a random 32-byte token, we store its SHA-256 hash
- * plus the lead_id and expiry in `public.sessions`, and set the raw token in
+ * plus the user_id and expiry in `public.sessions`, and set the raw token in
  * a httpOnly cookie. The token itself is unguessable; hashing at rest means a
  * DB dump doesn't hand attackers usable cookies.
  *
@@ -18,7 +18,7 @@ export const COOKIE_NAME = "sfp_session";
 export const SESSION_DAYS = 90;
 
 export interface CurrentUser {
-  leadId: string;
+  userId: string;
   email: string;
   fullName: string;
   firstName: string;
@@ -38,7 +38,7 @@ function firstNameOf(fullName: string): string {
   return trimmed.split(/\s+/)[0];
 }
 
-export async function createSession(leadId: string): Promise<string> {
+export async function createSession(userId: string): Promise<string> {
   const token = generateToken();
   const tokenHash = hashToken(token);
   const expiresAt = new Date(
@@ -47,7 +47,7 @@ export async function createSession(leadId: string): Promise<string> {
 
   const { error } = await supabase()
     .from("sessions")
-    .insert({ lead_id: leadId, token_hash: tokenHash, expires_at: expiresAt });
+    .insert({ user_id: userId, token_hash: tokenHash, expires_at: expiresAt });
   if (error) throw new Error(`createSession: ${error.message}`);
 
   cookies().set(COOKIE_NAME, token, {
@@ -77,11 +77,11 @@ export async function getCurrentUser(): Promise<CurrentUser | null> {
 
   const { data, error } = await supabase()
     .from("sessions")
-    .select("lead_id, expires_at, lead:leads!sessions_lead_id_fkey(id, email, full_name)")
+    .select("user_id, expires_at, user:users!sessions_user_id_fkey(id, email, full_name)")
     .eq("token_hash", tokenHash)
     .maybeSingle();
 
-  if (error || !data || !data.lead) return null;
+  if (error || !data || !data.user) return null;
   if (new Date(data.expires_at).getTime() < Date.now()) return null;
 
   // Best-effort last_seen bump — fire and forget.
@@ -94,11 +94,11 @@ export async function getCurrentUser(): Promise<CurrentUser | null> {
   // Supabase joins can come back as array or object depending on the
   // relationship shape; normalize.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const lead: any = Array.isArray(data.lead) ? data.lead[0] : data.lead;
+  const user: any = Array.isArray(data.user) ? data.user[0] : data.user;
   return {
-    leadId: lead.id,
-    email: lead.email,
-    fullName: lead.full_name,
-    firstName: firstNameOf(lead.full_name),
+    userId: user.id,
+    email: user.email,
+    fullName: user.full_name,
+    firstName: firstNameOf(user.full_name),
   };
 }

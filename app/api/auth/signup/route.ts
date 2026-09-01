@@ -26,25 +26,24 @@ export async function POST(req: Request) {
 
   const sb = supabase();
 
-  // Upsert on email — a signup with an already-known email is treated as a
-  // login (same effect: name + unlock). We refresh full_name only if the row
-  // was created, not on repeat signups.
+  // A signup with an already-known email is treated as a login (same effect:
+  // name + unlock). We keep the original full_name on repeat signups.
   const { data: existing } = await sb
-    .from("leads")
+    .from("users")
     .select("id, full_name")
     .eq("email", email)
     .maybeSingle();
 
-  let leadId: string;
+  let userId: string;
   if (existing) {
-    leadId = existing.id;
+    userId = existing.id;
     await sb
-      .from("leads")
+      .from("users")
       .update({ last_login_at: new Date().toISOString() })
-      .eq("id", leadId);
+      .eq("id", userId);
   } else {
     const { data, error } = await sb
-      .from("leads")
+      .from("users")
       .insert({ email, full_name: fullName, signup_source: "site" })
       .select("id")
       .single();
@@ -54,10 +53,10 @@ export async function POST(req: Request) {
         { status: 500 }
       );
     }
-    leadId = data.id;
+    userId = data.id;
   }
 
-  await createSession(leadId);
+  await createSession(userId);
 
   return NextResponse.json({
     ok: true,

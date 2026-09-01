@@ -19,13 +19,13 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Enter a valid email." }, { status: 400 });
   }
 
-  const { data: lead } = await supabase()
-    .from("leads")
+  const { data: user } = await supabase()
+    .from("users")
     .select("id, full_name, email")
     .eq("email", email)
     .maybeSingle();
 
-  if (!lead) {
+  if (!user) {
     return NextResponse.json(
       { error: "We couldn't find that email — sign up above." },
       { status: 404 }
@@ -33,17 +33,17 @@ export async function POST(req: Request) {
   }
 
   await supabase()
-    .from("leads")
+    .from("users")
     .update({ last_login_at: new Date().toISOString() })
-    .eq("id", lead.id);
+    .eq("id", user.id);
 
-  await createSession(lead.id);
+  await createSession(user.id);
 
   return NextResponse.json({
     ok: true,
     user: {
-      email: lead.email,
-      firstName: (lead.full_name || "").split(/\s+/)[0] || "",
+      email: user.email,
+      firstName: (user.full_name || "").split(/\s+/)[0] || "",
     },
   });
 }
