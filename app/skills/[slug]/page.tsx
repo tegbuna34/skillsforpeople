@@ -4,10 +4,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { promises as fs } from "node:fs";
 import path from "node:path";
-import { getPublishedSkills, getSkillBySlug } from "@/lib/skills";
+import { getFreeSkillSlugs, getPublishedSkills, getSkillBySlug } from "@/lib/skills";
 import { inspiredByLine, skillPromptMarkdown } from "@/lib/format";
 import PodcastMicIcon from "@/components/PodcastMicIcon";
+import { getCurrentUser } from "@/lib/session";
 import DetailActions from "./DetailActions";
+import BodyLockOverlay from "./BodyLockOverlay";
 
 // If the Notion Prompt File URL points into /public/skills/, read the real
 // .md file at build time and hand its contents to the Copy-prompt button.
@@ -64,6 +66,16 @@ const INCLUDED_ITEMS = [
 export default async function SkillDetailPage({ params }: { params: { slug: string } }) {
   const skill = await getSkillBySlug(params.slug);
   if (!skill) notFound();
+
+  // Body gate: first six most-recent skills are fully readable. Locked pages
+  // still resolve (better for shared/bookmarked links) but render the body
+  // blurred behind a centered login panel.
+  const [freeSlugs, currentUser] = await Promise.all([
+    getFreeSkillSlugs(),
+    getCurrentUser().catch(() => null),
+  ]);
+  const isLoggedIn = Boolean(currentUser);
+  const isBodyLocked = !isLoggedIn && !freeSlugs.has(skill.slug);
 
   const realPromptFileContent = await readPublicPromptFile(skill.promptFileUrl);
   const promptText = realPromptFileContent ?? skillPromptMarkdown(skill);
@@ -140,8 +152,15 @@ export default async function SkillDetailPage({ params }: { params: { slug: stri
       </section>
 
       {/* BODY */}
-      <section className="mx-auto flex max-w-[1180px] flex-wrap gap-12 px-5 pb-16 sm:px-8 lg:px-16">
-        <div className="min-w-[280px] flex-[2] basis-[520px]">
+      <section className="relative mx-auto flex max-w-[1180px] flex-wrap gap-12 px-5 pb-16 sm:px-8 lg:px-16">
+        {isBodyLocked && <BodyLockOverlay />}
+        <div
+          className={`min-w-[280px] flex-[2] basis-[520px] ${
+            isBodyLocked ? "pointer-events-none select-none" : ""
+          }`}
+          style={isBodyLocked ? { filter: "blur(6px)" } : undefined}
+          aria-hidden={isBodyLocked || undefined}
+        >
           {(skill.whatItDoes || skill.description) && (
             <>
               <h2 className="mb-3.5 text-[22px] font-bold">What this skill does</h2>

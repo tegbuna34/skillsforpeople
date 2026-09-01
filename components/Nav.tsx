@@ -4,15 +4,20 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useAuth } from "./AuthContext";
 
+// Final nav on every page: logo · About · Work with us · Browse the library · Login/account.
+// "Contribute" moved to an inline link on /skills. Pricing has no nav link.
 const links = [
   { href: "/about", label: "About" },
-  { href: "/contribute", label: "Contribute" },
+  { href: "/work-with-us", label: "Work with us" },
+  { href: "/skills", label: "Browse the library" },
 ];
 
 export default function Nav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const { user, openLogin, logout } = useAuth();
 
   useEffect(() => {
     setOpen(false);
@@ -26,8 +31,6 @@ export default function Nav() {
       document.body.style.overflow = prev;
     };
   }, [open]);
-
-  const isBrowse = pathname === "/skills";
 
   return (
     <>
@@ -56,29 +59,60 @@ export default function Nav() {
               </Link>
             );
           })}
-          <Link
-            href="/skills"
-            className={`whitespace-nowrap rounded-lg px-5 py-2.5 text-[15px] font-semibold transition-colors ${
-              isBrowse
-                ? "bg-blue text-white hover:bg-blue"
-                : "bg-navy text-white hover:bg-blue"
-            }`}
-          >
-            Browse the library
-          </Link>
+          {user ? (
+            <div className="flex items-center gap-3">
+              <span className="text-[15px] font-medium text-navy">
+                Hi, {user.firstName || "there"}
+              </span>
+              <button
+                type="button"
+                onClick={() => void logout()}
+                className="whitespace-nowrap rounded-lg border border-navy/20 bg-white px-4 py-2 text-[14px] font-semibold text-navy transition-colors hover:bg-mint"
+              >
+                Log out
+              </button>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={openLogin}
+              className="whitespace-nowrap rounded-lg bg-navy px-5 py-2.5 text-[15px] font-semibold text-white transition-colors hover:bg-blue"
+            >
+              Login
+            </button>
+          )}
         </div>
 
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Menu"
-          aria-expanded={open}
-          className="flex h-9 w-9 flex-col items-stretch justify-center gap-[5px] border-none bg-transparent p-0 nav:hidden"
-        >
-          <span className="block h-[2px] w-full bg-navy" />
-          <span className="block h-[2px] w-full bg-navy" />
-          <span className="block h-[2px] w-full bg-navy" />
-        </button>
+        <div className="flex items-center gap-3 nav:hidden">
+          {user ? (
+            <button
+              type="button"
+              onClick={() => void logout()}
+              className="whitespace-nowrap rounded-lg border border-navy/20 bg-white px-3 py-2 text-[13px] font-semibold text-navy"
+            >
+              Log out
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={openLogin}
+              className="whitespace-nowrap rounded-lg bg-navy px-4 py-2 text-[14px] font-semibold text-white"
+            >
+              Login
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Menu"
+            aria-expanded={open}
+            className="flex h-9 w-9 flex-col items-stretch justify-center gap-[5px] border-none bg-transparent p-0"
+          >
+            <span className="block h-[2px] w-full bg-navy" />
+            <span className="block h-[2px] w-full bg-navy" />
+            <span className="block h-[2px] w-full bg-navy" />
+          </button>
+        </div>
       </div>
 
       {open && (
@@ -110,12 +144,34 @@ export default function Nav() {
                 {l.label}
               </Link>
             ))}
-            <Link
-              href="/skills"
-              className="mt-6 block rounded-lg bg-white py-3.5 text-center text-base font-bold text-navy"
-            >
-              Browse the library
-            </Link>
+            {user ? (
+              <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-4 text-white">
+                <span className="text-lg font-semibold">
+                  Hi, {user.firstName || "there"}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setOpen(false);
+                    void logout();
+                  }}
+                  className="rounded-lg border border-white/30 px-4 py-2 text-sm font-semibold"
+                >
+                  Log out
+                </button>
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => {
+                  setOpen(false);
+                  openLogin();
+                }}
+                className="mt-6 block rounded-lg bg-white py-3.5 text-center text-base font-bold text-navy"
+              >
+                Login
+              </button>
+            )}
           </div>
         </div>
       )}

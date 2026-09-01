@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { track } from "@vercel/analytics";
+import { useAuth } from "@/components/AuthContext";
 
 function downloadText(filename: string, content: string) {
   const blob = new Blob([content], { type: "text/markdown" });
@@ -26,21 +27,14 @@ export default function DetailActions({
 }: {
   slug: string;
   vertical: string;
-  // Direct link to a real .skill zip in /public/skills/<slug>/. If null, the
-  // Download-skill button is disabled — we cannot fabricate a valid zip
-  // client-side, so no fallback.
   skillFileUrl: string | null;
-  // Direct link to the real .md prompt in /public/skills/<slug>/. If null,
-  // Download-.md falls back to the synthesized markdown, since a plain-text
-  // prompt is safe to generate from Notion fields.
   promptFileUrl: string | null;
-  // The text the "Copy prompt" button writes to the clipboard. If the real
-  // .md file exists in /public/skills/, this is that file's contents (read
-  // at build time). Otherwise it's the synthesized version.
   promptText: string;
   promptTextIsGenerated: boolean;
   compatibleTools: string[];
 }) {
+  const { user, openLogin } = useAuth();
+  const isLoggedIn = Boolean(user);
   const [copied, setCopied] = useState(false);
 
   const flash = (setter: (v: boolean) => void) => {
@@ -83,6 +77,43 @@ export default function DetailActions({
 
   const compatText =
     compatibleTools.length > 0 ? compatibleTools.join(", ") : "ChatGPT, Claude, Other";
+
+  // Even on free skills, download + copy always require login. Logged-out
+  // visitors see this compact prompt in the action card instead of the buttons.
+  if (!isLoggedIn) {
+    return (
+      <aside className="min-w-[260px] flex-1 basis-[300px] rounded-2xl border border-navy/10 bg-white p-6 shadow-cardLg">
+        <div className="mb-2 flex items-center gap-2 text-[12px] font-bold uppercase tracking-wider text-blue">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+            <rect x="4" y="10" width="16" height="10" rx="2" />
+            <path d="M8 10V7a4 4 0 1 1 8 0v3" />
+          </svg>
+          Login to download
+        </div>
+        <div className="mb-4 text-[15px] font-bold text-navy">
+          Get this skill as a .skill file or a plain prompt.
+        </div>
+        <button
+          type="button"
+          onClick={openLogin}
+          className="mb-2.5 w-full cursor-pointer whitespace-nowrap rounded-[9px] border-none bg-navy px-4 py-3 text-center text-[14.5px] font-bold text-white transition-colors hover:bg-blue"
+        >
+          Login to download
+        </button>
+        <div className="text-center text-[12.5px] text-navy/50">
+          Name + email. No password. 100% free.
+        </div>
+        <div className="mt-4 flex justify-between border-t border-navy/10 pt-3.5 text-[12.5px] text-navy/50">
+          <span>Format</span>
+          <span className="font-semibold text-navy">.skill / .md</span>
+        </div>
+        <div className="mt-1.5 flex justify-between text-[12.5px] text-navy/50">
+          <span>Compatible with</span>
+          <span className="text-right font-semibold text-navy">{compatText}</span>
+        </div>
+      </aside>
+    );
+  }
 
   return (
     <aside className="min-w-[260px] flex-1 basis-[300px] rounded-2xl border border-navy/10 bg-white p-6 shadow-cardLg">
