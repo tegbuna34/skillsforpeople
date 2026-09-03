@@ -20,6 +20,7 @@ export interface Contributor {
   title: string;
   company: string;
   slug?: string;
+  linkedinUrl?: string | null;
 }
 
 export interface Episode {
@@ -94,6 +95,7 @@ type SkillRow = {
     name: string;
     title: string;
     company: string;
+    linkedin_url: string | null;
   } | null;
   episode: {
     id: string;
@@ -106,6 +108,7 @@ type SkillRow = {
       name: string;
       title: string;
       company: string;
+      linkedin_url: string | null;
     } | null;
   } | null;
 };
@@ -122,6 +125,7 @@ function mapRow(row: SkillRow): Skill | null {
         title: row.contributor.title ?? "",
         company: row.contributor.company ?? "",
         slug: row.contributor.slug || undefined,
+        linkedinUrl: row.contributor.linkedin_url ?? null,
       }
     : row.episode?.guest
     ? {
@@ -129,6 +133,7 @@ function mapRow(row: SkillRow): Skill | null {
         title: row.episode.guest.title ?? "",
         company: row.episode.guest.company ?? "",
         slug: row.episode.guest.slug || undefined,
+        linkedinUrl: row.episode.guest.linkedin_url ?? null,
       }
     : null;
 
@@ -185,12 +190,12 @@ const SKILL_SELECT = `
   contributor_id,
   episode_id,
   contributor:contributors!skills_contributor_id_fkey (
-    slug, name, title, company
+    slug, name, title, company, linkedin_url
   ),
   episode:episodes!skills_episode_id_fkey (
     id, podcast, title, url, date,
     guest:contributors!episodes_guest_contributor_id_fkey (
-      slug, name, title, company
+      slug, name, title, company, linkedin_url
     )
   )
 `;

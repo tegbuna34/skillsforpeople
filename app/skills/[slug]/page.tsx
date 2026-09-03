@@ -81,10 +81,15 @@ export default async function SkillDetailPage({ params }: { params: { slug: stri
   const promptText = realPromptFileContent ?? skillPromptMarkdown(skill);
   const promptTextIsGenerated = realPromptFileContent === null;
   const guest = skill.episode?.guest;
+  // Prefer the contributor's real LinkedIn URL when we have one stored;
+  // only fall back to a LinkedIn people-search URL for contributors that
+  // predate the linkedin_url column being populated.
   const linkedinUrl = guest
-    ? `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(
-        `${guest.name} ${guest.company}`
-      )}`
+    ? guest.linkedinUrl
+      ? guest.linkedinUrl
+      : `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(
+          `${guest.name} ${guest.company}`
+        )}`
     : null;
 
   return (
