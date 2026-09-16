@@ -16,19 +16,14 @@ const services = [
     subhead: "For teams getting started with AI",
     title: "AI Workshops",
     desc:
-      "A 90-minute live working session that moves your team past “just using AI for emails” and toward the workflows actually eating your time.",
-    includes: [
-      "Live 90-minute session with your team",
-      "Workstream → workflow → task → step mapping",
-      "A concrete list of AI opportunities specific to your team",
-      "Built for HR and ops teams — no technical background needed",
-    ],
-    price: "$2,500",
-    priceLabel: "per 90 min",
+      "A working session with your team to map out where AI actually saves you time, and where it doesn’t.",
+    borderColor: "border-blue/35",
+    iconBg: "bg-blue/[0.14]",
+    iconColor: "text-blue",
     icon: (
       <svg
-        width="20"
-        height="20"
+        width="22"
+        height="22"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -43,21 +38,16 @@ const services = [
   },
   {
     subhead: "For teams ready to implement AI department-wide",
-    title: "Custom Workflow & Automation Builds",
+    title: "Custom Apps & Workflows",
     desc:
-      "We’ll work with the tools you already use and the data you already have to build custom solutions based on how your team works.",
-    includes: [
-      "Ongoing build support, not a single session",
-      "Built using the tools and docs you already have",
-      "Scoped to your team's specific workflows",
-      "Pricing scoped to the engagement",
-    ],
-    price: "Custom",
-    priceLabel: "",
+      "We’ll build something specific to how your team already works, using the tools you already have.",
+    borderColor: "border-peach/60",
+    iconBg: "bg-peach/[0.28]",
+    iconColor: "text-navy",
     icon: (
       <svg
-        width="20"
-        height="20"
+        width="22"
+        height="22"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -120,9 +110,10 @@ export default function WorkWithUsPage() {
           then build it.
         </h1>
         <p className="mx-auto mb-7 max-w-[620px] text-lg text-navy/75">
-          Two ways to work with us: a workshop that maps your priorities and
-          workflows, or hands-on support to build solutions with the tools you
-          already use.
+          We give away real HR AI content because we want HR teams actually
+          using AI well, not just talking about it. If you want help going
+          deeper, either as a team or with something custom-built for how you
+          work, we’re here for that too.
         </p>
         <a
           href={CALENDAR_LINK}
@@ -141,60 +132,27 @@ export default function WorkWithUsPage() {
             {services.map((service) => (
               <div
                 key={service.title}
-                className="flex flex-col rounded-[18px] border border-navy/10 bg-mint p-9"
+                className={`flex flex-col rounded-[18px] border ${service.borderColor} bg-mint p-8`}
               >
-                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-[10px] border border-navy/10 bg-white text-blue">
+                <div
+                  className={`mb-[18px] flex h-12 w-12 items-center justify-center rounded-xl ${service.iconBg} ${service.iconColor}`}
+                >
                   {service.icon}
                 </div>
                 <div className="mb-2 text-[13px] font-bold text-blue">
                   {service.subhead}
                 </div>
-                <h2 className="mb-3 text-[clamp(22px,2.6vw,26px)] font-bold tracking-tight">
+                <h2 className="mb-3.5 text-[clamp(22px,2.6vw,26px)] font-bold tracking-tight">
                   {service.title}
                 </h2>
-                <p className="mb-6 text-[15.5px] text-navy/75">{service.desc}</p>
-                <div className="mb-6 border-t border-navy/10 pt-5">
-                  <div className="mb-3.5 text-[13.5px] font-bold">
-                    What&apos;s included:
-                  </div>
-                  <div className="flex flex-col gap-3">
-                    {service.includes.map((item) => (
-                      <div key={item} className="flex items-start gap-2.5">
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="#5e749e"
-                          strokeWidth="2.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="mt-0.5 flex-shrink-0"
-                          aria-hidden="true"
-                        >
-                          <polyline points="20 6 9 17 4 12" />
-                        </svg>
-                        <span className="text-[14.5px] text-navy/80">
-                          {item}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <div className="flex-1" />
-                <div className="mb-4 flex items-baseline justify-between gap-3">
-                  <span className="text-[13px] font-semibold text-navy/55">
-                    {service.priceLabel}
-                  </span>
-                  <span className="text-2xl font-extrabold tracking-tight">
-                    {service.price}
-                  </span>
-                </div>
+                <p className="flex-1 text-base leading-[1.55] text-navy/75">
+                  {service.desc}
+                </p>
                 <a
                   href={CALENDAR_LINK}
                   target="_blank"
                   rel="noreferrer"
-                  className="block rounded-[9px] bg-navy px-4 py-3.5 text-center text-[14.5px] font-bold text-white no-underline transition-colors hover:bg-blue"
+                  className="mt-7 block rounded-[9px] bg-navy px-4 py-3.5 text-center text-[14.5px] font-bold text-white no-underline transition-colors hover:bg-blue"
                 >
                   Book a call
                 </a>
