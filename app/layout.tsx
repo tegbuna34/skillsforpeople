@@ -31,6 +31,21 @@ export const metadata: Metadata = {
     description:
       "A library of practical AI skills for HR professionals, built from workflows real practitioners have already run.",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 2000,
+        height: 1050,
+        alt: "Skills for People — Practical AI skills for HR, built from what worked.",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Skills for People",
+    description:
+      "A library of practical AI skills for HR professionals, built from workflows real practitioners have already run.",
+    images: ["/og-image.png"],
   },
 };
 
