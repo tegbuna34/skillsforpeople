@@ -15,9 +15,29 @@ const primaryLinks = [
 ];
 
 const resourceLinks = [
-  { href: "/skills", label: "Skill Library" },
-  { href: "/tools", label: "Tools" },
+  { href: "/skills", label: "Skill Library", comingSoon: false },
+  { href: "/tools", label: "Tools", comingSoon: true },
 ];
+
+function ChevronIcon({ open }: { open: boolean }) {
+  return (
+    <svg
+      width="10"
+      height="10"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="transition-transform duration-150"
+      style={{ transform: open ? "rotate(180deg)" : "rotate(0deg)" }}
+      aria-hidden="true"
+    >
+      <polyline points="6 9 12 15 18 9" />
+    </svg>
+  );
+}
 
 export default function Nav() {
   const pathname = usePathname();
@@ -103,12 +123,7 @@ export default function Nav() {
               }`}
             >
               Resources
-              <span
-                className="inline-block text-[10px] transition-transform duration-150"
-                style={{ transform: resourcesOpen ? "rotate(180deg)" : "rotate(0deg)" }}
-              >
-                ▾
-              </span>
+              <ChevronIcon open={resourcesOpen} />
             </button>
             {resourcesOpen && (
               <div className="absolute left-0 top-[calc(100%+10px)] z-20 min-w-[190px] overflow-hidden rounded-xl border border-navy/10 bg-white p-1.5 shadow-cardLg">
@@ -118,11 +133,16 @@ export default function Nav() {
                     <Link
                       key={l.href}
                       href={l.href}
-                      className={`block rounded-lg px-3.5 py-2.5 text-[14.5px] no-underline hover:bg-navy/5 ${
+                      className={`flex items-center justify-between gap-3 rounded-lg px-3.5 py-2.5 text-[14.5px] no-underline hover:bg-navy/5 ${
                         active ? "font-bold text-blue" : "font-medium text-navy"
                       }`}
                     >
                       {l.label}
+                      {l.comingSoon && (
+                        <span className="whitespace-nowrap rounded-md bg-navy/8 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-navy/50">
+                          Coming soon
+                        </span>
+                      )}
                     </Link>
                   );
                 })}
@@ -223,11 +243,8 @@ export default function Nav() {
                 className="flex w-full cursor-pointer items-center justify-between border-none bg-transparent py-4 text-left text-xl font-semibold text-white"
               >
                 <span>Resources</span>
-                <span
-                  className="text-[15px] transition-transform duration-150"
-                  style={{ transform: mobileResourcesOpen ? "rotate(180deg)" : "rotate(0deg)" }}
-                >
-                  ▾
+                <span className="text-white">
+                  <ChevronIcon open={mobileResourcesOpen} />
                 </span>
               </button>
               {mobileResourcesOpen && (
@@ -236,9 +253,14 @@ export default function Nav() {
                     <Link
                       key={l.href}
                       href={l.href}
-                      className="py-3 pl-4 text-[17px] font-medium text-white/75 no-underline"
+                      className="flex items-center justify-between gap-3 py-3 pl-4 pr-2 text-[17px] font-medium text-white/75 no-underline"
                     >
                       {l.label}
+                      {l.comingSoon && (
+                        <span className="whitespace-nowrap rounded-md bg-white/10 px-2 py-1 text-[11px] font-bold uppercase tracking-wide text-white/60">
+                          Coming soon
+                        </span>
+                      )}
                     </Link>
                   ))}
                 </div>
