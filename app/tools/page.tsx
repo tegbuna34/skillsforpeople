@@ -30,39 +30,73 @@ export default async function ToolsDirectoryPage() {
 
       <div className="mx-auto max-w-[1180px] px-5 pb-2 pt-10 sm:px-8 lg:px-16">
         <div className="grid gap-8 [grid-template-columns:repeat(auto-fit,minmax(480px,1fr))]">
-          {tools.map((tool) => (
-            <Link
-              key={tool.slug}
-              href={`/tools/${tool.slug}`}
-              className="flex cursor-pointer flex-col overflow-hidden rounded-[14px] border border-navy/10 bg-white text-inherit no-underline transition-shadow hover:border-navy/25 hover:shadow-card"
-            >
-              {tool.mockupImage && (
-                <Image
-                  src={tool.mockupImage}
-                  alt={`${tool.name} screenshot`}
-                  width={960}
-                  height={540}
-                  className="block aspect-video w-full border-b border-navy/10 object-cover"
-                />
-              )}
-              <div className="flex min-h-[216px] flex-1 flex-col gap-3 p-7">
-                <span className="self-start rounded-xl bg-blue/[0.12] px-3 py-1.5 text-[12px] font-bold uppercase tracking-wider text-blue">
-                  {tool.category}
-                </span>
-                <div className="overflow-hidden text-ellipsis whitespace-nowrap text-[21px] font-bold">
-                  {tool.name}
+          {tools.map((tool) => {
+            const cardBody = (
+              <>
+                <div className="relative">
+                  {tool.mockupImage && (
+                    <Image
+                      src={tool.mockupImage}
+                      alt={`${tool.name} screenshot`}
+                      width={960}
+                      height={540}
+                      className={`block aspect-video w-full border-b border-navy/10 object-cover ${
+                        tool.comingSoon ? "opacity-70" : ""
+                      }`}
+                    />
+                  )}
+                  {tool.comingSoon && (
+                    <span className="absolute right-4 top-4 rounded-xl bg-navy px-3 py-1.5 text-[12px] font-bold uppercase tracking-wider text-white shadow-card">
+                      Coming soon
+                    </span>
+                  )}
                 </div>
-                <div className="line-clamp-2 flex-1 text-[15.5px] text-navy/70">
-                  {tool.oneLiner}
-                </div>
-                <div className="flex justify-end pt-2">
-                  <span className="whitespace-nowrap text-[13.5px] font-bold text-blue">
-                    View →
+                <div className="flex min-h-[216px] flex-1 flex-col gap-3 p-7">
+                  <span className="self-start rounded-xl bg-blue/[0.12] px-3 py-1.5 text-[12px] font-bold uppercase tracking-wider text-blue">
+                    {tool.category}
                   </span>
+                  <div className="overflow-hidden text-ellipsis whitespace-nowrap text-[21px] font-bold">
+                    {tool.name}
+                  </div>
+                  <div className="line-clamp-2 flex-1 text-[15.5px] text-navy/70">
+                    {tool.oneLiner}
+                  </div>
+                  <div className="flex justify-end pt-2">
+                    {tool.comingSoon ? (
+                      <span className="whitespace-nowrap text-[13.5px] font-bold text-navy/40">
+                        Coming soon
+                      </span>
+                    ) : (
+                      <span className="whitespace-nowrap text-[13.5px] font-bold text-blue">
+                        View →
+                      </span>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </>
+            );
+
+            if (tool.comingSoon) {
+              return (
+                <div
+                  key={tool.slug}
+                  className="flex flex-col overflow-hidden rounded-[14px] border border-navy/10 bg-white text-inherit"
+                >
+                  {cardBody}
+                </div>
+              );
+            }
+
+            return (
+              <Link
+                key={tool.slug}
+                href={`/tools/${tool.slug}`}
+                className="flex cursor-pointer flex-col overflow-hidden rounded-[14px] border border-navy/10 bg-white text-inherit no-underline transition-shadow hover:border-navy/25 hover:shadow-card"
+              >
+                {cardBody}
+              </Link>
+            );
+          })}
         </div>
       </div>
 

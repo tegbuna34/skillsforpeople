@@ -29,6 +29,7 @@ export interface Tool {
   setupSteps: string[];
   makeYourOwn: string[];
   datePublished: string | null;
+  comingSoon: boolean;
 }
 
 type ToolRow = {
@@ -49,6 +50,7 @@ type ToolRow = {
   setup_steps: string[];
   make_your_own: string[];
   date_published: string | null;
+  coming_soon: boolean;
 };
 
 function normalizeImagePath(path: string | null): string | null {
@@ -75,6 +77,7 @@ function mapRow(row: ToolRow): Tool {
     setupSteps: row.setup_steps ?? [],
     makeYourOwn: row.make_your_own ?? [],
     datePublished: row.date_published,
+    comingSoon: row.coming_soon ?? false,
   };
 }
 
@@ -95,7 +98,8 @@ const TOOL_SELECT = `
   need_list,
   setup_steps,
   make_your_own,
-  date_published
+  date_published,
+  coming_soon
 `;
 
 let _cache: Promise<Tool[]> | null = null;
