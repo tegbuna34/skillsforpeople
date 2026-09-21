@@ -31,6 +31,9 @@ export default function Footer() {
               <Link href="/skills" className="text-[14.5px] text-mint/75 no-underline hover:underline">
                 Browse skills
               </Link>
+              <Link href="/tools" className="text-[14.5px] text-mint/75 no-underline hover:underline">
+                Browse tools
+              </Link>
               <Link href="/contribute" className="text-[14.5px] text-mint/75 no-underline hover:underline">
                 Contribute
               </Link>
