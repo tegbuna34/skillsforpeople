@@ -6,7 +6,6 @@ import { getPublishedSkills, type Skill } from "@/lib/skills";
 import { getCurrentUser, isOnProgramWaitlist } from "@/lib/account";
 import { HOME_TEASER_COUNT } from "@/lib/home";
 import { excerptForSkill } from "@/lib/skill-excerpt";
-import { newsletterUrl } from "@/lib/newsletter";
 import SkillCard from "@/components/SkillCard";
 import EmailSignup from "@/components/EmailSignup";
 import SeeLibraryButton from "@/components/SeeLibraryButton";
@@ -14,8 +13,6 @@ import DirectoryClient from "@/app/skills/DirectoryClient";
 import SkillDocument from "@/components/mockups/SkillDocument";
 import HowItWorks from "@/components/mockups/HowItWorks";
 import CohortPreview from "@/components/mockups/CohortPreview";
-import IssuePreview from "@/components/mockups/IssuePreview";
-import NewsletterBand from "@/components/NewsletterBand";
 import "@/components/mockups/visuals.css";
 
 const FAMILIAR = [
@@ -75,7 +72,6 @@ export default async function LandingPage() {
         <section className="mx-auto max-w-[1180px] px-5 py-10 sm:px-8 lg:px-16">
           <DirectoryClient skills={skills} verticals={verticalsOf(skills)} initialVertical="All" />
         </section>
-        <NewsletterBand />
       </>
     );
   }
@@ -89,7 +85,6 @@ export default async function LandingPage() {
         what: "A ready-to-use workflow an HR leader shared, written so you can run it in Claude or ChatGPT.",
         steps: [],
       };
-  const issueLine = (weekly?.description || excerpt.what).split(/(?<=\.)\s/)[0];
 
   return (
     <div className="sfp-mock">
@@ -211,25 +206,6 @@ export default async function LandingPage() {
         </div>
       </section>
 
-      <section className="band band--mint" data-email-capture="">
-        <div className="container split">
-          <div className="newsletter__copy">
-            <p className="eyebrow">Skills for People Weekly</p>
-            <h2 className="h2">One skill and one tip, every Tuesday</h2>
-            <p className="lead">
-              Each issue has a new skill built from an HR leader&apos;s workflow, plus one technical
-              tip from me.
-            </p>
-            <a className="btn" href={newsletterUrl()}>
-              Send it to me
-            </a>
-            <p className="fine" style={{ marginTop: 12 }}>
-              Unsubscribe anytime.
-            </p>
-          </div>
-          <IssuePreview skillName={excerpt.name} skillLine={issueLine} />
-        </div>
-      </section>
     </div>
   );
 }

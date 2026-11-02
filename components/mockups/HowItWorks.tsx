@@ -31,7 +31,7 @@ export default function HowItWorks({ skillName }: { skillName: string }) {
         <div className="hiw__text">
           <span className="hiw__num">1</span>
           <h3>Get the skill</h3>
-          <p>Enter your work email. This week&apos;s skill opens now, and a new one arrives every Tuesday.</p>
+          <p>Enter your work email. This week&apos;s skill opens now, and a new one arrives every Tuesday, plus one tip from me.</p>
         </div>
       </li>
       <li className="hiw__card">
