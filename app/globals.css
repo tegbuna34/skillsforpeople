@@ -42,6 +42,11 @@ button {
   font-family: inherit;
 }
 
+a,
+button {
+  touch-action: manipulation;
+}
+
 /* Utility: clamp text to N lines */
 .line-clamp-3 {
   display: -webkit-box;

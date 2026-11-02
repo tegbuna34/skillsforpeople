@@ -12,6 +12,7 @@ const nextConfig = {
       { source: "/tools", destination: "/skills", permanent: true },
       { source: "/tools/:slug", destination: "/skills", permanent: true },
       { source: "/pricing", destination: "/people-builders", permanent: true },
+      { source: "/work-with-us", destination: "/", permanent: false },
     ];
   },
 };

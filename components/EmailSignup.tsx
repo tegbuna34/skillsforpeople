@@ -13,12 +13,14 @@ export default function EmailSignup({
   placeholder = "Your work email",
   compact = false,
   inline = false,
+  bar = false,
 }: {
   cta: string;
   finePrint?: string;
   placeholder?: string;
   compact?: boolean;
   inline?: boolean;
+  bar?: boolean;
 }) {
   const [email, setEmail] = useState("");
   const [busy, setBusy] = useState(false);
@@ -69,6 +71,14 @@ export default function EmailSignup({
     setSentTo(value);
   }
 
+  if (sentTo && bar) {
+    return (
+      <div className="flex h-11 min-w-0 flex-1 items-center text-[13.5px] font-semibold text-navy">
+        Check {sentTo}
+      </div>
+    );
+  }
+
   if (sentTo) {
     return (
       <div className="rounded-xl border border-navy/10 bg-white px-4 py-3.5 text-[14.5px] text-navy/80">
@@ -97,7 +107,13 @@ export default function EmailSignup({
     <form
       onSubmit={(event) => void submit(event)}
       noValidate
-      className={inline ? "flex flex-col gap-2 sm:flex-row sm:items-center" : "flex flex-col gap-2.5"}
+      className={
+        bar
+          ? "flex min-w-0 flex-1 items-center gap-2"
+          : inline
+            ? "flex flex-col gap-2 sm:flex-row sm:items-center"
+            : "flex flex-col gap-2.5"
+      }
     >
       <input
         type="email"
@@ -105,23 +121,31 @@ export default function EmailSignup({
         autoComplete="email"
         placeholder={placeholder}
         aria-label={placeholder}
+        aria-invalid={Boolean(error)}
         value={email}
         onChange={(event) => setEmail(event.target.value)}
-        className={`rounded-lg border border-navy/15 bg-white px-3.5 py-3 text-[14.5px] text-navy outline-none focus:border-navy/40 ${
-          inline ? "w-full sm:min-w-[220px]" : "w-full"
-        }`}
+        className={`rounded-lg border bg-white text-[14.5px] text-navy outline-none focus:border-navy/40 ${
+          error ? "border-[#b5484d]" : "border-navy/15"
+        } ${bar ? "h-11 min-w-0 flex-1 px-3" : inline ? "w-full px-3.5 py-3 sm:min-w-[220px]" : "w-full px-3.5 py-3"}`}
       />
-      {error && !inline && <div className="text-[13px] text-[#b5484d]">{error}</div>}
+      {error && !inline && !bar && <div className="text-[13px] text-[#b5484d]">{error}</div>}
+      {error && bar && <span className="sr-only">{error}</span>}
       <button
         type="submit"
         disabled={busy}
         className={`rounded-[10px] bg-navy font-bold text-white transition-colors hover:bg-blue disabled:opacity-70 ${
-          inline ? "whitespace-nowrap px-4 py-3 text-[14.5px]" : compact ? "w-full px-4 py-3 text-[14.5px]" : "w-full px-4 py-3.5 text-[15.5px]"
+          bar
+            ? "h-11 shrink-0 px-3 text-[14px]"
+            : inline
+              ? "whitespace-nowrap px-4 py-3 text-[14.5px]"
+              : compact
+                ? "w-full px-4 py-3 text-[14.5px]"
+                : "w-full px-4 py-3.5 text-[15.5px]"
         }`}
       >
         {busy ? "Sending…" : cta}
       </button>
-      {error && inline && <div className="text-[13px] text-[#b5484d] sm:basis-full">{error}</div>}
+      {error && inline && !bar && <div className="text-[13px] text-[#b5484d] sm:basis-full">{error}</div>}
       {finePrint && (
         <div className="text-center text-[12.5px] leading-snug text-navy/55 sm:basis-full">{finePrint}</div>
       )}

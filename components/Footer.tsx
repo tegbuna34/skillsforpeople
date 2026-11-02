@@ -1,12 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
+import NewsletterBand from "@/components/NewsletterBand";
 
 const links = [
   { href: "/skills", label: "Skill Library" },
   { href: "/contribute", label: "Contribute a skill" },
   { href: "/people-builders", label: "People Builders" },
   { href: "/about", label: "About" },
-  { href: "/work-with-us", label: "Work with us" },
 ];
 
 export default function Footer() {
@@ -24,6 +24,7 @@ export default function Footer() {
             />
           </div>
           <p className="text-sm text-mint/70">AI skills for HR and People teams, from Toby Egbuna.</p>
+          <NewsletterBand compact />
         </div>
         <div className="flex flex-col gap-2.5">
           {links.map((link) => (

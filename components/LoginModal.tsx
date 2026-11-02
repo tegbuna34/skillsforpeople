@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { useAuth, type LoginMode } from "./AuthContext";
 import EmailSignup from "./EmailSignup";
@@ -27,9 +27,11 @@ const COPY: Record<LoginMode, { heading: string; body: string; cta: string; fine
 
 export default function LoginModal() {
   const { isLoginOpen, closeLogin, loginMode, loginExpired } = useAuth();
+  const openedAt = useRef(0);
 
   useEffect(() => {
     if (!isLoginOpen) return;
+    openedAt.current = Date.now();
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const onKey = (event: KeyboardEvent) => {
@@ -42,6 +44,12 @@ export default function LoginModal() {
     };
   }, [isLoginOpen, closeLogin]);
 
+  function dismissFromBackdrop() {
+    // The tap that opened the popup can land on the backdrop. Ignore it.
+    if (Date.now() - openedAt.current < 700) return;
+    closeLogin();
+  }
+
   if (!isLoginOpen) return null;
 
   const copy = COPY[loginMode];
@@ -49,25 +57,28 @@ export default function LoginModal() {
   return (
     <div
       role="presentation"
-      onClick={closeLogin}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-navy/55 px-5 py-5"
+      onClick={dismissFromBackdrop}
+      className="fixed inset-0 z-[100] flex items-end justify-center bg-navy/55 px-4 py-4 sm:items-center sm:px-5"
     >
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="login-modal-title"
         onClick={(event) => event.stopPropagation()}
-        className="relative max-h-[90vh] w-full max-w-[440px] overflow-y-auto rounded-2xl bg-white px-8 pb-7 pt-9 shadow-cardLg"
+        className="flex max-h-[90vh] w-full max-w-[440px] flex-col overflow-hidden rounded-2xl bg-white shadow-cardLg"
       >
-        <button
-          type="button"
-          onClick={closeLogin}
-          aria-label="Close"
-          className="absolute right-3 top-3 h-11 w-11 border-none bg-transparent text-[26px] leading-none text-navy/50 hover:text-navy"
-        >
-          ×
-        </button>
-        <h2 id="login-modal-title" className="mb-2 text-2xl font-bold tracking-tight text-navy">
+        <div className="flex shrink-0 items-center justify-end px-2 pt-2">
+          <button
+            type="button"
+            onClick={closeLogin}
+            aria-label="Close"
+            className="flex h-11 w-11 touch-manipulation items-center justify-center rounded-full border border-navy/15 bg-white text-[26px] leading-none text-navy"
+          >
+            ×
+          </button>
+        </div>
+        <div className="overflow-y-auto px-6 pb-7">
+        <h2 id="login-modal-title" className="mb-2 pr-2 text-2xl font-bold tracking-tight text-navy">
           {copy.heading}
         </h2>
         {loginExpired ? (
@@ -92,6 +103,7 @@ export default function LoginModal() {
             Back to the library
           </Link>
         )}
+        </div>
       </div>
     </div>
   );

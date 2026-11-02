@@ -47,23 +47,23 @@ export default function SignupBar() {
 
   return (
     <>
-      <div className="h-24 sm:h-20" aria-hidden="true" />
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-navy/10 bg-white/95 px-4 py-3 backdrop-blur sm:px-8">
-        <div className="mx-auto flex max-w-[1180px] flex-col gap-3 sm:flex-row sm:items-center">
-          <div className="min-w-0 flex-1 text-[14.5px] font-semibold text-navy">
+      <div className="h-[72px]" aria-hidden="true" />
+      <div className="fixed inset-x-0 bottom-0 z-40 h-[72px] border-t border-navy/10 bg-white px-3">
+        <div className="mx-auto flex h-full max-w-[1180px] items-center gap-2">
+          <p className="hidden min-w-0 flex-1 truncate text-[14px] font-semibold text-navy sm:block">
             One free AI skill for HR, every Tuesday.
+          </p>
+          <div className="flex min-w-0 flex-1 items-center sm:max-w-md sm:flex-none">
+            <EmailSignup bar cta="Send" placeholder="Work email" />
           </div>
-          <div className="flex w-full items-center gap-2 sm:w-auto">
-            <EmailSignup cta="Send it to me" placeholder="Work email" inline />
-            <button
-              type="button"
-              onClick={dismiss}
-              aria-label="Dismiss"
-              className="border-none bg-transparent px-2 text-xl leading-none text-navy/45"
-            >
-              ×
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={dismiss}
+            aria-label="Dismiss"
+            className="flex h-11 w-11 shrink-0 items-center justify-center border-none bg-transparent text-2xl leading-none text-navy/55"
+          >
+            ×
+          </button>
         </div>
       </div>
     </>

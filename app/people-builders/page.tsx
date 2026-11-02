@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Faq from "@/app/work-with-us/Faq";
 import WaitlistForm from "./WaitlistForm";
 import CopyNote from "./CopyNote";
@@ -206,10 +205,10 @@ export default function PeopleBuildersPage() {
           <h2 className="mb-6 text-[clamp(26px,3vw,34px)] font-bold">Join the waitlist</h2>
           <WaitlistForm />
           <p className="mt-6 text-[14px] text-navy/55">
-            Rather talk first?{" "}
-            <Link href="/work-with-us" className="font-semibold text-blue no-underline hover:underline">
-              Work with us
-            </Link>
+            Questions?{" "}
+            <a href="mailto:toby@tobyegbuna.com" className="font-semibold text-blue no-underline hover:underline">
+              toby@tobyegbuna.com
+            </a>
           </p>
         </div>
       </section>

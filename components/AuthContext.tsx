@@ -11,7 +11,7 @@ import {
 } from "react";
 import { useRouter } from "next/navigation";
 import { track } from "@vercel/analytics";
-import { SIGNUP_COMPLETED_COOKIE } from "@/lib/auth-cookies";
+import { SECOND_GATE_KEY, SIGNUP_COMPLETED_COOKIE } from "@/lib/auth-cookies";
 
 export interface AuthUser {
   email: string;
@@ -62,7 +62,7 @@ export function AuthProvider({
   const closeLogin = useCallback(() => {
     if (loginMode === "second") {
       try {
-        sessionStorage.removeItem("sfp_second_gate_pending");
+        sessionStorage.removeItem(SECOND_GATE_KEY);
       } catch {
         // ignore
       }
@@ -91,6 +91,17 @@ export function AuthProvider({
       params.delete("login");
       const query = params.toString();
       window.history.replaceState(null, "", window.location.pathname + (query ? `?${query}` : ""));
+      return;
+    }
+    // Full page loads of a later skill set this before paint. Re-open if the
+    // gate's state update was dropped during hydration.
+    try {
+      if (sessionStorage.getItem(SECOND_GATE_KEY)) {
+        setLoginMode("second");
+        setLoginOpen(true);
+      }
+    } catch {
+      // ignore
     }
   }, []);
 

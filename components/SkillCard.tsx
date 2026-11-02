@@ -3,18 +3,31 @@ import type { Skill } from "@/lib/skills";
 import { addedLabel, inspiredByName, isRecentlyAdded } from "@/lib/format";
 import PodcastMicIcon from "@/components/PodcastMicIcon";
 
+function shorten(text: string, maxWords: number): string {
+  const words = text.trim().split(/\s+/);
+  if (words.length <= maxWords) return text.trim();
+  return `${words.slice(0, maxWords).join(" ")}…`;
+}
+
 export default function SkillCard({
   skill,
   showArrow = false,
   hideGuest = false,
   showDateInfo = false,
+  compact = false,
 }: {
   skill: Skill;
   showArrow?: boolean;
   hideGuest?: boolean;
   showDateInfo?: boolean;
+  compact?: boolean;
 }) {
-  const guest = hideGuest ? undefined : skill.episode?.guest;
+  const guest = hideGuest || compact ? undefined : skill.episode?.guest;
+  const description = skill.description
+    ? compact
+      ? shorten(skill.description, 12)
+      : skill.description
+    : "";
   const isNew = showDateInfo && isRecentlyAdded(skill.datePublished);
   const dateLabel = showDateInfo && skill.datePublished ? addedLabel(skill.datePublished) : null;
   return (
@@ -33,9 +46,7 @@ export default function SkillCard({
         </span>
       )}
       <div className="text-[17px] font-bold text-navy">{skill.name}</div>
-      {skill.description && (
-        <div className="flex-1 text-[14px] text-navy/70">{skill.description}</div>
-      )}
+      {description && <div className="flex-1 text-[14px] text-navy/70">{description}</div>}
       {(guest || showArrow) && (
         <div className="flex items-center justify-between gap-3 border-t border-navy/10 pt-3">
           {guest ? (

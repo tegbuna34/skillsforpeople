@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { track } from "@vercel/analytics";
 import { useAuth } from "@/components/AuthContext";
+import { SECOND_GATE_KEY } from "@/lib/auth-cookies";
 
 const VIEWED_KEY = "sfp_skills_viewed";
-const PENDING_KEY = "sfp_second_gate_pending";
 
 function readViewed(): string[] {
   try {
@@ -17,48 +17,46 @@ function readViewed(): string[] {
 }
 
 /**
- * Logged-out visitors can read the first skill. The next distinct skill opens
- * the sign-up popup. The page body is always in the HTML, so crawlers get it.
- * sessionStorage keeps the popup open across React strict-mode remounts in dev.
+ * The first distinct skill a logged-out visitor opens stays quiet.
+ * Every later skill opens the sign-up popup, including on a full page load.
+ * The decision is stored before paint so a fast navigation cannot skip it.
  */
 export default function SecondSkillGate({ slug }: { slug: string }) {
   const { openLogin } = useAuth();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const viewed = readViewed();
-    const already = viewed.includes(slug);
-    if (!already && viewed.length > 0) {
+    const seenBefore = viewed.includes(slug);
+    if (seenBefore) {
       try {
-        sessionStorage.setItem(PENDING_KEY, slug);
+        if (sessionStorage.getItem(SECOND_GATE_KEY) === slug) openLogin("second");
       } catch {
         // ignore
       }
+      return;
     }
-    if (!already) {
-      try {
-        localStorage.setItem(VIEWED_KEY, JSON.stringify([...viewed, slug]));
-      } catch {
-        // ignore
-      }
-    }
-    let pending: string | null = null;
+    const isLaterSkill = viewed.length > 0;
     try {
-      pending = sessionStorage.getItem(PENDING_KEY);
+      localStorage.setItem(VIEWED_KEY, JSON.stringify([...viewed, slug]));
     } catch {
-      pending = null;
+      // ignore
     }
-    if (pending === slug) {
-      openLogin("second");
-      const trackedKey = `sfp_second_gate_tracked_${slug}`;
-      try {
-        if (sessionStorage.getItem(trackedKey) !== "1") {
-          sessionStorage.setItem(trackedKey, "1");
-          track("second_skill_gate_shown", { slug });
-        }
-      } catch {
-        track("second_skill_gate_shown", { slug });
-      }
+    if (!isLaterSkill) return;
+
+    try {
+      sessionStorage.setItem(SECOND_GATE_KEY, slug);
+    } catch {
+      // ignore
     }
+    openLogin("second");
+    const trackedKey = `sfp_second_gate_tracked_${slug}`;
+    try {
+      if (sessionStorage.getItem(trackedKey) === "1") return;
+      sessionStorage.setItem(trackedKey, "1");
+    } catch {
+      // still track below
+    }
+    track("second_skill_gate_shown", { slug });
   }, [slug, openLogin]);
 
   return null;

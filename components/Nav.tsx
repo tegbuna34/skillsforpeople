@@ -3,13 +3,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAuth } from "./AuthContext";
 
 const sharedLinks = [
   { href: "/people-builders", label: "People Builders" },
   { href: "/about", label: "About" },
-  { href: "/work-with-us", label: "Work with us" },
 ];
 
 export default function Nav() {
@@ -22,9 +21,15 @@ export default function Nav() {
     ? [{ href: "/skills", label: "Skill Library" }, ...sharedLinks]
     : sharedLinks;
 
+  // Close only after a real navigation. The first pathname update on load
+  // (null, then the URL) was clearing the menu and eating the first tap.
+  const pathRef = useRef<string | null>(null);
   useEffect(() => {
-    setOpen(false);
-    setAccountOpen(false);
+    if (pathRef.current && pathRef.current !== pathname) {
+      setOpen(false);
+      setAccountOpen(false);
+    }
+    pathRef.current = pathname;
   }, [pathname]);
 
   useEffect(() => {
@@ -38,14 +43,14 @@ export default function Nav() {
 
   return (
     <>
-      <div className="sticky top-0 z-10 flex flex-wrap items-center justify-between gap-3 border-b border-navy/10 bg-mint/90 px-5 py-5 backdrop-blur sm:px-8 lg:px-16">
-        <Link href="/" className="flex items-center" aria-label="Skills for People home">
+      <div className="sticky top-0 z-10 flex flex-nowrap items-center justify-between gap-2 border-b border-navy/10 bg-mint/95 px-4 py-2.5 touch-manipulation sm:px-8 sm:py-4 lg:px-16">
+        <Link href="/" className="flex min-w-0 items-center" aria-label="Skills for People home">
           <Image
             src="/assets/logo-wordmark.svg"
             alt="Skills for People"
             width={200}
             height={28}
-            className="h-7 w-auto"
+            className="h-6 w-auto max-w-[42vw] nav:h-7 nav:max-w-none"
             priority
           />
         </Link>
@@ -105,12 +110,12 @@ export default function Nav() {
           )}
         </div>
 
-        <div className="flex items-center gap-3 nav:hidden">
+        <div className="flex shrink-0 items-center gap-1.5 nav:hidden">
           {user ? (
             <button
               type="button"
               onClick={() => void logout()}
-              className="whitespace-nowrap rounded-lg border border-navy/20 bg-white px-3 py-2 text-[13px] font-semibold text-navy"
+              className="whitespace-nowrap rounded-lg border border-navy/20 bg-white px-2.5 py-2 text-[13px] font-semibold text-navy"
             >
               Log out
             </button>
@@ -118,21 +123,22 @@ export default function Nav() {
             <button
               type="button"
               onClick={() => openLogin("nav")}
-              className="whitespace-nowrap rounded-lg bg-navy px-4 py-2 text-[14px] font-semibold text-white"
+              aria-label="Log in or sign up"
+              className="whitespace-nowrap rounded-lg bg-navy px-3 py-2 text-[13px] font-semibold text-white"
             >
-              Log in / Sign up
+              Log in
             </button>
           )}
           <button
             type="button"
-            onClick={() => setOpen((value) => !value)}
+            onClick={() => setOpen(true)}
             aria-label="Menu"
             aria-expanded={open}
-            className="flex h-9 w-9 flex-col items-stretch justify-center gap-[5px] border-none bg-transparent p-0"
+            className="flex h-11 w-11 touch-manipulation flex-col items-center justify-center gap-[5px] border-none bg-transparent p-0"
           >
-            <span className="block h-[2px] w-full bg-navy" />
-            <span className="block h-[2px] w-full bg-navy" />
-            <span className="block h-[2px] w-full bg-navy" />
+            <span className="block h-[2px] w-5 bg-navy" />
+            <span className="block h-[2px] w-5 bg-navy" />
+            <span className="block h-[2px] w-5 bg-navy" />
           </button>
         </div>
       </div>
@@ -151,7 +157,7 @@ export default function Nav() {
               type="button"
               onClick={() => setOpen(false)}
               aria-label="Close menu"
-              className="border-none bg-transparent p-0 text-[30px] leading-none text-white"
+              className="flex h-11 w-11 items-center justify-center border-none bg-transparent text-[30px] leading-none text-white"
             >
               ×
             </button>
