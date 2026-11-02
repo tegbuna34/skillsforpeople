@@ -173,7 +173,8 @@ export default async function SkillDetailPage({ params }: { params: { slug: stri
               <div className="mb-4 flex flex-col gap-4 rounded-2xl border border-navy/10 bg-white p-6">
                 {skill.processSteps.map((step, i) => (
                   <div key={i}>
-                    <strong>Step {i + 1} —</strong> {step}
+                    <strong>Step {i + 1}. </strong>
+                    {step.replace(/^\s*\*{0,2}\s*Step\s+\d+\s*[—–:-]+\s*/i, "")}
                   </div>
                 ))}
                 {(skill.definitionOfDone || skill.commonPitfalls) && (
@@ -224,8 +225,8 @@ export default async function SkillDetailPage({ params }: { params: { slug: stri
                     )}
                   </div>
                   <div className="mt-3 border-t border-navy/[0.08] pt-3 text-[12px] text-navy/50">
-                    This skill was built by the Skills for People team based on {guest.name}
-                    &apos;s public remarks — not written or reviewed by them.
+                    I built this skill from {guest.name}&apos;s public remarks. They did not write
+                    or review it.
                   </div>
                 </div>
               </div>

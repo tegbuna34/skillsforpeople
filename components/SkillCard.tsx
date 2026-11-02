@@ -3,37 +3,30 @@ import type { Skill } from "@/lib/skills";
 import { addedLabel, inspiredByName, isRecentlyAdded } from "@/lib/format";
 import PodcastMicIcon from "@/components/PodcastMicIcon";
 
-function shorten(text: string, maxWords: number): string {
-  const words = text.trim().split(/\s+/);
-  if (words.length <= maxWords) return text.trim();
-  return `${words.slice(0, maxWords).join(" ")}…`;
-}
-
 export default function SkillCard({
   skill,
   showArrow = false,
   hideGuest = false,
   showDateInfo = false,
   compact = false,
+  className = "",
 }: {
   skill: Skill;
   showArrow?: boolean;
   hideGuest?: boolean;
   showDateInfo?: boolean;
+  /** Home teaser: keep the full description in the DOM, clamp it to two lines. */
   compact?: boolean;
+  className?: string;
 }) {
-  const guest = hideGuest || compact ? undefined : skill.episode?.guest;
-  const description = skill.description
-    ? compact
-      ? shorten(skill.description, 12)
-      : skill.description
-    : "";
+  const guest = hideGuest ? undefined : skill.episode?.guest;
+  const description = skill.description ?? "";
   const isNew = showDateInfo && isRecentlyAdded(skill.datePublished);
   const dateLabel = showDateInfo && skill.datePublished ? addedLabel(skill.datePublished) : null;
   return (
     <Link
       href={`/skills/${skill.slug}`}
-      className="group relative flex flex-col gap-3 rounded-2xl border border-navy/10 bg-white p-6 no-underline transition-shadow hover:border-navy/25 hover:shadow-card"
+      className={`group relative flex flex-col gap-3 rounded-2xl border border-navy/10 bg-white p-6 no-underline transition-shadow hover:border-navy/25 hover:shadow-card ${className}`}
     >
       {isNew && (
         <span className="absolute -right-3.5 -top-3.5 rounded-[20px] bg-navy px-4 py-2 text-[12px] font-bold uppercase tracking-wide text-white shadow-[0_6px_14px_rgba(36,54,110,0.25)]">
@@ -46,7 +39,11 @@ export default function SkillCard({
         </span>
       )}
       <div className="text-[17px] font-bold text-navy">{skill.name}</div>
-      {description && <div className="flex-1 text-[14px] text-navy/70">{description}</div>}
+      {description && (
+        <div className={`flex-1 text-[14px] leading-normal text-navy/75 ${compact ? "line-clamp-2" : ""}`}>
+          {description}
+        </div>
+      )}
       {(guest || showArrow) && (
         <div className="flex items-center justify-between gap-3 border-t border-navy/10 pt-3">
           {guest ? (
