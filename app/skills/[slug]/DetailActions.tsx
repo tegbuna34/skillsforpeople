@@ -1,116 +1,94 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { track } from "@vercel/analytics";
 import { useAuth } from "@/components/AuthContext";
-
-function downloadText(filename: string, content: string) {
-  const blob = new Blob([content], { type: "text/markdown" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
+import EmailSignup from "@/components/EmailSignup";
 
 export default function DetailActions({
   slug,
   vertical,
-  skillFileUrl,
-  promptFileUrl,
+  hasSkillFile,
+  hasPromptFile,
   promptText,
-  promptTextIsGenerated,
   compatibleTools,
 }: {
   slug: string;
   vertical: string;
-  skillFileUrl: string | null;
-  promptFileUrl: string | null;
+  hasSkillFile: boolean;
+  hasPromptFile: boolean;
   promptText: string;
-  promptTextIsGenerated: boolean;
   compatibleTools: string[];
 }) {
   const { user, openLogin } = useAuth();
-  const isLoggedIn = Boolean(user);
   const [copied, setCopied] = useState(false);
-
-  const flash = (setter: (v: boolean) => void) => {
-    setter(true);
-    setTimeout(() => setter(false), 1800);
-  };
-
-  const onCopy = async () => {
-    if (!promptText) return;
-    await navigator.clipboard.writeText(promptText);
-    flash(setCopied);
-    track("skill_copy_prompt", {
-      slug,
-      vertical,
-      source: promptTextIsGenerated ? "generated" : "file",
-    });
-  };
-
-  const onDownloadSkill = () => {
-    if (!skillFileUrl) return;
-    track("skill_download", { slug, vertical, format: "skill" });
-    window.location.href = skillFileUrl;
-  };
-
-  const onDownloadMd = () => {
-    if (promptFileUrl) {
-      track("skill_download", { slug, vertical, format: "md" });
-      window.location.href = promptFileUrl;
-      return;
-    }
-    if (promptText) {
-      downloadText(`${slug}.md`, promptText);
-      track("skill_download", { slug, vertical, format: "md-generated" });
-    }
-  };
-
-  const canSkill = Boolean(skillFileUrl);
-  const canMd = Boolean(promptFileUrl || promptText);
-  const canCopy = Boolean(promptText);
+  const [busy, setBusy] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const compatText =
     compatibleTools.length > 0 ? compatibleTools.join(", ") : "ChatGPT, Claude, Other";
 
-  // Even on free skills, download + copy always require login. Logged-out
-  // visitors see this compact prompt in the action card instead of the buttons.
-  if (!isLoggedIn) {
+  async function download(format: "skill" | "md" | "copy") {
+    setError(null);
+    setBusy(format);
+    try {
+      const res = await fetch(`/api/skills/${slug}/download`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ format }),
+      });
+      if (res.status === 401) {
+        openLogin("library");
+        return;
+      }
+      if (!res.ok) throw new Error("download failed");
+
+      if (format === "copy") {
+        const data = (await res.json()) as { text?: string };
+        const text = data.text || promptText;
+        if (!text) throw new Error("empty");
+        await navigator.clipboard.writeText(text);
+        setCopied(true);
+        window.setTimeout(() => setCopied(false), 1600);
+        track("skill_copy_prompt", { slug, vertical, source: "file" });
+        return;
+      }
+
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = `${slug}.${format}`;
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+      URL.revokeObjectURL(url);
+      track("skill_download", { slug, vertical, format });
+    } catch {
+      setError("Something went wrong. Try again.");
+    } finally {
+      setBusy(null);
+    }
+  }
+
+  if (!user) {
     return (
       <aside className="min-w-[260px] flex-1 basis-[300px] rounded-2xl border border-navy/10 bg-white p-6 shadow-cardLg">
-        <div className="mb-2 flex items-center gap-2 text-[12px] font-bold uppercase tracking-wider text-blue">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
-            <rect x="4" y="10" width="16" height="10" rx="2" />
-            <path d="M8 10V7a4 4 0 1 1 8 0v3" />
-          </svg>
-          Login to download
+        <div className="mb-1 flex items-center justify-center gap-2 text-[15px] font-bold text-navy">
+          <LockIcon />
+          Get this skill free
         </div>
-        <div className="mb-4 text-[15px] font-bold text-navy">
-          Get this skill as a .skill file or a plain prompt.
-        </div>
-        <button
-          type="button"
-          onClick={openLogin}
-          className="mb-2.5 w-full cursor-pointer whitespace-nowrap rounded-[9px] border-none bg-navy px-4 py-3 text-center text-[14.5px] font-bold text-white transition-colors hover:bg-blue"
-        >
-          Login to download
-        </button>
-        <div className="text-center text-[12.5px] text-navy/50">
-          Name + email. No password. 100% free.
-        </div>
-        <div className="mt-4 flex justify-between border-t border-navy/10 pt-3.5 text-[12.5px] text-navy/50">
-          <span>Format</span>
-          <span className="font-semibold text-navy">.skill / .md</span>
-        </div>
-        <div className="mt-1.5 flex justify-between text-[12.5px] text-navy/50">
-          <span>Compatible with</span>
-          <span className="text-right font-semibold text-navy">{compatText}</span>
-        </div>
+        <p className="mb-4 text-center text-[13.5px] text-navy/65">
+          Enter your email and I&apos;ll send you a sign-in link. Click it and you&apos;ll come
+          back to this page with the download ready.
+        </p>
+        <EmailSignup
+          cta="Send my link"
+          placeholder="you@company.com"
+          finePrint="You'll also get one new skill every Tuesday. Unsubscribe anytime."
+          compact
+        />
       </aside>
     );
   }
@@ -120,39 +98,33 @@ export default function DetailActions({
       <div className="mb-4 flex flex-col gap-2.5">
         <button
           type="button"
-          onClick={onDownloadSkill}
-          disabled={!canSkill}
+          onClick={() => void download("skill")}
+          disabled={!hasSkillFile || busy !== null}
           className="cursor-pointer whitespace-nowrap rounded-[9px] border-none bg-navy px-4 py-3 text-center text-[14.5px] font-bold text-white transition-colors hover:bg-blue disabled:cursor-not-allowed disabled:opacity-50"
         >
-          Download skill
+          {busy === "skill" ? "Preparing…" : "Download skill"}
         </button>
         <div className="text-center text-[12.5px] text-navy/50">
-          Upload the file to your AI of choice as a custom skill/instructions.
+          Upload the file to your AI of choice as a custom skill or instructions.
         </div>
+        {error && <div className="text-center text-[13px] text-[#b5484d]">{error}</div>}
       </div>
 
       <div className="flex justify-center gap-4 border-t border-navy/10 pt-3.5">
         <button
           type="button"
-          onClick={onCopy}
-          disabled={!canCopy}
+          onClick={() => void download("copy")}
+          disabled={(!hasPromptFile && !promptText) || busy !== null}
           className="flex cursor-pointer items-center gap-1.5 border-none bg-transparent p-0 text-[13.5px] font-semibold text-navy disabled:cursor-not-allowed disabled:opacity-40"
         >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-            <rect x="9" y="9" width="11" height="11" rx="2" />
-            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-          </svg>
           {copied ? "Copied!" : "Copy prompt"}
         </button>
         <button
           type="button"
-          onClick={onDownloadMd}
-          disabled={!canMd}
+          onClick={() => void download("md")}
+          disabled={!hasPromptFile || busy !== null}
           className="flex cursor-pointer items-center gap-1.5 border-none bg-transparent p-0 text-[13.5px] font-semibold text-navy disabled:cursor-not-allowed disabled:opacity-40"
         >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-            <path d="M12 3v12m0 0-4-4m4 4 4-4M4 21h16" />
-          </svg>
           Download .md
         </button>
       </div>
@@ -165,6 +137,21 @@ export default function DetailActions({
         <span>Compatible with</span>
         <span className="text-right font-semibold text-navy">{compatText}</span>
       </div>
+      <div className="mt-4 border-t border-navy/10 pt-3.5 text-[13px] text-navy/70">
+        Want to build tools like this yourself?{" "}
+        <Link href="/people-builders" className="font-semibold text-blue no-underline hover:underline">
+          See People Builders →
+        </Link>
+      </div>
     </aside>
+  );
+}
+
+function LockIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+      <rect x="5" y="11" width="14" height="10" rx="2" />
+      <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+    </svg>
   );
 }

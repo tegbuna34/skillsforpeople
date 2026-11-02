@@ -1,11 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
 
+const links = [
+  { href: "/skills", label: "Skill Library" },
+  { href: "/contribute", label: "Contribute a skill" },
+  { href: "/people-builders", label: "People Builders" },
+  { href: "/about", label: "About" },
+  { href: "/work-with-us", label: "Work with us" },
+];
+
 export default function Footer() {
   return (
     <footer className="bg-navy">
       <div className="mx-auto flex max-w-[1180px] flex-wrap justify-between gap-10 px-5 pb-8 pt-14 sm:px-8 lg:px-16">
-        <div className="max-w-xs">
+        <div className="max-w-sm">
           <div className="mb-3.5">
             <Image
               src="/assets/logo-wordmark-reversed.svg"
@@ -15,40 +23,24 @@ export default function Footer() {
               className="h-5 w-auto"
             />
           </div>
-          <a
-            href="https://www.skillsforpeople.com"
-            className="text-sm text-mint/55 no-underline hover:underline"
-          >
-            skillsforpeople.com
-          </a>
+          <p className="text-sm text-mint/70">AI skills for HR and People teams, from Toby Egbuna.</p>
         </div>
-        <div className="flex flex-wrap gap-14">
-          <div>
-            <div className="mb-3.5 text-xs font-bold uppercase tracking-wider text-mint/40">
-              Library
-            </div>
-            <div className="flex flex-col gap-2.5">
-              <Link href="/skills" className="text-[14.5px] text-mint/75 no-underline hover:underline">
-                Browse skills
-              </Link>
-              <Link href="/tools" className="text-[14.5px] text-mint/75 no-underline hover:underline">
-                Browse tools
-              </Link>
-              <Link href="/contribute" className="text-[14.5px] text-mint/75 no-underline hover:underline">
-                Contribute
-              </Link>
-            </div>
-          </div>
-          <div>
-            <div className="mb-3.5 text-xs font-bold uppercase tracking-wider text-mint/40">
-              Company
-            </div>
-            <div className="flex flex-col gap-2.5">
-              <Link href="/about" className="text-[14.5px] text-mint/75 no-underline hover:underline">
-                About
-              </Link>
-            </div>
-          </div>
+        <div className="flex flex-col gap-2.5">
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-[14.5px] text-mint/75 no-underline hover:underline"
+            >
+              {link.label}
+            </Link>
+          ))}
+          <a
+            href="mailto:toby@tobyegbuna.com"
+            className="text-[14.5px] text-mint/75 no-underline hover:underline"
+          >
+            Contact (toby@tobyegbuna.com)
+          </a>
         </div>
       </div>
       <div className="mx-auto flex max-w-[1180px] flex-wrap items-center justify-between gap-3 border-t border-mint/10 px-5 py-5 sm:px-8 lg:px-16">

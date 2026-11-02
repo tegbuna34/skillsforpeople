@@ -1,139 +1,209 @@
 import Link from "next/link";
-import { getPublishedSkills } from "@/lib/skills";
-import SkillCard from "@/components/SkillCard";
-import HeroCards from "@/components/HeroCards";
 
-const STEPS = [
-  {
-    num: "1",
-    title: "Browse or search",
-    desc: "Filter the library by HR vertical or search for the problem you're trying to solve.",
-  },
-  {
-    num: "2",
-    title: "Download the skill",
-    desc: "Get it as a Claude .skill file or a plain-prompt .md — works with whatever AI tool you already use.",
-  },
-  {
-    num: "3",
-    title: "Run it on your org",
-    desc: "The skill asks about your team, budget, and constraints, then produces output tailored to you.",
-  },
+export const dynamic = "force-dynamic";
+import { getPublishedSkills } from "@/lib/skills";
+import { getCurrentUser, isOnProgramWaitlist } from "@/lib/account";
+import SkillCard from "@/components/SkillCard";
+import EmailSignup from "@/components/EmailSignup";
+import SeeLibraryButton from "@/components/SeeLibraryButton";
+import DirectoryClient from "@/app/skills/DirectoryClient";
+
+const FAMILIAR = [
+  "I asked for a simple tool months ago and it's still in the IT queue.",
+  "Our HRIS has the data, but every Monday I export it to a spreadsheet and clean it by hand.",
+  "Leadership wants an AI plan for HR and I don't know where to start.",
 ];
 
 export default async function LandingPage() {
-  const skills = await getPublishedSkills();
-  const previewSkills = skills.slice(0, 3);
-  const rotatingSkills = skills.slice(0, 6);
+  const [skills, current] = await Promise.all([
+    getPublishedSkills(),
+    getCurrentUser().catch(() => null),
+  ]);
+  const weekly = skills[0] ?? null;
+
+  if (current) {
+    const onWaitlist = await isOnProgramWaitlist(current.email);
+    const name = current.firstName;
+    return (
+      <>
+        <section className="mx-auto max-w-[1180px] px-5 py-16 sm:px-8 lg:px-16 lg:py-20">
+          <h1 className="mb-3 text-[clamp(36px,5vw,52px)] font-bold leading-[1.08] tracking-tight text-navy">
+            {name ? `Welcome back, ${name}.` : "Welcome back."}
+          </h1>
+          <p className="mb-8 max-w-[560px] text-[18px] text-navy/75">
+            {weekly
+              ? `This week's skill is ${weekly.name}. A new one lands every Tuesday.`
+              : "A new skill lands every Tuesday."}
+          </p>
+          <div className="flex flex-wrap gap-3">
+            {weekly && (
+              <Link
+                href={`/skills/${weekly.slug}`}
+                className="rounded-[10px] bg-navy px-6 py-3.5 text-[15px] font-bold text-white no-underline hover:bg-blue"
+              >
+                Open this week&apos;s skill
+              </Link>
+            )}
+            <Link
+              href="/skills"
+              className="rounded-[10px] border border-navy/20 bg-white px-6 py-3.5 text-[15px] font-bold text-navy no-underline hover:bg-mint"
+            >
+              Browse the library
+            </Link>
+          </div>
+        </section>
+
+        {!onWaitlist && (
+          <section className="border-y border-navy/10 bg-white">
+            <div className="mx-auto flex max-w-[1180px] flex-wrap items-center justify-between gap-4 px-5 py-6 sm:px-8 lg:px-16">
+              <p className="text-[16px] text-navy/80">
+                Want to build tools like these yourself? The People Builders waitlist is open.
+              </p>
+              <Link
+                href="/people-builders"
+                className="whitespace-nowrap font-bold text-blue no-underline hover:underline"
+              >
+                Join the waitlist →
+              </Link>
+            </div>
+          </section>
+        )}
+
+        <section className="mx-auto max-w-[1180px] px-5 py-12 sm:px-8 lg:px-16">
+          <DirectoryClient skills={skills} verticals={verticalsOf(skills)} initialVertical="All" />
+        </section>
+      </>
+    );
+  }
+
+  const teaser = skills.slice(0, 12);
 
   return (
     <>
-      {/* HERO */}
-      <section className="mx-auto flex max-w-[1180px] flex-wrap items-center gap-14 px-5 py-16 sm:px-8 md:py-20 lg:px-16 lg:py-24">
-        <div className="min-w-[280px] flex-1 basis-[480px]">
-          <div className="mb-5 inline-block rounded-full bg-blue/10 px-3.5 py-1.5 text-[13px] font-semibold uppercase tracking-wider text-blue">
-            For HR practitioners
+      <section className="mx-auto flex max-w-[1180px] flex-wrap items-center gap-12 px-5 py-16 sm:px-8 lg:gap-16 lg:px-16 lg:py-24">
+        <div className="min-w-[280px] flex-1 basis-[440px]">
+          <div className="mb-3.5 text-[13px] font-bold uppercase tracking-wider text-blue">
+            AI skills for HR and People teams
           </div>
-          <h1 className="mb-5 text-[clamp(36px,5vw,54px)] font-bold leading-[1.08] tracking-tight text-navy">
-            Practical AI skills for HR, built from what actually worked.
+          <h1 className="mb-5 text-[clamp(36px,5vw,52px)] font-bold leading-[1.08] tracking-tight text-navy">
+            Get this week&apos;s free AI skill for your HR team.
           </h1>
-          <p className="mb-8 max-w-[520px] text-[19px] text-navy/75">
-            We turn real workflows HR leaders share through thought leadership content into
-            downloadable AI skills you can run with Claude or ChatGPT this week.
+          <p className="mb-7 max-w-[500px] text-[17.5px] leading-relaxed text-navy/75">
+            One ready-to-use skill every week, built from a workflow an HR leader shared, plus one
+            technical tip from me. Drop it into Claude or ChatGPT and run it this week.
           </p>
-          <div className="flex flex-wrap items-center gap-4">
-            <Link
-              href="/skills"
-              className="whitespace-nowrap rounded-[10px] bg-navy px-7 py-4 text-base font-bold text-white shadow-cta transition-colors hover:bg-blue"
-            >
-              Browse the skill library
-            </Link>
-            <Link
-              href="#how"
-              className="border-b-2 border-navy/25 pb-0.5 text-base font-semibold text-navy no-underline"
-            >
-              See how it works
-            </Link>
+          <div className="max-w-[440px]">
+            <EmailSignup
+              cta="Get this week's skill →"
+              placeholder="Your work email"
+              finePrint="Get this skill now, plus a new one in your inbox every Tuesday. Unsubscribe anytime."
+            />
           </div>
         </div>
-        <HeroCards skills={rotatingSkills} />
+        {weekly && (
+          <div className="min-w-[280px] flex-1 basis-[340px] rounded-2xl border border-navy/10 bg-white p-7 shadow-cardLg">
+            <div className="mb-4 flex items-center justify-between gap-3">
+              {weekly.vertical && (
+                <span className="rounded-xl bg-blue/10 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-blue">
+                  {weekly.vertical}
+                </span>
+              )}
+              <span className="text-[12px] font-bold uppercase tracking-wide text-[#b5484d]">
+                This week&apos;s skill
+              </span>
+            </div>
+            <div className="mb-2.5 text-[22px] font-bold leading-snug text-navy">{weekly.name}</div>
+            {weekly.description && (
+              <p className="mb-5 text-[15px] leading-relaxed text-navy/65">{weekly.description}</p>
+            )}
+            <div className="flex items-center gap-2 border-t border-navy/10 pt-4 text-[13.5px] font-semibold text-navy/55">
+              <LockIcon />
+              Opens with your free account
+            </div>
+          </div>
+        )}
       </section>
 
-      {/* HOW IT WORKS */}
-      <section id="how" className="mx-auto max-w-[1180px] px-5 py-20 sm:px-8 md:py-24 lg:px-16">
-        <div className="mb-12 max-w-[640px]">
-          <div className="mb-2.5 text-[13px] font-bold uppercase tracking-wider text-blue">
-            How it works
-          </div>
-          <h2 className="text-[clamp(28px,3.4vw,38px)] font-bold tracking-tight">
-            Get access to the best workflows in just three steps.
+      <section className="border-y border-navy/10 bg-white">
+        <div className="mx-auto max-w-[820px] px-5 py-16 sm:px-8 lg:px-16">
+          <h2 className="mb-6 text-[clamp(28px,3.4vw,36px)] font-bold tracking-tight">
+            Sound familiar?
           </h2>
-        </div>
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {STEPS.map((s) => (
-            <div key={s.num}>
-              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-[10px] border-2 border-blue bg-white text-lg font-bold text-blue">
-                {s.num}
-              </div>
-              <div className="mb-2 text-lg font-bold">{s.title}</div>
-              <div className="text-[15px] text-navy/70">{s.desc}</div>
-            </div>
-          ))}
+          <ul className="flex flex-col gap-4">
+            {FAMILIAR.map((line) => (
+              <li
+                key={line}
+                className="rounded-xl border border-navy/10 bg-mint px-5 py-4 text-[16.5px] text-navy/80"
+              >
+                &ldquo;{line}&rdquo;
+              </li>
+            ))}
+          </ul>
+          <p className="mt-6 text-[15.5px] text-navy/70">
+            Every skill here starts with a problem like these.
+          </p>
         </div>
       </section>
 
-      {/* LIBRARY PREVIEW */}
-      <section
-        id="library"
-        className="border-y border-navy/10 bg-white"
-      >
-        <div className="mx-auto max-w-[1180px] px-5 py-20 sm:px-8 md:py-24 lg:px-16">
-          <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
-            <div className="max-w-[600px]">
-              <div className="mb-2.5 text-[13px] font-bold uppercase tracking-wider text-blue">
-                From the library
-              </div>
-              <h2 className="text-[clamp(28px,3.4vw,38px)] font-bold tracking-tight">
-                A growing set of skills, sourced one workflow at a time.
-              </h2>
-            </div>
-            <Link
-              href="/skills"
-              className="whitespace-nowrap border-b-2 border-navy/25 pb-0.5 text-[15px] font-semibold text-navy no-underline"
-            >
-              See all skills →
-            </Link>
+      <section className="mx-auto max-w-[1180px] px-5 py-16 sm:px-8 lg:px-16 lg:py-20">
+        <h2 className="mb-8 text-[clamp(28px,3.4vw,36px)] font-bold tracking-tight">
+          A few of the skills you get free
+        </h2>
+        {teaser.length > 0 ? (
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {teaser.map((skill) => (
+              <SkillCard key={skill.slug} skill={skill} showArrow />
+            ))}
           </div>
+        ) : (
+          <p className="text-navy/60">The first skills are on the way.</p>
+        )}
+        <SeeLibraryButton />
+      </section>
 
-          {previewSkills.length > 0 ? (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {previewSkills.map((s) => (
-                <SkillCard key={s.slug} skill={s} />
-              ))}
-            </div>
-          ) : (
-            <EmptyLibrary />
-          )}
+      <section className="border-y border-navy/10 bg-white">
+        <div className="mx-auto max-w-[820px] px-5 py-16 sm:px-8 lg:px-16">
+          <div className="mb-2.5 text-[13px] font-bold uppercase tracking-wider text-blue">
+            People Builders
+          </div>
+          <h2 className="mb-3 text-[clamp(28px,3.4vw,36px)] font-bold tracking-tight">
+            Want to build your own tools?
+          </h2>
+          <p className="mb-6 max-w-[640px] text-[16.5px] text-navy/75">
+            People Builders is a 4-week live program for HR teams on Claude or ChatGPT, capped at
+            10 people. You build two automated workflows and two apps that save your team time.
+          </p>
+          <Link
+            href="/people-builders"
+            className="inline-block rounded-[10px] bg-navy px-6 py-3.5 text-[15px] font-bold text-white no-underline hover:bg-blue"
+          >
+            Join the waitlist →
+          </Link>
         </div>
+      </section>
+
+      <section className="mx-auto max-w-[820px] px-5 py-10 sm:px-8 lg:px-16">
+        <p className="text-[15.5px] text-navy/75">
+          Built by Toby Egbuna, co-founder of Chezie, an HR tech company with $1 million in
+          revenue.{" "}
+          <Link href="/about" className="font-semibold text-blue no-underline hover:underline">
+            Read my story →
+          </Link>
+        </p>
       </section>
     </>
   );
 }
 
-function EmptyLibrary() {
+function verticalsOf(skills: { vertical: string }[]): string[] {
+  return Array.from(new Set(skills.map((skill) => skill.vertical).filter(Boolean))).sort();
+}
+
+function LockIcon() {
   return (
-    <div className="flex flex-col items-center gap-3 rounded-2xl border border-dashed border-navy/25 p-14 text-center">
-      <div className="text-lg font-bold text-navy">Coming soon</div>
-      <p className="max-w-md text-[15px] text-navy/60">
-        The first skills are being finalized. Check back shortly — or subscribe by contributing one
-        of your own.
-      </p>
-      <Link
-        href="/contribute"
-        className="mt-2 rounded-lg bg-navy px-5 py-3 text-sm font-bold text-white no-underline transition-colors hover:bg-blue"
-      >
-        Contribute a skill
-      </Link>
-    </div>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+      <rect x="5" y="11" width="14" height="10" rx="2" />
+      <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+    </svg>
   );
 }

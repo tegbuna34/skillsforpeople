@@ -1,34 +1,22 @@
 import type { Metadata } from "next";
+
+export const dynamic = "force-dynamic";
 import { Fragment } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { promises as fs } from "node:fs";
-import path from "node:path";
-import { getFreeSkillSlugs, getPublishedSkills, getSkillBySlug } from "@/lib/skills";
+import { getSkillBySlug } from "@/lib/skills";
 import { inspiredByLine, skillPromptMarkdown } from "@/lib/format";
 import PodcastMicIcon from "@/components/PodcastMicIcon";
-import { getCurrentUser } from "@/lib/session";
+import { getCurrentUser } from "@/lib/account";
+import { readSkillText } from "@/lib/skill-files";
 import DetailActions from "./DetailActions";
-import BodyLockOverlay from "./BodyLockOverlay";
+import SecondSkillGate from "./SecondSkillGate";
 
-// If the Notion Prompt File URL points into /public/skills/, read the real
-// .md file at build time and hand its contents to the Copy-prompt button.
-// The .md is authored to be a self-contained pasteable prompt with its own
-// framing, so falling back to a synthesized version silently would drop
-// that framing. Only used as fallback when the real file isn't there.
-async function readPublicPromptFile(promptFileUrl: string | null): Promise<string | null> {
-  if (!promptFileUrl || !promptFileUrl.startsWith("/skills/")) return null;
-  const filePath = path.join(process.cwd(), "public", promptFileUrl);
-  try {
-    return await fs.readFile(filePath, "utf8");
-  } catch {
-    return null;
-  }
-}
-
-export async function generateStaticParams() {
-  const skills = await getPublishedSkills();
-  return skills.map((s) => ({ slug: s.slug }));
+// Skill files live in content/skills (not public/). Logged-out pages do not
+// receive the prompt text. Logged-in copy still prefers the real file over a
+// synthesized fallback.
+async function readPublicPromptFile(slug: string): Promise<string | null> {
+  return readSkillText(slug, "md");
 }
 
 export async function generateMetadata({
@@ -67,19 +55,11 @@ export default async function SkillDetailPage({ params }: { params: { slug: stri
   const skill = await getSkillBySlug(params.slug);
   if (!skill) notFound();
 
-  // Body gate: first six most-recent skills are fully readable. Locked pages
-  // still resolve (better for shared/bookmarked links) but render the body
-  // blurred behind a centered login panel.
-  const [freeSlugs, currentUser] = await Promise.all([
-    getFreeSkillSlugs(),
-    getCurrentUser().catch(() => null),
-  ]);
+  const currentUser = await getCurrentUser().catch(() => null);
   const isLoggedIn = Boolean(currentUser);
-  const isBodyLocked = !isLoggedIn && !freeSlugs.has(skill.slug);
 
-  const realPromptFileContent = await readPublicPromptFile(skill.promptFileUrl);
-  const promptText = realPromptFileContent ?? skillPromptMarkdown(skill);
-  const promptTextIsGenerated = realPromptFileContent === null;
+  const realPromptFileContent = isLoggedIn ? await readPublicPromptFile(skill.slug) : null;
+  const promptText = isLoggedIn ? realPromptFileContent ?? skillPromptMarkdown(skill) : "";
   const guest = skill.episode?.guest;
   // Prefer the contributor's real LinkedIn URL when we have one stored;
   // only fall back to a LinkedIn people-search URL for contributors that
@@ -148,24 +128,18 @@ export default async function SkillDetailPage({ params }: { params: { slug: stri
         <DetailActions
           slug={skill.slug}
           vertical={skill.vertical}
-          skillFileUrl={skill.skillFileUrl}
-          promptFileUrl={skill.promptFileUrl}
+          hasSkillFile={Boolean(skill.skillFileUrl)}
+          hasPromptFile={Boolean(skill.promptFileUrl) || Boolean(realPromptFileContent)}
           promptText={promptText}
-          promptTextIsGenerated={promptTextIsGenerated}
           compatibleTools={skill.compatibleTools}
         />
       </section>
 
+      {!isLoggedIn && <SecondSkillGate slug={skill.slug} />}
+
       {/* BODY */}
       <section className="relative mx-auto flex max-w-[1180px] flex-wrap gap-12 px-5 pb-16 sm:px-8 lg:px-16">
-        {isBodyLocked && <BodyLockOverlay />}
-        <div
-          className={`min-w-[280px] flex-[2] basis-[520px] ${
-            isBodyLocked ? "pointer-events-none select-none" : ""
-          }`}
-          style={isBodyLocked ? { filter: "blur(6px)" } : undefined}
-          aria-hidden={isBodyLocked || undefined}
-        >
+        <div className="min-w-[280px] flex-[2] basis-[520px]">
           {(skill.whatItDoes || skill.description) && (
             <>
               <h2 className="mb-3.5 text-[22px] font-bold">What this skill does</h2>

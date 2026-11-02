@@ -1,12 +1,18 @@
 import type { Metadata } from "next";
 import { Sora } from "next/font/google";
+import { cookies } from "next/headers";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { AuthProvider } from "@/components/AuthContext";
 import LoginModal from "@/components/LoginModal";
-import { getCurrentUser } from "@/lib/session";
+import WelcomeModal from "@/components/WelcomeModal";
+import BioPopup from "@/components/BioPopup";
+import SignupBar from "@/components/SignupBar";
+import AttributionCapture from "@/components/AttributionCapture";
+import { getCurrentUser } from "@/lib/account";
+import { WELCOME_COOKIE } from "@/lib/auth-cookies";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -36,7 +42,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 2000,
         height: 1050,
-        alt: "Skills for People — Practical AI skills for HR, built from what worked.",
+        alt: "Skills for People. Practical AI skills for HR, built from what worked.",
       },
     ],
   },
@@ -49,9 +55,6 @@ export const metadata: Metadata = {
   },
 };
 
-// Root layout hits Supabase to hydrate the initial user so the nav renders in
-// its logged-in shape on first paint. If the session lookup ever fails we
-// treat the visitor as logged out.
 async function safeGetCurrentUser() {
   try {
     return await getCurrentUser();
@@ -69,15 +72,20 @@ export default async function RootLayout({
   const initialUser = current
     ? { email: current.email, firstName: current.firstName }
     : null;
+  const showWelcome = cookies().get(WELCOME_COOKIE)?.value === "1";
 
   return (
     <html lang="en" className={sora.variable}>
       <body>
         <AuthProvider initialUser={initialUser}>
+          <AttributionCapture />
           <Nav />
           {children}
+          <SignupBar />
           <Footer />
           <LoginModal />
+          <WelcomeModal initialOpen={showWelcome && Boolean(initialUser)} />
+          <BioPopup />
         </AuthProvider>
         <Analytics />
       </body>

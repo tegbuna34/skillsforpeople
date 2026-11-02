@@ -93,8 +93,11 @@ export async function getCurrentUser(): Promise<CurrentUser | null> {
 
   // Supabase joins can come back as array or object depending on the
   // relationship shape; normalize.
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const user: any = Array.isArray(data.user) ? data.user[0] : data.user;
+  const user = (Array.isArray(data.user) ? data.user[0] : data.user) as {
+    id: string;
+    email: string;
+    full_name: string;
+  };
   return {
     userId: user.id,
     email: user.email,

@@ -46,11 +46,10 @@ grep -rE "@notionhq/client|notion\." app components lib | grep -v "lib/skills.ts
 ## Publishing a new skill
 
 1. In Notion, finish the skill and flip **Status** to **Published**.
-2. Commit the skill's downloadable files into `public/skills/<slug>/`:
-   - `public/skills/<slug>/<slug>.skill`
-   - `public/skills/<slug>/<slug>.md`
-3. Set the Notion **Skill File URL** and **Prompt File URL** to the matching paths
-   (e.g. `/skills/interviewer-scorecard-builder/interviewer-scorecard-builder.skill`).
+2. Commit the skill's downloadable files into `content/skills/<slug>/` (this folder is not public):
+   - `content/skills/<slug>/<slug>.skill`
+   - `content/skills/<slug>/<slug>.md`
+3. Leave the Notion file URL fields empty, or point them at an external URL. Paths under `/skills/` are not served. Downloads go through `/api/skills/<slug>/download` after sign-in.
 4. Trigger a redeploy via the **Vercel Deploy Hook** (see below) — one click, no code push.
 
 If a skill's file URL is missing, the corresponding button falls back to a generated `.md` built

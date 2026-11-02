@@ -74,7 +74,7 @@ The unit users actually browse and download.
 | Column               | Type            | Notes                                                                                                |
 | -------------------- | --------------- | ---------------------------------------------------------------------------------------------------- |
 | `id`                 | uuid            | Primary key.                                                                                         |
-| `slug`               | text UNIQUE     | Required. Kebab-case. URL: `/skills/<slug>`. Also names the folder in `public/skills/<slug>/`.       |
+| `slug`               | text UNIQUE     | Required. Kebab-case. URL: `/skills/<slug>`. Also names the folder in `content/skills/<slug>/`.      |
 | `name`               | text            | Required. Display name.                                                                              |
 | `vertical`           | text            | HR vertical, e.g. `Talent Acquisition & Sourcing`. Used as a filter facet.                           |
 | `description`        | text            | One-line teaser. Shown on cards.                                                                     |
@@ -90,7 +90,7 @@ The unit users actually browse and download.
 | `contributor_id`     | uuid            | FK → `contributors.id`. Required for the page to render a byline.                                    |
 | `episode_id`         | uuid            | FK → `episodes.id`. Required for the skill to appear on the site.                                    |
 | `status`             | text            | `'published'` to appear on the site. `'draft'` to hide it. No other values.                          |
-| `date_published`     | timestamptz     | Newest-first ordering on the library page. Also determines the free-6 gate. Default to `now()`.      |
+| `date_published`     | timestamptz     | Newest-first ordering. The newest skill is "this week's skill" on the home page. Default to `now()`. |
 | `notion_id`          | text UNIQUE     | Nullable. Only set for rows that came out of the historical migration.                               |
 
 ---
@@ -102,14 +102,16 @@ on disk over the DB URL columns. So when a skill has an authored `.skill` or
 `.md`, drop them here:
 
 ```
-site/public/skills/<slug>/<slug>.skill
-site/public/skills/<slug>/<slug>.md
+site/content/skills/<slug>/<slug>.skill
+site/content/skills/<slug>/<slug>.md
 ```
 
+These files are not in `public/`, so the URL `/skills/<slug>/<slug>.md` does
+not serve the file. Logged-in downloads go through `/api/skills/<slug>/download`.
 The file's existence on disk is the ground truth for the Download button. If
 the file is not there, the site synthesizes a `.md` prompt from the DB fields
-so download-as-`.md` still works. `.skill` cannot be synthesized — if there's
-no file, the Download-skill button is disabled.
+for logged-in copy. `.skill` cannot be synthesized. If there's
+no file, the Download skill button is disabled.
 
 The `slug` in both the folder name and the filename must match the skill's
 `slug` column exactly.
@@ -128,7 +130,7 @@ episode, so those have to exist first.
    contributor's `id` from step 1 when possible. If a matching episode row
    already exists (same podcast + title, or same `url`), reuse it.
 3. **Files** — if there's a `.skill` or `.md` to ship, write them to
-   `site/public/skills/<slug>/<slug>.<ext>`.
+   `site/content/skills/<slug>/<slug>.<ext>`.
 4. **Skill** — insert into `skills` with `contributor_id`, `episode_id`,
    `status = 'published'`, and `date_published = now()`.
 5. **Commit + push** the file changes to GitHub. Vercel picks up the push and
@@ -218,16 +220,17 @@ episodes + 16 skills), see
 
 ## Do not touch
 
-- **`users` and `sessions` tables.** These are the auth store for the library
-  gate. Only [lib/session.ts](lib/session.ts) and the `/api/auth/*` routes
-  should ever write to them.
+- **`sessions` table.** The magic-link cutover does not write it. Keep the
+  table until Toby approves dropping it.
+- **Existing `users` rows.** Sign-in matches by email and sets `auth_user_id`.
+  Do not delete rows to "reset" someone.
 - **`notion_id` on existing rows.** It's the idempotency key for the
   historical migration. Leave it alone on rows that already have one; leave
   it `null` on new rows unless you're re-running the migration script.
-- **Row-Level Security policies.** RLS is enabled on every table with no
-  policies, which means only the service role can read/write. That's
-  intentional. If you find yourself wanting to add an anon-key policy, stop
-  and reconsider — the site never uses the anon key.
+- **Row-Level Security.** `program_waitlist` has RLS enabled and no policies.
+  The anon key is only for Supabase Auth in the browser. App data is still
+  read and written with the service role. Don't add an anon policy for these
+  tables.
 
 ---
 
@@ -238,7 +241,7 @@ episodes + 16 skills), see
   either. It logs a warning at build time (Vercel build logs) naming the
   excluded slugs.
 - **Skill page renders but Download-skill is disabled** — the `.skill` file
-  isn't in `public/skills/<slug>/<slug>.skill`. Add it and redeploy.
+  isn't in `content/skills/<slug>/<slug>.skill`. Add it and redeploy.
 - **The site is empty** — likely `SUPABASE_URL` or `SUPABASE_SERVICE_ROLE_KEY`
   is missing in Vercel env, or `USE_MOCK_SKILLS=1` is set in prod (never do
   that).

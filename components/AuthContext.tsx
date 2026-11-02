@@ -4,27 +4,43 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   type ReactNode,
 } from "react";
 import { useRouter } from "next/navigation";
+import { track } from "@vercel/analytics";
+import { SIGNUP_COMPLETED_COOKIE } from "@/lib/auth-cookies";
 
 export interface AuthUser {
   email: string;
   firstName: string;
 }
 
+export type LoginMode = "nav" | "library" | "second";
+
 interface AuthContextValue {
   user: AuthUser | null;
   isLoginOpen: boolean;
-  openLogin: () => void;
+  loginMode: LoginMode;
+  loginExpired: boolean;
+  openLogin: (mode?: LoginMode) => void;
   closeLogin: () => void;
-  setUser: (u: AuthUser | null) => void;
   logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
+
+function readCookie(name: string): string | null {
+  if (typeof document === "undefined") return null;
+  const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
+  return match ? decodeURIComponent(match[1]) : null;
+}
+
+function clearCookie(name: string) {
+  document.cookie = `${name}=; path=/; max-age=0`;
+}
 
 export function AuthProvider({
   initialUser,
@@ -36,19 +52,51 @@ export function AuthProvider({
   const router = useRouter();
   const [user, setUser] = useState<AuthUser | null>(initialUser);
   const [isLoginOpen, setLoginOpen] = useState(false);
+  const [loginMode, setLoginMode] = useState<LoginMode>("library");
+  const [loginExpired, setLoginExpired] = useState(false);
 
-  const openLogin = useCallback(() => setLoginOpen(true), []);
-  const closeLogin = useCallback(() => setLoginOpen(false), []);
+  const openLogin = useCallback((mode: LoginMode = "library") => {
+    setLoginMode(mode);
+    setLoginOpen(true);
+  }, []);
+  const closeLogin = useCallback(() => {
+    if (loginMode === "second") {
+      try {
+        sessionStorage.removeItem("sfp_second_gate_pending");
+      } catch {
+        // ignore
+      }
+    }
+    setLoginOpen(false);
+    setLoginExpired(false);
+  }, [loginMode]);
 
   const logout = useCallback(async () => {
-    await fetch("/api/auth/logout", { method: "POST" });
+    await fetch("/api/auth/signout", { method: "POST" });
     setUser(null);
     router.refresh();
   }, [router]);
 
+  useEffect(() => {
+    const flag = readCookie(SIGNUP_COMPLETED_COOKIE);
+    if (flag) {
+      track("signup_completed", { first: flag === "1" ? "1" : "0" });
+      clearCookie(SIGNUP_COMPLETED_COOKIE);
+    }
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("login") === "expired") {
+      setLoginExpired(true);
+      setLoginMode("nav");
+      setLoginOpen(true);
+      params.delete("login");
+      const query = params.toString();
+      window.history.replaceState(null, "", window.location.pathname + (query ? `?${query}` : ""));
+    }
+  }, []);
+
   const value = useMemo(
-    () => ({ user, isLoginOpen, openLogin, closeLogin, setUser, logout }),
-    [user, isLoginOpen, openLogin, closeLogin, logout]
+    () => ({ user, isLoginOpen, loginMode, loginExpired, openLogin, closeLogin, logout }),
+    [user, isLoginOpen, loginMode, loginExpired, openLogin, closeLogin, logout]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
