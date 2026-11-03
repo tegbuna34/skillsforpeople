@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Faq from "./Faq";
 
 export const metadata: Metadata = {
@@ -16,7 +17,7 @@ const services = [
     subhead: "For teams getting started with AI",
     title: "AI Workshops",
     desc:
-      "A working session with your team to map out where AI actually saves you time, and where it doesn’t.",
+      "A working session with your team to map where AI saves you time and where it doesn’t. You leave with a plan you can start the next day.",
     borderColor: "border-blue/35",
     iconBg: "bg-blue/[0.14]",
     iconColor: "text-blue",
@@ -37,10 +38,10 @@ const services = [
     ),
   },
   {
-    subhead: "For teams ready to implement AI department-wide",
+    subhead: "For teams ready to build",
     title: "Custom Apps & Workflows",
     desc:
-      "We’ll build something specific to how your team already works, using the tools you already have.",
+      "I build a tool around how your team already works, using the software you already pay for.",
     borderColor: "border-peach/60",
     iconBg: "bg-peach/[0.28]",
     iconColor: "text-navy",
@@ -62,7 +63,7 @@ const services = [
   },
 ];
 
-// The 4-column process visual — Workstreams → Workflows → Tasks → Steps.
+// The 4-column process visual: Workstreams, Workflows, Tasks, Steps.
 // Tasks (index 2) carries the "AI enters here" tag; Tasks + Steps are both
 // navy-filled to match the design.
 const processSteps: Array<{
@@ -71,29 +72,29 @@ const processSteps: Array<{
   navy: boolean;
   highlight: boolean;
 }> = [
-  { label: "Workstreams", desc: "The big areas of the business", navy: false, highlight: false },
+  { label: "Workstreams", desc: "The big areas of the work", navy: false, highlight: false },
   { label: "Workflows", desc: "How work moves through each area", navy: false, highlight: false },
   {
     label: "Tasks",
-    desc: "The individual jobs inside a workflow — where AI gets introduced",
+    desc: "The jobs inside a workflow, where AI comes in",
     navy: true,
     highlight: true,
   },
-  { label: "Steps", desc: "The granular actions AI speeds up or takes over", navy: true, highlight: false },
+  { label: "Steps", desc: "The small actions AI speeds up or takes over", navy: true, highlight: false },
 ];
 
 const faqs = [
   {
     q: "How is this different from generic AI training?",
-    a: "Most AI training teaches the tool. We start from your actual workflows and work backward to where AI fits — using the same workstream → workflow → task → step process we built running our own HR SaaS company. The output is specific to your team, not a set of prompts everyone in your industry gets.",
+    a: "Most AI training teaches the tool. I start from your team’s workflows and work back to where AI fits, using the process I used building Chezie. What you get is specific to your team.",
   },
   {
     q: "Who should be in the room for the workshop?",
-    a: "Whoever actually does the work you want to improve — not just leadership. The session works best with the people closest to the day-to-day, since the mapping only works if it’s grounded in what’s really happening, not what a manager assumes is happening.",
+    a: "The people who do the work you want to improve, plus whoever decides. The map only works if it reflects what happens day to day.",
   },
   {
-    q: "Do we need any technical background on our team?",
-    a: "No. The workshop is built for HR and operations teams, not engineers. If a workflow needs custom automation to actually ship, that’s the custom build engagement — you don’t need to build anything yourself.",
+    q: "Do we need any technical background?",
+    a: "No. The workshop is built for HR teams. If a workflow needs a custom build, that’s the second option, and I build it.",
   },
 ];
 
@@ -106,14 +107,10 @@ export default function WorkWithUsPage() {
           Work with us
         </div>
         <h1 className="mb-5 text-[clamp(32px,4.4vw,46px)] font-bold leading-[1.12] tracking-tight">
-          We help People teams find where AI <i>actually</i> moves the needle,
-          then build it.
+          I help HR teams find where AI saves real time, then build it.
         </h1>
         <p className="mx-auto mb-7 max-w-[620px] text-lg text-navy/75">
-          We give away real HR AI content because we want HR teams actually
-          using AI well, not just talking about it. If you want help going
-          deeper, either as a team or with something custom-built for how you
-          work, we’re here for that too.
+          For teams that want more than the library. Two ways to work together.
         </p>
         <a
           href={CALENDAR_LINK}
@@ -123,6 +120,12 @@ export default function WorkWithUsPage() {
         >
           Book a call
         </a>
+        <p className="mt-4 text-[15px] text-navy/70">
+          Rather email?{" "}
+          <a href="mailto:toby@tobyegbuna.com" className="font-semibold text-blue no-underline hover:underline">
+            toby@tobyegbuna.com
+          </a>
+        </p>
       </section>
 
       {/* SERVICES */}
@@ -159,6 +162,12 @@ export default function WorkWithUsPage() {
               </div>
             ))}
           </div>
+          <p className="mx-auto mt-8 max-w-[720px] text-center text-[16px] text-navy/75">
+            Want to learn to build it yourself? People Builders is a 4-week program for HR teams.{" "}
+            <Link href="/people-builders" className="font-semibold text-blue no-underline hover:underline">
+              Join the waitlist →
+            </Link>
+          </p>
         </div>
       </section>
 
@@ -166,15 +175,11 @@ export default function WorkWithUsPage() {
       <section className="mx-auto max-w-[1180px] px-5 py-16 sm:px-8 md:py-20 lg:px-16 lg:py-24">
         <div className="mx-auto mb-12 max-w-[640px] text-center">
           <div className="mb-2.5 text-[13px] font-bold uppercase tracking-wider text-blue">
-            Our process
+            The process
           </div>
           <h2 className="mb-3.5 text-[clamp(26px,3.2vw,34px)] font-bold tracking-tight">
-            The same mapping process we use to run our own HR SaaS company.
+            The same mapping process I used building Chezie.
           </h2>
-          <p className="text-base text-navy/70">
-            We go one level at a time until we hit something specific enough to
-            actually automate.
-          </p>
         </div>
         <div className="mx-auto flex max-w-[980px] flex-col items-stretch gap-3 md:flex-row md:items-stretch md:gap-0">
           {processSteps.map((step, i) => {
@@ -257,7 +262,7 @@ export default function WorkWithUsPage() {
           Ready to see where AI actually fits in your workflows?
         </h2>
         <p className="mb-7 text-base text-navy/70">
-          Book a 30-minute discovery call to see how we can partner!
+          Book a 30-minute discovery call.
         </p>
         <a
           href={CALENDAR_LINK}

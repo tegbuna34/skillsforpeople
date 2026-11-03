@@ -15,7 +15,7 @@ export default function ContributorActions({
   const [copied, setCopied] = useState(false);
 
   const getLabel =
-    skillCount === 1 ? `Get ${firstName}'s skill` : `Get all of ${firstName}'s skills`;
+    skillCount === 1 ? `Get ${firstName}’s skill` : `Get all of ${firstName}’s skills`;
 
   const scrollToSkills = () => {
     document.getElementById("skills")?.scrollIntoView({ behavior: "smooth", block: "start" });

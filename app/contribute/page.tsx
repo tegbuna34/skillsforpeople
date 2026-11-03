@@ -4,7 +4,7 @@ import ExtractionPromptCard from "./ExtractionPromptCard";
 export const metadata: Metadata = {
   title: "Contribute",
   description:
-    "Submit a workflow you've already built as a Skills for People skill, or use the extraction prompt to find one in your chat history.",
+    "Submit a workflow you’ve already built as a Skills for People skill, or use the extraction prompt to find one in your chat history.",
 };
 
 const TALLY_URL = "https://tally.so/r/9qAx2K";
@@ -20,7 +20,7 @@ const LOOKING_FOR = [
   },
   {
     title: "Reusable by others",
-    desc: "Should work for another HR team with different inputs, not just yours.",
+    desc: "Should work for another People team with different inputs, not just yours.",
   },
   {
     title: "Structured as a skill",
@@ -36,18 +36,18 @@ export default function ContributePage() {
           Contribute
         </div>
         <h1 className="mb-5 text-[clamp(32px,4.4vw,46px)] font-bold leading-[1.12] tracking-tight">
-          You&apos;ve probably already built a skill. Share it.
+          You’ve probably already built a skill. Share it.
         </h1>
         <p className="text-lg text-navy/75">
-          Skills for People doesn&apos;t write skills for you — it&apos;s a place to publish the
-          ones HR leaders have already built and quietly kept to themselves. If you&apos;ve
-          formalized a workflow, submit it directly. If you haven&apos;t yet, there&apos;s
+          Skills for People doesn’t write skills for you — it’s a place to publish the
+          ones People leaders have already built and quietly kept to themselves. If you’ve
+          formalized a workflow, submit it directly. If you haven’t yet, there’s
           probably one sitting in your chat history.
         </p>
       </div>
 
       <div className="mx-auto max-w-[1180px] px-5 pb-16 pt-6 sm:px-8 lg:px-16">
-        <h2 className="mb-6 text-xl font-bold">What we&apos;re looking for</h2>
+        <h2 className="mb-6 text-xl font-bold">What we’re looking for</h2>
         <div className="grid gap-5 sm:grid-cols-2">
           {LOOKING_FOR.map((c) => (
             <div key={c.title} className="rounded-2xl border border-navy/10 bg-white p-6">
@@ -62,8 +62,8 @@ export default function ContributePage() {
         <div className="mx-auto max-w-[1180px] px-5 py-16 sm:px-8 md:py-20 lg:px-16">
           <h2 className="mb-2 text-xl font-bold">Two ways to contribute</h2>
           <p className="mb-8 max-w-2xl text-[15px] text-navy/70">
-            Already have something built? Submit it below. Don&apos;t have one yet? You probably
-            have raw material for one sitting in your AI chat history — here&apos;s how to find
+            Already have something built? Submit it below. Don’t have one yet? You probably
+            have raw material for one sitting in your AI chat history — here’s how to find
             it.
           </p>
 
@@ -75,7 +75,7 @@ export default function ContributePage() {
               <div className="mb-2 text-lg font-bold">Already built one? Import it.</div>
               <p className="mb-5 flex-1 text-[14.5px] text-navy/70">
                 Export your existing Claude .skill file or prompt and submit it directly — upload
-                the file or paste it as markdown. We&apos;ll review it against the criteria above
+                the file or paste it as markdown. We’ll review it against the criteria above
                 and follow up before it goes live.
               </p>
               <a
@@ -92,11 +92,11 @@ export default function ContributePage() {
               <div className="mb-4 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-blue/10 text-sm font-bold text-blue">
                 2
               </div>
-              <div className="mb-2 text-lg font-bold">Don&apos;t have one? You probably do.</div>
+              <div className="mb-2 text-lg font-bold">Don’t have one? You probably do.</div>
               <p className="mb-5 flex-1 text-[14.5px] text-navy/70">
                 Run this prompt in Claude or ChatGPT. It scans your own chat history for workflows
-                you&apos;ve already solved for yourself, formalized enough to become a skill —
-                you just haven&apos;t packaged them yet.
+                you’ve already solved for yourself, formalized enough to become a skill —
+                you just haven’t packaged them yet.
               </p>
               <ExtractionPromptCard />
             </div>
@@ -107,8 +107,8 @@ export default function ContributePage() {
       <div id="submit" className="mx-auto max-w-[640px] px-5 py-20 text-center sm:px-8 lg:px-16">
         <h2 className="mb-2 text-[22px] font-bold">Submit a built skill</h2>
         <p className="mb-7 text-[15px] text-navy/70">
-          Upload your .skill file, or paste it as a markdown document. We don&apos;t build skills
-          from scratch — this is for workflows you&apos;ve already formalized.
+          Upload your .skill file, or paste it as a markdown document. We don’t build skills
+          from scratch — this is for workflows you’ve already formalized.
         </p>
         <a
           href={TALLY_URL}

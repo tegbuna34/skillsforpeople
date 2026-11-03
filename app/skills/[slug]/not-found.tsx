@@ -7,7 +7,7 @@ export default function SkillNotFound() {
         Skill not found
       </div>
       <h1 className="mb-4 text-3xl font-bold tracking-tight">
-        We couldn&apos;t find that skill.
+        We couldn’t find that skill.
       </h1>
       <p className="mb-6 text-navy/70">
         It may have been unpublished or the link may be out of date.

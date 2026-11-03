@@ -8,11 +8,11 @@ const PROMPT = `Go through my past conversations with you and find moments where
 For each one you find, tell me:
 1. What problem it solved and for whom (which HR function/vertical)
 2. The actual steps I used, reconstructed in order
-3. What inputs it needs to run for someone else's org (team size, tools, constraints, etc.)
-4. What a "done" output looks like
-5. Whether it's specific and reusable enough to publish as a skill, or too one-off
+3. What inputs it needs to run for someone else’s org (team size, tools, constraints, etc.)
+4. What a “done” output looks like
+5. Whether it’s specific and reusable enough to publish as a skill, or too one-off
 
-Then, for anything that qualifies, draft it as a step-by-step skill: a short description, a numbered implementation process, a definition of done, and common pitfalls — so it's ready to submit to Skills for People.`;
+Then, for anything that qualifies, draft it as a step-by-step skill: a short description, a numbered implementation process, a definition of done, and common pitfalls — so it’s ready to submit to Skills for People.`;
 
 export default function ExtractionPromptCard() {
   const [copied, setCopied] = useState(false);

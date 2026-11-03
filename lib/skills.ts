@@ -10,9 +10,8 @@
  * or generateStaticParams; there are no per-request queries.
  */
 
-import { existsSync } from "node:fs";
-import path from "node:path";
 import { supabase, hasSupabaseConfig } from "./supabase";
+import { skillFileExists } from "./skill-files";
 import { MOCK_SKILLS } from "./skills.mock";
 
 export interface Contributor {
@@ -54,23 +53,19 @@ export interface Skill {
 
 const USE_MOCK = process.env.USE_MOCK_SKILLS === "1";
 
-// Prefer the on-disk file at /public/skills/<slug>/<slug>.<ext> over the DB's
-// URL field: the file's existence on disk is the ground truth for whether the
-// download button should be enabled. The DB field is still honored when it
-// points at an external URL.
+// Files live in content/skills and are served only by the download route.
+// A non-null URL means the file exists. It is not a public path.
 function resolveDownloadUrl(
   slug: string,
   ext: "skill" | "md",
   dbUrl: string | null
 ): string | null {
-  const conventionalRel = `/skills/${slug}/${slug}.${ext}`;
-  const diskPath = path.join(process.cwd(), "public", conventionalRel);
-  if (existsSync(diskPath)) return conventionalRel;
-  if (dbUrl && !dbUrl.startsWith("/skills/")) return dbUrl;
+  if (skillFileExists(slug, ext)) {
+    return `/api/skills/${slug}/download?format=${ext === "md" ? "md" : "skill"}`;
+  }
+  if (dbUrl && !dbUrl.startsWith("/skills/") && !dbUrl.startsWith("/api/")) return dbUrl;
   return null;
 }
-
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
 type SkillRow = {
   id: string;
@@ -273,26 +268,6 @@ export async function getSkillsByNotionIds(ids: string[]): Promise<Skill[]> {
   const wanted = new Set(ids);
   const all = await getPublishedSkills();
   return all.filter((s) => s.notionPageId && wanted.has(s.notionPageId));
-}
-
-/**
- * The set of skill slugs whose detail pages + library cards are ungated for
- * logged-out visitors. Currently: the six most recently published.
- * Kept in sync with the library gate: `DirectoryClient` shows the same first
- * six matched results ungated. This helper is the canonical source for the
- * skill-detail body gate, since ordering there needs to be independent of the
- * user's current library filter.
- */
-export const FREE_SKILL_COUNT = 6;
-
-export async function getFreeSkillSlugs(): Promise<Set<string>> {
-  const all = await getPublishedSkills();
-  const sorted = [...all].sort((a, b) => {
-    const at = a.datePublished ? new Date(a.datePublished).getTime() : 0;
-    const bt = b.datePublished ? new Date(b.datePublished).getTime() : 0;
-    return bt - at;
-  });
-  return new Set(sorted.slice(0, FREE_SKILL_COUNT).map((s) => s.slug));
 }
 
 export async function getVerticals(): Promise<string[]> {

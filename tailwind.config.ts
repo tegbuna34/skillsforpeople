@@ -7,6 +7,7 @@ const config: Config = {
       colors: {
         navy: "#24366e",
         blue: "#5e749e",
+        blueInk: "#56698f",
         peach: "#eabfa8",
         mint: "#f0f5f6",
       },

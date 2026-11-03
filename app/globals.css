@@ -42,6 +42,20 @@ button {
   font-family: inherit;
 }
 
+a,
+button {
+  touch-action: manipulation;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #24366e;
+  outline-offset: 2px;
+}
+
 /* Utility: clamp text to N lines */
 .line-clamp-3 {
   display: -webkit-box;

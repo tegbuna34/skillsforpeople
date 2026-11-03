@@ -1,139 +1,213 @@
 import Link from "next/link";
-import { getPublishedSkills } from "@/lib/skills";
-import SkillCard from "@/components/SkillCard";
-import HeroCards from "@/components/HeroCards";
+import Image from "next/image";
 
-const STEPS = [
-  {
-    num: "1",
-    title: "Browse or search",
-    desc: "Filter the library by HR vertical or search for the problem you're trying to solve.",
-  },
-  {
-    num: "2",
-    title: "Download the skill",
-    desc: "Get it as a Claude .skill file or a plain-prompt .md — works with whatever AI tool you already use.",
-  },
-  {
-    num: "3",
-    title: "Run it on your org",
-    desc: "The skill asks about your team, budget, and constraints, then produces output tailored to you.",
-  },
+export const dynamic = "force-dynamic";
+import { getPublishedSkills, type Skill } from "@/lib/skills";
+import { getCurrentUser, isOnProgramWaitlist } from "@/lib/account";
+import { HOME_TEASER_COUNT } from "@/lib/home";
+import { excerptForSkill } from "@/lib/skill-excerpt";
+import SkillCard from "@/components/SkillCard";
+import EmailSignup from "@/components/EmailSignup";
+import SeeLibraryButton from "@/components/SeeLibraryButton";
+import DirectoryClient from "@/app/skills/DirectoryClient";
+import SkillDocument from "@/components/mockups/SkillDocument";
+import HowItWorks from "@/components/mockups/HowItWorks";
+import CohortPreview from "@/components/mockups/CohortPreview";
+import "@/components/mockups/visuals.css";
+
+const FAMILIAR = [
+  "I asked for a simple tool months ago and it’s still in the IT queue.",
+  "Our HRIS has the data, but every Monday I export it to a spreadsheet and clean it by hand.",
+  "Leadership wants an AI plan for HR and I don’t know where to start.",
 ];
 
 export default async function LandingPage() {
-  const skills = await getPublishedSkills();
-  const previewSkills = skills.slice(0, 3);
-  const rotatingSkills = skills.slice(0, 6);
+  const [skills, current] = await Promise.all([
+    getPublishedSkills(),
+    getCurrentUser().catch(() => null),
+  ]);
+  const weekly = skills[0] ?? null;
+
+  if (current) {
+    const onWaitlist = await isOnProgramWaitlist(current.email);
+    const name = current.firstName;
+    return (
+      <>
+        <section className="mx-auto max-w-[1180px] px-5 py-12 sm:px-8 lg:px-16 lg:py-16">
+          <h1 className="mb-3 text-[clamp(32px,5vw,48px)] font-bold leading-[1.08] tracking-tight text-navy">
+            {name ? `Welcome back, ${name}.` : "Welcome back."}
+          </h1>
+          <p className="mb-6 max-w-[520px] text-[17px] text-navy/75">
+            {weekly ? `${weekly.name} is this week’s skill.` : "A new skill lands every Tuesday."}
+          </p>
+          <div className="flex flex-wrap gap-3">
+            {weekly && (
+              <Link
+                href={`/skills/${weekly.slug}`}
+                className="rounded-[10px] bg-navy px-5 py-3 text-[15px] font-bold text-white no-underline hover:bg-blue"
+              >
+                Open this week’s skill
+              </Link>
+            )}
+            <Link
+              href="/skills"
+              className="rounded-[10px] border border-navy/20 bg-white px-5 py-3 text-[15px] font-bold text-navy no-underline hover:bg-mint"
+            >
+              Browse the library
+            </Link>
+          </div>
+        </section>
+
+        {!onWaitlist && (
+          <section className="border-y border-navy/10 bg-white">
+            <div className="mx-auto flex max-w-[1180px] flex-wrap items-center justify-between gap-4 px-5 py-5 sm:px-8 lg:px-16">
+              <p className="text-[15.5px] text-navy/80">People Builders waitlist is open.</p>
+              <Link href="/people-builders" className="font-bold text-blue no-underline hover:underline">
+                Join the waitlist →
+              </Link>
+            </div>
+          </section>
+        )}
+
+        <section className="mx-auto max-w-[1180px] px-5 py-10 sm:px-8 lg:px-16">
+          <DirectoryClient skills={skills} verticals={verticalsOf(skills)} initialVertical="All" />
+        </section>
+      </>
+    );
+  }
+
+  const teaser = skills.slice(0, HOME_TEASER_COUNT);
+  const excerpt = weekly
+    ? await excerptForSkill(weekly)
+    : {
+        name: "This week’s skill",
+        filename: "skill.md",
+        what: "A ready-to-use workflow a People leader shared, written so you can run it in Claude or ChatGPT.",
+        steps: [],
+      };
 
   return (
-    <>
-      {/* HERO */}
-      <section className="mx-auto flex max-w-[1180px] flex-wrap items-center gap-14 px-5 py-16 sm:px-8 md:py-20 lg:px-16 lg:py-24">
-        <div className="min-w-[280px] flex-1 basis-[480px]">
-          <div className="mb-5 inline-block rounded-full bg-blue/10 px-3.5 py-1.5 text-[13px] font-semibold uppercase tracking-wider text-blue">
-            For HR practitioners
+    <div className="sfp-mock">
+      <section className="band band--mint hero">
+        <div className="container split">
+          <div className="hero__copy">
+            <p className="eyebrow">AI skills for People leaders</p>
+            <h1 className="h1">Get this week’s free AI skill for People leaders.</h1>
+            <p className="lead">
+              One ready-to-use skill every Tuesday, built from a workflow a People leader shared. Drop
+              it into Claude or ChatGPT and run it this week.
+            </p>
+            <EmailSignup
+              designed
+              cta="Get this week’s skill →"
+              placeholder="Your work email"
+              finePrint="Get this skill now, plus a new one every Tuesday. Unsubscribe anytime."
+            />
           </div>
-          <h1 className="mb-5 text-[clamp(36px,5vw,54px)] font-bold leading-[1.08] tracking-tight text-navy">
-            Practical AI skills for HR, built from what actually worked.
-          </h1>
-          <p className="mb-8 max-w-[520px] text-[19px] text-navy/75">
-            We turn real workflows HR leaders share through thought leadership content into
-            downloadable AI skills you can run with Claude or ChatGPT this week.
-          </p>
-          <div className="flex flex-wrap items-center gap-4">
-            <Link
-              href="/skills"
-              className="whitespace-nowrap rounded-[10px] bg-navy px-7 py-4 text-base font-bold text-white shadow-cta transition-colors hover:bg-blue"
-            >
-              Browse the skill library
-            </Link>
-            <Link
-              href="#how"
-              className="border-b-2 border-navy/25 pb-0.5 text-base font-semibold text-navy no-underline"
-            >
-              See how it works
-            </Link>
-          </div>
-        </div>
-        <HeroCards skills={rotatingSkills} />
-      </section>
-
-      {/* HOW IT WORKS */}
-      <section id="how" className="mx-auto max-w-[1180px] px-5 py-20 sm:px-8 md:py-24 lg:px-16">
-        <div className="mb-12 max-w-[640px]">
-          <div className="mb-2.5 text-[13px] font-bold uppercase tracking-wider text-blue">
-            How it works
-          </div>
-          <h2 className="text-[clamp(28px,3.4vw,38px)] font-bold tracking-tight">
-            Get access to the best workflows in just three steps.
-          </h2>
-        </div>
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {STEPS.map((s) => (
-            <div key={s.num}>
-              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-[10px] border-2 border-blue bg-white text-lg font-bold text-blue">
-                {s.num}
-              </div>
-              <div className="mb-2 text-lg font-bold">{s.title}</div>
-              <div className="text-[15px] text-navy/70">{s.desc}</div>
-            </div>
-          ))}
+          <SkillDocument excerpt={excerpt} />
         </div>
       </section>
 
-      {/* LIBRARY PREVIEW */}
-      <section
-        id="library"
-        className="border-y border-navy/10 bg-white"
-      >
-        <div className="mx-auto max-w-[1180px] px-5 py-20 sm:px-8 md:py-24 lg:px-16">
-          <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
-            <div className="max-w-[600px]">
-              <div className="mb-2.5 text-[13px] font-bold uppercase tracking-wider text-blue">
-                From the library
-              </div>
-              <h2 className="text-[clamp(28px,3.4vw,38px)] font-bold tracking-tight">
-                A growing set of skills, sourced one workflow at a time.
-              </h2>
-            </div>
-            <Link
-              href="/skills"
-              className="whitespace-nowrap border-b-2 border-navy/25 pb-0.5 text-[15px] font-semibold text-navy no-underline"
-            >
-              See all skills →
-            </Link>
+      <section className="band band--white">
+        <div className="container">
+          <div className="section-head">
+            <p className="eyebrow">How it works</p>
+            <h2 className="h2">From your inbox to Claude or ChatGPT</h2>
           </div>
+          <HowItWorks skillName={excerpt.name} />
+        </div>
+      </section>
 
-          {previewSkills.length > 0 ? (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {previewSkills.map((s) => (
-                <SkillCard key={s.slug} skill={s} />
+      <section className="band band--mint familiar">
+        <div className="container split">
+          <div className="notes" aria-label="Three problems People teams run into">
+            {FAMILIAR.map((line) => (
+              <p key={line} className="note">
+                &ldquo;{line}&rdquo;
+              </p>
+            ))}
+          </div>
+          <div className="familiar__copy">
+            <h2 className="h2">Sound familiar?</h2>
+            <p className="lead">Every skill here starts with a problem like these.</p>
+            <a className="link" href="#library">
+              Browse the skills ↓
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="band band--white" id="library">
+        <div className="container">
+          <div className="section-head">
+            <h2 className="h2">A few of the skills you get free</h2>
+          </div>
+          {teaser.length > 0 ? (
+            <div className="grid">
+              {teaser.map((skill) => (
+                <SkillCard key={skill.slug} skill={skill} showArrow compact className="skill" />
               ))}
             </div>
           ) : (
-            <EmptyLibrary />
+            <p className="lead">The first skills are on the way.</p>
           )}
+          <div className="library__more">
+            <SeeLibraryButton className="btn btn--ghost" />
+          </div>
         </div>
       </section>
-    </>
+
+      <section className="band band--mint">
+        <div className="container">
+          <div className="program__head">
+            <div>
+              <p className="eyebrow">People Builders</p>
+              <h2 className="h2">Want to build your own tools?</h2>
+              <p className="lead">
+                A 4-week live program for People leaders on Claude or ChatGPT, capped at 10 people. You
+                build two automated workflows and two apps.
+              </p>
+            </div>
+            <Link className="btn" href="/people-builders">
+              Join the waitlist →
+            </Link>
+          </div>
+          <CohortPreview />
+        </div>
+      </section>
+
+      <section className="band band--white founder">
+        <div className="container">
+          <p className="eyebrow">Who’s behind this</p>
+          <div className="founder__row">
+            <Image
+              src="/assets/toby-headshot.jpg"
+              alt="Toby Egbuna"
+              width={320}
+              height={320}
+              className="founder__photo"
+            />
+            <div>
+              <div className="founder__story">
+                <p>
+                  I’m Toby Egbuna. In 2021 I co-founded Chezie, an HR-tech platform for managing
+                  internal communities, and built the first version myself in a no-code tool. Today
+                  we work with customers like Airbnb and the NBA, and I still lead our technical
+                  work, mostly by using AI to build things that used to be too technical for me.
+                </p>
+              </div>
+              <p className="founder__line">
+                <Link href="/about">Read my full story →</Link>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
   );
 }
 
-function EmptyLibrary() {
-  return (
-    <div className="flex flex-col items-center gap-3 rounded-2xl border border-dashed border-navy/25 p-14 text-center">
-      <div className="text-lg font-bold text-navy">Coming soon</div>
-      <p className="max-w-md text-[15px] text-navy/60">
-        The first skills are being finalized. Check back shortly — or subscribe by contributing one
-        of your own.
-      </p>
-      <Link
-        href="/contribute"
-        className="mt-2 rounded-lg bg-navy px-5 py-3 text-sm font-bold text-white no-underline transition-colors hover:bg-blue"
-      >
-        Contribute a skill
-      </Link>
-    </div>
-  );
+function verticalsOf(skills: Skill[]): string[] {
+  return Array.from(new Set(skills.map((skill) => skill.vertical).filter(Boolean))).sort();
 }

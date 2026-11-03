@@ -6,53 +6,30 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useAuth } from "./AuthContext";
 
-// Final nav on every page: logo · About · Work with us · Resources (Skill
-// Library, Tools) · Login/account. "Contribute" lives as an inline link on
-// /skills. Pricing has no nav link.
-const primaryLinks = [
+const sharedLinks = [
+  { href: "/people-builders", label: "People Builders" },
   { href: "/about", label: "About" },
-  { href: "/work-with-us", label: "Work with us" },
 ];
-
-const resourceLinks = [
-  { href: "/skills", label: "Skill Library", comingSoon: false },
-  { href: "/tools", label: "Tools", comingSoon: true },
-];
-
-function ChevronIcon({ open }: { open: boolean }) {
-  return (
-    <svg
-      width="10"
-      height="10"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="3"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="transition-transform duration-150"
-      style={{ transform: open ? "rotate(180deg)" : "rotate(0deg)" }}
-      aria-hidden="true"
-    >
-      <polyline points="6 9 12 15 18 9" />
-    </svg>
-  );
-}
 
 export default function Nav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [resourcesOpen, setResourcesOpen] = useState(false);
-  const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [accountOpen, setAccountOpen] = useState(false);
   const { user, openLogin, logout } = useAuth();
 
-  const resourcesActive = resourceLinks.some((l) => l.href === pathname);
+  const links = user
+    ? [{ href: "/skills", label: "Skill Library" }, ...sharedLinks]
+    : sharedLinks;
 
+  // Close only after a real navigation. The first pathname update on load
+  // (null, then the URL) was clearing the menu and eating the first tap.
+  const pathRef = useRef<string | null>(null);
   useEffect(() => {
-    setOpen(false);
-    setResourcesOpen(false);
-    setMobileResourcesOpen(false);
+    if (pathRef.current && pathRef.current !== pathname) {
+      setOpen(false);
+      setAccountOpen(false);
+    }
+    pathRef.current = pathname;
   }, [pathname]);
 
   useEffect(() => {
@@ -64,144 +41,104 @@ export default function Nav() {
     };
   }, [open]);
 
-  useEffect(() => {
-    return () => {
-      if (closeTimer.current) clearTimeout(closeTimer.current);
-    };
-  }, []);
-
-  const openResources = () => {
-    if (closeTimer.current) {
-      clearTimeout(closeTimer.current);
-      closeTimer.current = null;
-    }
-    setResourcesOpen(true);
-  };
-
-  const scheduleCloseResources = () => {
-    closeTimer.current = setTimeout(() => setResourcesOpen(false), 180);
-  };
-
   return (
     <>
-      <div className="sticky top-0 z-10 flex flex-wrap items-center justify-between gap-3 border-b border-navy/10 bg-mint/90 px-5 py-5 backdrop-blur sm:px-8 lg:px-16">
-        <Link href="/" className="flex items-center" aria-label="Skills for People — home">
+      <div className="sticky top-0 z-10 flex flex-nowrap items-center justify-between gap-2 border-b border-navy/10 bg-mint/95 px-4 py-2.5 touch-manipulation sm:px-8 sm:py-4 lg:px-16">
+        <Link href="/" className="flex min-w-0 items-center" aria-label="Skills for People home">
           <Image
             src="/assets/logo-wordmark.svg"
             alt="Skills for People"
             width={200}
             height={28}
-            className="h-7 w-auto"
+            className="h-6 w-auto max-w-[42vw] nav:h-7 nav:max-w-none"
             priority
           />
         </Link>
 
         <div className="hidden items-center gap-6 nav:flex lg:gap-8">
-          {primaryLinks.map((l) => {
-            const active = pathname === l.href;
+          {links.map((link) => {
+            const active = pathname === link.href;
             return (
               <Link
-                key={l.href}
-                href={l.href}
+                key={link.href}
+                href={link.href}
                 className={`text-[15px] ${active ? "font-bold text-blue" : "font-medium text-navy"}`}
               >
-                {l.label}
+                {link.label}
               </Link>
             );
           })}
 
-          <div
-            className="relative"
-            onMouseEnter={openResources}
-            onMouseLeave={scheduleCloseResources}
-          >
-            <button
-              type="button"
-              onClick={() => setResourcesOpen((v) => !v)}
-              className={`flex cursor-pointer items-center gap-1.5 border-none bg-transparent p-0 text-[15px] ${
-                resourcesActive ? "font-bold text-blue" : "font-medium text-navy"
-              }`}
-            >
-              Resources
-              <ChevronIcon open={resourcesOpen} />
-            </button>
-            {resourcesOpen && (
-              <div className="absolute left-0 top-[calc(100%+10px)] z-20 min-w-[190px] overflow-hidden rounded-xl border border-navy/10 bg-white p-1.5 shadow-cardLg">
-                {resourceLinks.map((l) => {
-                  const active = pathname === l.href;
-                  return (
-                    <Link
-                      key={l.href}
-                      href={l.href}
-                      className={`flex items-center justify-between gap-3 rounded-lg px-3.5 py-2.5 text-[14.5px] no-underline hover:bg-navy/5 ${
-                        active ? "font-bold text-blue" : "font-medium text-navy"
-                      }`}
-                    >
-                      {l.label}
-                      {l.comingSoon && (
-                        <span className="whitespace-nowrap rounded-md bg-navy/8 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-navy/50">
-                          Coming soon
-                        </span>
-                      )}
-                    </Link>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-
           {user ? (
-            <div className="flex items-center gap-3">
-              <span className="text-[15px] font-medium text-navy">
-                Hi, {user.firstName || "there"}
-              </span>
+            <div className="relative">
               <button
                 type="button"
-                onClick={() => void logout()}
-                className="whitespace-nowrap rounded-lg border border-navy/20 bg-white px-4 py-2 text-[14px] font-semibold text-navy transition-colors hover:bg-mint"
+                onClick={() => setAccountOpen((value) => !value)}
+                className="whitespace-nowrap rounded-lg border border-navy/20 bg-white px-4 py-2 text-[14px] font-semibold text-navy"
+                aria-expanded={accountOpen}
+                aria-haspopup="menu"
               >
-                Log out
+                {user.firstName || "Account"}
               </button>
+              {accountOpen && (
+                <div
+                  role="menu"
+                  className="absolute right-0 top-[calc(100%+8px)] z-20 min-w-[160px] rounded-xl border border-navy/10 bg-white p-1.5 shadow-cardLg"
+                >
+                  <button
+                    type="button"
+                    role="menuitem"
+                    onClick={() => {
+                      setAccountOpen(false);
+                      void logout();
+                    }}
+                    className="w-full rounded-lg px-3.5 py-2.5 text-left text-[14.5px] font-semibold text-navy hover:bg-navy/5"
+                  >
+                    Log out
+                  </button>
+                </div>
+              )}
             </div>
           ) : (
             <button
               type="button"
-              onClick={openLogin}
+              onClick={() => openLogin("nav")}
               className="whitespace-nowrap rounded-lg bg-navy px-5 py-2.5 text-[15px] font-semibold text-white transition-colors hover:bg-blue"
             >
-              Login
+              Log in / Sign up
             </button>
           )}
         </div>
 
-        <div className="flex items-center gap-3 nav:hidden">
+        <div className="flex shrink-0 items-center gap-1.5 nav:hidden">
           {user ? (
             <button
               type="button"
               onClick={() => void logout()}
-              className="whitespace-nowrap rounded-lg border border-navy/20 bg-white px-3 py-2 text-[13px] font-semibold text-navy"
+              className="whitespace-nowrap rounded-lg border border-navy/20 bg-white px-2.5 py-2 text-[13px] font-semibold text-navy"
             >
               Log out
             </button>
           ) : (
             <button
               type="button"
-              onClick={openLogin}
-              className="whitespace-nowrap rounded-lg bg-navy px-4 py-2 text-[14px] font-semibold text-white"
+              onClick={() => openLogin("nav")}
+              aria-label="Log in or sign up"
+              className="whitespace-nowrap rounded-lg bg-navy px-3 py-2 text-[13px] font-semibold text-white"
             >
-              Login
+              Log in
             </button>
           )}
           <button
             type="button"
-            onClick={() => setOpen((v) => !v)}
+            onClick={() => setOpen(true)}
             aria-label="Menu"
             aria-expanded={open}
-            className="flex h-9 w-9 flex-col items-stretch justify-center gap-[5px] border-none bg-transparent p-0"
+            className="flex h-11 w-11 touch-manipulation flex-col items-center justify-center gap-[5px] border-none bg-transparent p-0"
           >
-            <span className="block h-[2px] w-full bg-navy" />
-            <span className="block h-[2px] w-full bg-navy" />
-            <span className="block h-[2px] w-full bg-navy" />
+            <span className="block h-[2px] w-5 bg-navy" />
+            <span className="block h-[2px] w-5 bg-navy" />
+            <span className="block h-[2px] w-5 bg-navy" />
           </button>
         </div>
       </div>
@@ -220,81 +157,31 @@ export default function Nav() {
               type="button"
               onClick={() => setOpen(false)}
               aria-label="Close menu"
-              className="border-none bg-transparent p-0 text-[30px] leading-none text-white"
+              className="flex h-11 w-11 items-center justify-center border-none bg-transparent text-[30px] leading-none text-white"
             >
               ×
             </button>
           </div>
           <div className="mt-10 flex flex-col">
-            {primaryLinks.map((l) => (
+            {links.map((link) => (
               <Link
-                key={l.href}
-                href={l.href}
+                key={link.href}
+                href={link.href}
                 className="border-t border-white/10 py-4 text-xl font-semibold text-white"
               >
-                {l.label}
+                {link.label}
               </Link>
             ))}
-
-            <div className="border-t border-b border-white/10">
-              <button
-                type="button"
-                onClick={() => setMobileResourcesOpen((v) => !v)}
-                className="flex w-full cursor-pointer items-center justify-between border-none bg-transparent py-4 text-left text-xl font-semibold text-white"
-              >
-                <span>Resources</span>
-                <span className="text-white">
-                  <ChevronIcon open={mobileResourcesOpen} />
-                </span>
-              </button>
-              {mobileResourcesOpen && (
-                <div className="flex flex-col pb-3.5">
-                  {resourceLinks.map((l) => (
-                    <Link
-                      key={l.href}
-                      href={l.href}
-                      className="flex items-center justify-between gap-3 py-3 pl-4 pr-2 text-[17px] font-medium text-white/75 no-underline"
-                    >
-                      {l.label}
-                      {l.comingSoon && (
-                        <span className="whitespace-nowrap rounded-md bg-white/10 px-2 py-1 text-[11px] font-bold uppercase tracking-wide text-white/60">
-                          Coming soon
-                        </span>
-                      )}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {user && (
-              <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-4 text-white">
-                <span className="text-lg font-semibold">
-                  Hi, {user.firstName || "there"}
-                </span>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setOpen(false);
-                    void logout();
-                  }}
-                  className="rounded-lg border border-white/30 px-4 py-2 text-sm font-semibold"
-                >
-                  Log out
-                </button>
-              </div>
-            )}
-
             {!user && (
               <button
                 type="button"
                 onClick={() => {
                   setOpen(false);
-                  openLogin();
+                  openLogin("nav");
                 }}
                 className="mt-6 block rounded-lg bg-white py-3.5 text-center text-base font-bold text-navy"
               >
-                Login
+                Log in / Sign up
               </button>
             )}
           </div>
