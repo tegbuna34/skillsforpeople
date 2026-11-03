@@ -80,13 +80,13 @@ export default function DetailActions({
           Get this skill free
         </div>
         <p className="mb-4 text-center text-[13.5px] text-navy/65">
-          Enter your email and I&apos;ll send you a sign-in link. Click it and you&apos;ll come
+          Enter your email and I’ll send you a sign-in link. Click it and you’ll come
           back to this page with the download ready.
         </p>
         <EmailSignup
           cta="Send my link"
           placeholder="you@company.com"
-          finePrint="You'll also get one new skill every Tuesday. Unsubscribe anytime."
+          finePrint="You’ll also get one new skill every Tuesday. Unsubscribe anytime."
           compact
         />
       </aside>

@@ -13,7 +13,7 @@ export default function FoundingCohortPage() {
         People Builders: founding cohort
       </h1>
       <p className="mb-4 text-[17px] text-navy/80">
-        You&apos;re invited to the first cohort, free. In return, you build a real project, track a
+        You’re invited to the first cohort, free. In return, you build a real project, track a
         baseline number, and let me publish a case study once you and your employer approve it.
       </p>
       <p className="mb-8 text-[15.5px] text-navy/70">

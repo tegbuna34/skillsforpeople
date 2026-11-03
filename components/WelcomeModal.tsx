@@ -57,7 +57,7 @@ export default function WelcomeModal({ initialOpen }: { initialOpen: boolean }) 
       }
       if (!skip && data.ok) track("welcome_answers_saved");
       if (!skip && data.degraded) {
-        setError("I couldn't store those answers yet. You can skip for now.");
+        setError("I couldn’t store those answers yet. You can skip for now.");
         setBusy(false);
         return;
       }
@@ -77,14 +77,14 @@ export default function WelcomeModal({ initialOpen }: { initialOpen: boolean }) 
         className="max-h-[90vh] w-full max-w-[480px] overflow-y-auto rounded-2xl bg-white px-7 pb-6 pt-8 shadow-cardLg"
       >
         <h2 id="welcome-title" className="mb-2 text-2xl font-bold tracking-tight text-navy">
-          You&apos;re in. Your skill is ready.
+          You’re in. Your skill is ready.
         </h2>
         <p className="mb-5 text-[14.5px] text-navy/70">
           Three quick questions so I send you skills that fit your job. All optional.
         </p>
 
         <div className="mb-4">
-          <div className="mb-2 text-[13.5px] font-semibold text-navy">What&apos;s your HR function?</div>
+          <div className="mb-2 text-[13.5px] font-semibold text-navy">What’s your HR function?</div>
           <div className="flex flex-wrap gap-2">
             {HR_FUNCTIONS.map((option) => (
               <button

@@ -139,7 +139,7 @@ export default function WaitlistForm({ founding = false }: { founding?: boolean 
       </Field>
       <fieldset>
         <legend className="mb-2 text-[13.5px] font-semibold text-navy">
-          I&apos;m interested in <span className="text-[#b5484d]">*</span>
+          I’m interested in <span className="text-[#b5484d]">*</span>
         </legend>
         <div className="flex flex-col gap-2">
           {WAITLIST_INTERESTS.map((option) => (

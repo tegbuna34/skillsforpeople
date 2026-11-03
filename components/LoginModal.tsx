@@ -8,15 +8,15 @@ import EmailSignup from "./EmailSignup";
 const COPY: Record<LoginMode, { heading: string; body: string; cta: string; finePrint?: string }> = {
   nav: {
     heading: "Log in or sign up",
-    body: "New or returning, you'll get the same sign-in link.",
+    body: "New or returning, you’ll get the same sign-in link.",
     cta: "Send my sign-in link",
-    finePrint: "You'll also get one new skill every Tuesday. Unsubscribe anytime.",
+    finePrint: "You’ll also get one new skill every Tuesday. Unsubscribe anytime.",
   },
   library: {
     heading: "Get the full library free",
-    body: "Enter your email and I'll send you a sign-in link. No password.",
+    body: "Enter your email and I’ll send you a sign-in link. No password.",
     cta: "Send my sign-in link",
-    finePrint: "You'll also get one new skill every Tuesday. Unsubscribe anytime.",
+    finePrint: "You’ll also get one new skill every Tuesday. Unsubscribe anytime.",
   },
   second: {
     heading: "Want this one too?",
@@ -83,7 +83,7 @@ export default function LoginModal() {
         </h2>
         {loginExpired ? (
           <p className="mb-5 text-[14.5px] text-[#b5484d]">
-            That link expired. Enter your email and I&apos;ll send a new one.
+            That link expired. Enter your email and I’ll send a new one.
           </p>
         ) : (
           <p className="mb-5 text-[14.5px] text-navy/70">{copy.body}</p>

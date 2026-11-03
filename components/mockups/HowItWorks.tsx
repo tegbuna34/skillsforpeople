@@ -7,7 +7,7 @@ export default function HowItWorks({ skillName }: { skillName: string }) {
         <div
           className="hiw__art"
           role="img"
-          aria-label={`An email in an inbox from Toby Egbuna. Subject: This week's skill, ${skillName}.`}
+          aria-label={`An email in an inbox from Toby Egbuna. Subject: This week’s skill, ${skillName}.`}
         >
           <div className="mini-mail" aria-hidden="true">
             <div className="mini-mail__row mini-mail__row--dim">
@@ -18,7 +18,7 @@ export default function HowItWorks({ skillName }: { skillName: string }) {
               <span className="mini-mail__unread" />
               <div>
                 <b>Toby Egbuna</b>
-                <span className="mini-mail__subj">This week&apos;s skill: {skillName}</span>
+                <span className="mini-mail__subj">This week’s skill: {skillName}</span>
                 <span className="mini-mail__prev">Plus one tip: write prompts like job descriptions.</span>
               </div>
             </div>
@@ -31,7 +31,7 @@ export default function HowItWorks({ skillName }: { skillName: string }) {
         <div className="hiw__text">
           <span className="hiw__num">1</span>
           <h3>Get the skill</h3>
-          <p>Enter your work email. This week&apos;s skill opens now, and a new one arrives every Tuesday, plus one tip from me.</p>
+          <p>Enter your work email. This week’s skill opens now, and a new one arrives every Tuesday, plus one tip from me.</p>
         </div>
       </li>
       <li className="hiw__card">
@@ -89,7 +89,7 @@ export default function HowItWorks({ skillName }: { skillName: string }) {
         <div className="hiw__text">
           <span className="hiw__num">3</span>
           <h3>Run it in Claude or ChatGPT</h3>
-          <p>Upload the file, add your team&apos;s data, and work through the steps.</p>
+          <p>Upload the file, add your team’s data, and work through the steps.</p>
         </div>
       </li>
     </ol>

@@ -89,10 +89,10 @@ export default function EmailSignup({
         <div className="mb-1 font-bold text-navy">Check your email</div>
         <p>
           I sent a sign-in link to <span className="font-semibold text-navy">{sentTo}</span> from
-          toby@tobyegbuna.com. Open it on this device and you&apos;ll land back where you were.
+          toby@tobyegbuna.com. Open it on this device and you’ll land back where you were.
         </p>
         <p className="mt-2 text-[13px] text-navy/60">
-          Didn&apos;t get it? Check spam, or{" "}
+          Didn’t get it? Check spam, or{" "}
           <button
             type="button"
             onClick={() => void submit()}

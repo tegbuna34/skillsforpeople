@@ -61,7 +61,7 @@ export default async function SkillDetailPage({ params }: { params: { slug: stri
   const realPromptFileContent = isLoggedIn ? await readPublicPromptFile(skill.slug) : null;
   const promptText = isLoggedIn ? realPromptFileContent ?? skillPromptMarkdown(skill) : "";
   const guest = skill.episode?.guest;
-  // Prefer the contributor's real LinkedIn URL when we have one stored;
+  // Prefer the contributor’s real LinkedIn URL when we have one stored;
   // only fall back to a LinkedIn people-search URL for contributors that
   // predate the linkedin_url column being populated.
   const linkedinUrl = guest
@@ -149,7 +149,7 @@ export default async function SkillDetailPage({ params }: { params: { slug: stri
             </>
           )}
 
-          <h2 className="mb-4 text-[22px] font-bold">What&apos;s included</h2>
+          <h2 className="mb-4 text-[22px] font-bold">What’s included</h2>
           <div className="mb-9 flex flex-col gap-3">
             {INCLUDED_ITEMS.map((item) => (
               <div
@@ -220,12 +220,12 @@ export default async function SkillDetailPage({ params }: { params: { slug: stri
                         rel="noreferrer"
                         className="text-blue no-underline hover:underline"
                       >
-                        Guest&apos;s LinkedIn ↗
+                        Guest’s LinkedIn ↗
                       </a>
                     )}
                   </div>
                   <div className="mt-3 border-t border-navy/[0.08] pt-3 text-[12px] text-navy/50">
-                    I built this skill from {guest.name}&apos;s public remarks. They did not write
+                    I built this skill from {guest.name}’s public remarks. They did not write
                     or review it.
                   </div>
                 </div>

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const NOTE = `Hi [manager], I'd like to join People Builders, a 4-week live program that teaches HR teams to build with the Claude or ChatGPT licenses we already have. It costs $2,500. I'd spend about 2 hours a week in sessions and come out with two automated workflows and two apps for our team, starting with [workflow], which takes us about [hours] a week today. Can we use L&D budget for this? Details: skillsforpeople.com/people-builders`;
+const NOTE = `Hi [manager], I’d like to join People Builders, a 4-week live program that teaches HR teams to build with the Claude or ChatGPT licenses we already have. It costs $2,500. I’d spend about 2 hours a week in sessions and come out with two automated workflows and two apps for our team, starting with [workflow], which takes us about [hours] a week today. Can we use L&D budget for this? Details: skillsforpeople.com/people-builders`;
 
 export default function CopyNote() {
   const [copied, setCopied] = useState(false);

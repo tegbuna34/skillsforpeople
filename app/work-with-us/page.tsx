@@ -17,7 +17,7 @@ const services = [
     subhead: "For teams getting started with AI",
     title: "AI Workshops",
     desc:
-      "A working session with your team to map where AI saves you time and where it doesn't. You leave with a plan you can start the next day.",
+      "A working session with your team to map where AI saves you time and where it doesn’t. You leave with a plan you can start the next day.",
     borderColor: "border-blue/35",
     iconBg: "bg-blue/[0.14]",
     iconColor: "text-blue",
@@ -86,7 +86,7 @@ const processSteps: Array<{
 const faqs = [
   {
     q: "How is this different from generic AI training?",
-    a: "Most AI training teaches the tool. I start from your team's workflows and work back to where AI fits, using the process I used building Chezie. What you get is specific to your team.",
+    a: "Most AI training teaches the tool. I start from your team’s workflows and work back to where AI fits, using the process I used building Chezie. What you get is specific to your team.",
   },
   {
     q: "Who should be in the room for the workshop?",
@@ -94,7 +94,7 @@ const faqs = [
   },
   {
     q: "Do we need any technical background?",
-    a: "No. The workshop is built for HR teams. If a workflow needs a custom build, that's the second option, and I build it.",
+    a: "No. The workshop is built for HR teams. If a workflow needs a custom build, that’s the second option, and I build it.",
   },
 ];
 

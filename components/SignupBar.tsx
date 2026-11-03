@@ -66,7 +66,7 @@ export default function SignupBar() {
       <div className="fixed inset-x-0 bottom-0 z-40 h-14 border-t border-navy/10 bg-white px-3">
         <div className="mx-auto flex h-full max-w-[1120px] items-center gap-2">
           <p className="hidden min-w-0 flex-1 truncate text-[14px] font-semibold text-navy sm:block">
-            One free AI skill for HR, every Tuesday.
+            One free AI skill for People leaders, every Tuesday.
           </p>
           <div className="flex min-w-0 flex-1 items-center sm:max-w-md sm:flex-none">
             <EmailSignup bar cta="Send it to me" placeholder="Work email" />

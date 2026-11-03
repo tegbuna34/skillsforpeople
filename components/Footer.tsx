@@ -22,7 +22,7 @@ export default function Footer() {
               className="h-5 w-auto"
             />
           </div>
-          <p className="text-sm text-mint/70">AI skills for HR and People teams, from Toby Egbuna.</p>
+          <p className="text-sm text-mint/70">AI skills for People leaders, from Toby Egbuna.</p>
         </div>
         <div className="flex flex-col gap-2.5">
           {links.map((link) => (

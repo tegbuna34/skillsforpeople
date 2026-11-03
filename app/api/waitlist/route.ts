@@ -16,7 +16,7 @@ export const dynamic = "force-dynamic";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const ALREADY = "You're already on the list. I'll email you when dates are set.";
+const ALREADY = "You’re already on the list. I’ll email you when dates are set.";
 
 export async function POST(request: Request) {
   let body: {
@@ -54,7 +54,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Pick your HR function." }, { status: 400 });
   }
   if (!isOneOf(interest, WAITLIST_INTERESTS)) {
-    return NextResponse.json({ error: "Pick what you're interested in." }, { status: 400 });
+    return NextResponse.json({ error: "Pick what you’re interested in." }, { status: 400 });
   }
   if (companySize && !isOneOf(companySize, COMPANY_SIZES)) {
     return NextResponse.json({ error: "Pick a company size from the list." }, { status: 400 });
@@ -68,7 +68,7 @@ export async function POST(request: Request) {
 
   if (!hasSupabaseConfig()) {
     return NextResponse.json(
-      { error: "The waitlist isn't available in this environment yet." },
+      { error: "The waitlist isn’t available in this environment yet." },
       { status: 503 }
     );
   }
@@ -77,7 +77,7 @@ export async function POST(request: Request) {
   const existing = await sb.from("program_waitlist").select("id").eq("email", email).maybeSingle();
   if (existing.error && isMissingTable(existing.error)) {
     return NextResponse.json(
-      { error: "The waitlist isn't open yet. Email toby@tobyegbuna.com and I'll add you." },
+      { error: "The waitlist isn’t open yet. Email toby@tobyegbuna.com and I’ll add you." },
       { status: 503 }
     );
   }
@@ -107,7 +107,7 @@ export async function POST(request: Request) {
   }
   if (inserted.error && isMissingTable(inserted.error)) {
     return NextResponse.json(
-      { error: "The waitlist isn't open yet. Email toby@tobyegbuna.com and I'll add you." },
+      { error: "The waitlist isn’t open yet. Email toby@tobyegbuna.com and I’ll add you." },
       { status: 503 }
     );
   }
@@ -135,6 +135,6 @@ export async function POST(request: Request) {
   return NextResponse.json({
     ok: true,
     already: false,
-    message: "You're on the list. I'll email you the next cohort's dates before anyone else hears them.",
+    message: "You’re on the list. I’ll email you the next cohort’s dates before anyone else hears them.",
   });
 }

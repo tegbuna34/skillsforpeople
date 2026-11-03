@@ -24,25 +24,25 @@ const sora = Sora({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.skillsforpeople.com"),
   title: {
-    default: "Skills for People — Practical AI skills for HR",
+    default: "Skills for People — Practical AI skills for People Leaders",
     template: "%s · Skills for People",
   },
   description:
-    "A library of practical AI skills for HR professionals, built from workflows real practitioners have already run.",
+    "A library of practical AI skills for People leaders, built from workflows real practitioners have already run.",
   icons: {
     icon: "/assets/favicon.svg",
   },
   openGraph: {
     title: "Skills for People",
     description:
-      "A library of practical AI skills for HR professionals, built from workflows real practitioners have already run.",
+      "A library of practical AI skills for People leaders, built from workflows real practitioners have already run.",
     type: "website",
     images: [
       {
         url: "/og-image.png",
         width: 2000,
         height: 1050,
-        alt: "Skills for People. Practical AI skills for HR, built from what worked.",
+        alt: "Skills for People. Practical AI skills for People Leaders, built from what worked.",
       },
     ],
   },
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Skills for People",
     description:
-      "A library of practical AI skills for HR professionals, built from workflows real practitioners have already run.",
+      "A library of practical AI skills for People leaders, built from workflows real practitioners have already run.",
     images: ["/og-image.png"],
   },
 };

@@ -21,46 +21,52 @@ export default function AboutPage() {
 
       <div className="mx-auto flex max-w-[820px] flex-col gap-6 px-5 pb-10 text-[16.5px] text-navy/80 sm:px-8 lg:px-16">
         <p>
-          I&apos;m Toby Egbuna. I co-founded Chezie, an HR tech company, and I&apos;ve spent the last
-          6 years building it.
+          I’m Toby Egbuna. In 2021, I co-founded Chezie, an HR-tech platform for managing internal
+          communities.
         </p>
         <p>
-          I was in consulting when I built the first version of our product, and I built it with
-          no-code tools. Like a lot of non-technical people, I was intimidated for a long time by
-          building an app, setting up an automation, or doing anything that involved the word
-          &quot;code.&quot;
+          When I started Chezie, I wasn’t technical. Like most non-technical people, I was
+          intimidated for a long time by building an app, setting up an automation, or doing
+          anything that involved the word “code.”
         </p>
         <p>
-          Even as AI took off, I used ChatGPT and Claude for the same things most HR people use
-          them for: emails, a thought partner, some writing. Then one day I clicked into Claude
-          Code and asked Claude to teach me how to build an internal app for our product roadmap,
-          because a bunch of our customers kept asking for it. It walked me through it, and I
-          launched it. The whole thing took about an hour. My reaction was, &quot;This is
-          incredible.&quot;
+          What I was, though, was resourceful. So I built the first version of Chezie by myself in a
+          no-code platform. Today, we work with customers like Airbnb and the NBA, and though we’ve
+          since brought on an engineering team, I still lead our technical work, using AI to turn
+          things that used to be way too technical for me into things I can do.
         </p>
         <p>
-          Six years of building Chezie showed me how under-resourced HR teams are. They&apos;re
-          short-staffed, under-budgeted, and underfunded. Now that almost every company is handing
-          out ChatGPT and Claude licenses, AI is the great equalizer for those teams. The resources
-          are there. What&apos;s missing is the know-how.
+          As AI exploded, I mostly used it for the same things most People leaders use it for:
+          handling emails, acting as a thought partner for strategic work, maybe to draft a document
+          to share externally. I knew it could handle coding for me, but talked myself out of using
+          it because I’m not “technical.”
         </p>
         <p>
-          I think every company should have someone on the team who acts as its internal product
+          Then one day I clicked into Claude Code and asked Claude to teach me how to build an
+          internal app for our product roadmap, because a bunch of our customers kept asking for it.
+          It took a few hours of back-and-forth, but that night, I got it live.
+        </p>
+        <hr className="border-0 border-t border-navy/15" />
+        <p>
+          Having spoken to over 1,000 HR and People leaders since launching Chezie, I’ve seen just
+          how under-resourced these teams are.
+        </p>
+        <p>
+          However, now that almost every company is handing out ChatGPT and Claude licenses, things
+          are changing. AI is the great equalizer for any team that didn’t have the resources to
+          build an automation that saves hours every week, or a custom internal app that answers
+          employees’ questions. The resources are finally here. What’s missing is the know-how.
+        </p>
+        <p>
+          Every company should and will have someone on the team who acts as its internal product
           manager and internal builder. That person takes the problems the team has lived with for
           years and solves them with automations, custom apps, reusable skills, and AI. People
           Builders exists to make you that person, for yourself and for your team.
         </p>
         <p>
-          Chezie has one product manager, and it&apos;s me. That&apos;s enough. With me as head of
-          product and primary builder, we&apos;ve grown to $1 million in revenue and work with
-          customers like Airbnb, the NBA, and ServiceNow. A lot of that, especially in the last
-          couple of years, comes from using AI to turn things that used to be way too technical for
-          me into things I can do.
-        </p>
-        <p>
-          I&apos;m not an HR expert, and I won&apos;t teach you HR. You already know your job. Every
-          skill in the library starts with something an HR leader shared publicly, in a talk, a
-          post, or a podcast. I turn it into a skill you can run, and I credit them on the page.
+          I’ve been building HR tech for years. I know the work, and I know how to build for it with
+          AI. People Builders teaches you to do the same, so you become the person your team goes to
+          when something needs building.
         </p>
       </div>
 
@@ -100,9 +106,9 @@ export default function AboutPage() {
         <h2 className="mb-4 text-[clamp(24px,2.8vw,30px)] font-bold tracking-tight">
           Get one free skill every week.
         </h2>
-        <EmailSignup cta="Get this week's skill →" placeholder="Your work email" />
+        <EmailSignup cta="Get this week’s skill →" placeholder="Your work email" />
         <p className="mt-6 text-[15.5px] text-navy/75">
-          Want to be your team&apos;s builder?{" "}
+          Want to be your team’s builder?{" "}
           <Link href="/people-builders" className="font-semibold text-blue no-underline hover:underline">
             See People Builders →
           </Link>

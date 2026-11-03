@@ -1,8 +1,8 @@
 import type { SkillExcerpt } from "@/lib/skill-excerpt";
 
-/** This week's skill as a document excerpt. Sized like Design's hero frame. */
+/** This week’s skill as a document excerpt. Sized like Design’s hero frame. */
 export default function SkillDocument({ excerpt }: { excerpt: SkillExcerpt }) {
-  const alt = `This week's skill, ${excerpt.name}. ${excerpt.what} Steps include ${excerpt.steps.slice(0, 3).join(", ")}.`;
+  const alt = `This week’s skill, ${excerpt.name}. ${excerpt.what} Steps include ${excerpt.steps.slice(0, 3).join(", ")}.`;
   return (
     <div className="hero__visual">
       <article className="skill-doc" role="img" aria-label={alt}>
@@ -28,7 +28,7 @@ export default function SkillDocument({ excerpt }: { excerpt: SkillExcerpt }) {
         </div>
       </article>
       <div className="hero__badge">
-        <b>This week&apos;s skill</b>
+        <b>This week’s skill</b>
         <span>{excerpt.name}</span>
         <small>Opens with your free account</small>
       </div>

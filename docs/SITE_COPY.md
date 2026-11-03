@@ -12,7 +12,7 @@ The root layout sets the default title, the title template, and the default desc
 
 <small>app/layout.tsx</small>
 
-Skills for People — Practical AI skills for HR
+Skills for People — Practical AI skills for People Leaders
 
 **Title template**
 
@@ -24,7 +24,7 @@ Skills for People — Practical AI skills for HR
 
 <small>app/layout.tsx</small>
 
-A library of practical AI skills for HR professionals, built from workflows real practitioners have already run.
+A library of practical AI skills for People leaders, built from workflows real practitioners have already run.
 
 **Open Graph title**
 
@@ -36,13 +36,13 @@ Skills for People
 
 <small>app/layout.tsx</small>
 
-A library of practical AI skills for HR professionals, built from workflows real practitioners have already run.
+A library of practical AI skills for People leaders, built from workflows real practitioners have already run.
 
 **Open Graph image alt**
 
 <small>app/layout.tsx</small>
 
-Skills for People. Practical AI skills for HR, built from what worked.
+Skills for People. Practical AI skills for People Leaders, built from what worked.
 
 **Twitter title**
 
@@ -54,7 +54,7 @@ Skills for People
 
 <small>app/layout.tsx</small>
 
-A library of practical AI skills for HR professionals, built from workflows real practitioners have already run.
+A library of practical AI skills for People leaders, built from workflows real practitioners have already run.
 
 Home has no page-level title or description. It uses the defaults above.
 
@@ -68,7 +68,7 @@ Every skill, free
 
 <small>app/skills/page.tsx</small>
 
-AI skills for HR, sorted by function. Browse all of it free. You need a free account to download.
+AI skills for People leaders, sorted by function. Browse all of it free. You need a free account to download.
 
 **Skill detail title**
 
@@ -98,7 +98,7 @@ People Builders
 
 <small>app/people-builders/page.tsx</small>
 
-A 4-week live program for HR and People teams on Claude or ChatGPT. Think like a founder. Build your own HR tools.
+A 4-week live program for People leaders on Claude or ChatGPT. Think like a founder. Build your own tools.
 
 **About title**
 
@@ -208,7 +208,7 @@ Log in / Sign up
 
 ### Logged in
 
-Skill Library is added before the shared links. The desktop account button shows the person's first name, or `Account` if there is no first name. The menu item and the small-screen button both say:
+Skill Library is added before the shared links. The desktop account button shows the person’s first name, or `Account` if there is no first name. The menu item and the small-screen button both say:
 
 <small>components/Nav.tsx</small>
 
@@ -234,7 +234,7 @@ Skills for People
 
 <small>components/Footer.tsx</small>
 
-AI skills for HR and People teams, from Toby Egbuna.
+AI skills for People leaders, from Toby Egbuna.
 
 **Links**
 
@@ -262,13 +262,13 @@ About
 
 <small>app/page.tsx</small>
 
-AI skills for HR and People teams
+AI skills for People leaders
 
 **Heading**
 
 <small>app/page.tsx</small>
 
-Get this week's free AI skill for your HR team.
+Get this week’s free AI skill for your HR team.
 
 **Lead**
 
@@ -292,7 +292,7 @@ Your work email
 
 <small>app/page.tsx</small>
 
-Get this week's skill →
+Get this week’s skill →
 
 **Button while sending**
 
@@ -320,17 +320,17 @@ From the file
 
 <small>components/mockups/SkillDocument.tsx</small>
 
-This week's skill
+This week’s skill
 
 {skill name}
 
 Opens with your free account
 
-The filename, title, "what it does" paragraph, and up to four step titles are read from that skill's markdown file. See the example under the skill detail section. If no skill is published, the fallback is:
+The filename, title, "what it does" paragraph, and up to four step titles are read from that skill’s markdown file. See the example under the skill detail section. If no skill is published, the fallback is:
 
 <small>app/page.tsx</small>
 
-This week's skill
+This week’s skill
 
 skill.md
 
@@ -364,7 +364,7 @@ Get the skill
 
 <small>components/mockups/HowItWorks.tsx</small>
 
-Enter your work email. This week's skill opens now, and a new one arrives every Tuesday, plus one tip from me.
+Enter your work email. This week’s skill opens now, and a new one arrives every Tuesday, plus one tip from me.
 
 **Step 1 inbox art, other rows**
 
@@ -376,7 +376,7 @@ Tue
 
 Toby Egbuna
 
-This week's skill: {skill name}
+This week’s skill: {skill name}
 
 Plus one tip: write prompts like job descriptions.
 
@@ -388,7 +388,7 @@ Mon
 
 <small>components/mockups/HowItWorks.tsx</small>
 
-An email in an inbox from Toby Egbuna. Subject: This week's skill, {skill name}.
+An email in an inbox from Toby Egbuna. Subject: This week’s skill, {skill name}.
 
 **Step 2 heading**
 
@@ -436,7 +436,7 @@ Run it in Claude or ChatGPT
 
 <small>components/mockups/HowItWorks.tsx</small>
 
-Upload the file, add your team's data, and work through the steps.
+Upload the file, add your team’s data, and work through the steps.
 
 **Step 3 chat art**
 
@@ -470,11 +470,11 @@ Three problems HR teams run into
 
 <small>app/page.tsx</small>
 
-"I asked for a simple tool months ago and it's still in the IT queue."
+“I asked for a simple tool months ago and it’s still in the IT queue.”
 
-"Our HRIS has the data, but every Monday I export it to a spreadsheet and clean it by hand."
+“Our HRIS has the data, but every Monday I export it to a spreadsheet and clean it by hand.”
 
-"Leadership wants an AI plan for HR and I don't know where to start."
+“Leadership wants an AI plan for HR and I don’t know where to start.”
 
 **Heading**
 
@@ -528,7 +528,7 @@ Want to build your own tools?
 
 <small>app/page.tsx</small>
 
-A 4-week live program for HR teams on Claude or ChatGPT, capped at 10 people. You build two automated workflows and two apps.
+A 4-week live program for People leaders on Claude or ChatGPT, capped at 10 people. You build two automated workflows and two apps.
 
 **Button**
 
@@ -656,13 +656,13 @@ What I built
 
 Who uses it
 
-What I'd build next
+What I’d build next
 
 **Week 4, accessible name**
 
 <small>components/mockups/CohortPreview.tsx</small>
 
-A demo slide with three headings: what I built, who uses it, and what I'd build next.
+A demo slide with three headings: what I built, who uses it, and what I’d build next.
 
 **Cohort footer**
 
@@ -674,7 +674,7 @@ You walk out with
 
 2 apps
 
-A map of your team's work
+A map of your team’s work
 
 A demo for your manager
 
@@ -682,7 +682,7 @@ A demo for your manager
 
 <small>app/page.tsx</small>
 
-Who's behind this
+Who’s behind this
 
 **Photo alt**
 
@@ -694,9 +694,7 @@ Toby Egbuna
 
 <small>app/page.tsx</small>
 
-I'm Toby Egbuna. I co-founded Chezie, an HR tech company, and I've spent the last 6 years building it.
-
-Chezie has one product manager, and it's me. We've grown to $1 million in revenue.
+I’m Toby Egbuna. In 2021 I co-founded Chezie, an HR-tech platform for managing internal communities, and built the first version myself in a no-code tool. Today we work with customers like Airbnb and the NBA, and I still lead our technical work, mostly by using AI to build things that used to be too technical for me.
 
 **Link**
 
@@ -724,7 +722,7 @@ Welcome back.
 
 <small>app/page.tsx</small>
 
-{skill name} is this week's skill.
+{skill name} is this week’s skill.
 
 **Lead, otherwise**
 
@@ -736,7 +734,7 @@ A new skill lands every Tuesday.
 
 <small>app/page.tsx</small>
 
-Open this week's skill
+Open this week’s skill
 
 **Button**
 
@@ -796,13 +794,13 @@ Check your email
 
 <small>components/EmailSignup.tsx</small>
 
-I sent a sign-in link to {email} from toby@tobyegbuna.com. Open it on this device and you'll land back where you were.
+I sent a sign-in link to {email} from toby@tobyegbuna.com. Open it on this device and you’ll land back where you were.
 
 **After the link is sent, help**
 
 <small>components/EmailSignup.tsx</small>
 
-Didn't get it? Check spam, or send it again.
+Didn’t get it? Check spam, or send it again.
 
 **Resend button while sending**
 
@@ -830,7 +828,7 @@ Every skill, free
 
 <small>app/skills/page.tsx</small>
 
-AI skills for HR, sorted by function. Browse all of it free. You need a free account to download.
+AI skills for People leaders, sorted by function. Browse all of it free. You need a free account to download. Every skill credits the practitioner whose work it’s built from.
 
 **Search placeholder**
 
@@ -976,7 +974,7 @@ What this skill does
 
 <small>app/skills/[slug]/page.tsx</small>
 
-What's included
+What’s included
 
 **Included items**
 
@@ -1034,17 +1032,17 @@ Heard on {podcast}
 
 Listen to episode ↗
 
-Guest's LinkedIn ↗
+Guest’s LinkedIn ↗
 
 **Credit**
 
 <small>app/skills/[slug]/page.tsx</small>
 
-I built this skill from {guest name}'s public remarks. They did not write or review it.
+I built this skill from {guest name}’s public remarks. They did not write or review it.
 
 ### Example: TA Portfolio Scorecard & Prune
 
-This is the newest published skill, so it is also "this week's skill" on the home page. Field text is the published record. The credit line is the current page, not the older production sentence.
+This is the newest published skill, so it is also "this week’s skill" on the home page. Field text is the published record. The credit line is the current page, not the older production sentence.
 
 **Breadcrumb**
 
@@ -1058,7 +1056,7 @@ TA Portfolio Scorecard & Prune
 
 **Description**
 
-Turn a TA function's pile of concurrent initiatives into a governed portfolio with one owner and real outcome metrics per initiative, plus pre-agreed scale/hold/kill thresholds and a retirement ritual that actually reclaims bandwidth.
+Turn a TA function’s pile of concurrent initiatives into a governed portfolio with one owner and real outcome metrics per initiative, plus pre-agreed scale/hold/kill thresholds and a retirement ritual that actually reclaims bandwidth.
 
 **Inspired by**
 
@@ -1094,9 +1092,9 @@ Heard on HR Leaders Podcast
 
 Listen to episode ↗
 
-Guest's LinkedIn ↗
+Guest’s LinkedIn ↗
 
-I built this skill from Blair Bennett's public remarks. They did not write or review it.
+I built this skill from Blair Bennett’s public remarks. They did not write or review it.
 
 **Hero excerpt of this same skill, on the logged-out home page**
 
@@ -1122,7 +1120,7 @@ Attach two to three real outcome metrics per initiative
 
 Establish a baseline and a decision horizon for each row
 
-This week's skill
+This week’s skill
 
 TA Portfolio Scorecard & Prune
 
@@ -1142,7 +1140,7 @@ Get this skill free
 
 <small>app/skills/[slug]/DetailActions.tsx</small>
 
-Enter your email and I'll send you a sign-in link. Click it and you'll come back to this page with the download ready.
+Enter your email and I’ll send you a sign-in link. Click it and you’ll come back to this page with the download ready.
 
 **Placeholder**
 
@@ -1160,7 +1158,7 @@ Send my link
 
 <small>app/skills/[slug]/DetailActions.tsx</small>
 
-You'll also get one new skill every Tuesday. Unsubscribe anytime.
+You’ll also get one new skill every Tuesday. Unsubscribe anytime.
 
 The same form errors and "Check your email" state as the home form apply here. See Home, email form errors.
 
@@ -1210,7 +1208,7 @@ Format
 
 .skill / .md
 
-**Compatibility row. The tools are the skill's own list. If that list is empty, the fallback is used.**
+**Compatibility row. The tools are the skill’s own list. If that list is empty, the fallback is used.**
 
 <small>app/skills/[slug]/DetailActions.tsx</small>
 
@@ -1254,7 +1252,7 @@ Skill not found
 
 <small>app/skills/[slug]/not-found.tsx</small>
 
-We couldn't find that skill.
+We couldn’t find that skill.
 
 **Body**
 
@@ -1288,7 +1286,7 @@ Think like a founder. Build your own HR tools.
 
 <small>app/people-builders/page.tsx</small>
 
-A 4-week live program for HR and People teams on Claude or ChatGPT. You walk out with two automated workflows and two apps that save your team time, and you learn to be the person on your team who builds.
+A 4-week live program for People leaders on Claude or ChatGPT. You walk out with two automated workflows and two apps that save your team time, and you learn to be the person on your team who builds.
 
 **Button**
 
@@ -1306,7 +1304,7 @@ The next cohort is $2,500 a seat. People on the waitlist hear first.
 
 <small>app/people-builders/page.tsx</small>
 
-Who it's for
+Who it’s for
 
 **Bullets**
 
@@ -1318,13 +1316,13 @@ Your company already pays for Claude or ChatGPT, and you mostly use it for email
 
 Your team has problems it has lived with for years, and nobody has had the time or the know-how to fix them.
 
-It's the wrong program if you want HR policy or compliance training. I'm not an HR expert and I don't teach HR.
+It’s the wrong program if you want HR policy or compliance training. I’m not an HR expert and I don’t teach HR.
 
 **Heading**
 
 <small>app/people-builders/page.tsx</small>
 
-What you'll walk out with
+What you’ll walk out with
 
 **Bullets**
 
@@ -1334,7 +1332,7 @@ Two automated workflows that save your team time.
 
 Two apps your team can use.
 
-A map of your team's work that shows what to build next.
+A map of your team’s work that shows what to build next.
 
 A demo of what you built, ready to show your manager.
 
@@ -1352,7 +1350,7 @@ The 4 weeks
 
 Week 1: Opportunity mapping
 
-Break your team's work into workstreams, then workflows, then tasks, and find the ones worth automating or building for.
+Break your team’s work into workstreams, then workflows, then tasks, and find the ones worth automating or building for.
 
 2
 
@@ -1392,7 +1390,7 @@ Price. $2,500 a seat.
 
 Built for. Teams on Claude or ChatGPT.
 
-Teams. Want to bring your team? Pick "A private cohort for my team" on the form and I'll follow up.
+Teams. Want to bring your team? Pick “A private cohort for my team” on the form and I’ll follow up.
 
 **Heading**
 
@@ -1404,9 +1402,9 @@ Why I teach this
 
 <small>app/people-builders/page.tsx</small>
 
-I'm Toby Egbuna. I co-founded Chezie, an HR tech company, and I've spent 6 years building it. Chezie has one product manager, and it's me. We've grown to $1 million in revenue and work with customers like Airbnb, the NBA, and ServiceNow.
+I’m Toby Egbuna. In 2021 I co-founded Chezie, an HR-tech platform for managing internal communities, and built the first version myself in a no-code tool. Today we work with customers like Airbnb and the NBA, and I still lead our technical work, mostly by using AI to build things that used to be too technical for me.
 
-For a long time I was intimidated by anything that involved the word "code." Now I use AI to build things that used to be way too technical for me. People Builders teaches you to do the same for your team. You bring the HR expertise. I bring the building.
+For a long time I was intimidated by anything that involved the word “code.” Now I use AI to build things that used to be way too technical for me. People Builders teaches you to do the same for your team. You bring the HR expertise. I bring the building.
 
 **Heading**
 
@@ -1418,13 +1416,13 @@ Getting your company to pay
 
 <small>app/people-builders/page.tsx</small>
 
-Most companies have an L&D or training budget that covers a program like this. Here's a note you can send your manager.
+Most companies have an L&D or training budget that covers a program like this. Here’s a note you can send your manager.
 
 **Note**
 
 <small>app/people-builders/CopyNote.tsx</small>
 
-Hi [manager], I'd like to join People Builders, a 4-week live program that teaches HR teams to build with the Claude or ChatGPT licenses we already have. It costs $2,500. I'd spend about 2 hours a week in sessions and come out with two automated workflows and two apps for our team, starting with [workflow], which takes us about [hours] a week today. Can we use L&D budget for this? Details: skillsforpeople.com/people-builders
+Hi [manager], I’d like to join People Builders, a 4-week live program that teaches HR teams to build with the Claude or ChatGPT licenses we already have. It costs $2,500. I’d spend about 2 hours a week in sessions and come out with two automated workflows and two apps for our team, starting with [workflow], which takes us about [hours] a week today. Can we use L&D budget for this? Details: skillsforpeople.com/people-builders
 
 **Copy button**
 
@@ -1454,7 +1452,7 @@ The first answer is open. The others show `+` until opened, then `−`.
 
 Do I need to know how to code?
 
-No. You'll learn the technical pieces you need, in HR terms, as you build.
+No. You’ll learn the technical pieces you need, in HR terms, as you build.
 
 What do I need to have?
 
@@ -1464,9 +1462,9 @@ How much time does it take?
 
 About 2 hours a week live, plus the time you spend building.
 
-Can I use my company's data?
+Can I use my company’s data?
 
-[Your data guidance, e.g. build with sample or anonymized data in sessions, and follow your company's AI policy.]
+[Your data guidance, e.g. build with sample or anonymized data in sessions, and follow your company’s AI policy.]
 
 When is the next cohort?
 
@@ -1474,7 +1472,7 @@ People on the waitlist hear the dates first.
 
 Can my team do it together?
 
-Yes. Pick "A private cohort for my team" on the waitlist form and I'll follow up.
+Yes. Pick “A private cohort for my team” on the waitlist form and I’ll follow up.
 
 Questions?
 
@@ -1518,7 +1516,7 @@ What would you build first?
 
 Who would pay?
 
-I'm interested in
+I’m interested in
 
 **Empty select**
 
@@ -1610,13 +1608,13 @@ The form is replaced by the message.
 
 <small>app/api/waitlist/route.ts</small>
 
-You're on the list. I'll email you the next cohort's dates before anyone else hears them.
+You’re on the list. I’ll email you the next cohort’s dates before anyone else hears them.
 
 **Email already on the list**
 
 <small>app/api/waitlist/route.ts</small>
 
-You're already on the list. I'll email you when dates are set.
+You’re already on the list. I’ll email you when dates are set.
 
 ### Waitlist form, error
 
@@ -1642,7 +1640,7 @@ Enter a valid work email.
 
 Pick your HR function.
 
-Pick what you're interested in.
+Pick what you’re interested in.
 
 Pick a company size from the list.
 
@@ -1652,9 +1650,9 @@ Pick who would pay.
 
 Invalid body.
 
-The waitlist isn't available in this environment yet.
+The waitlist isn’t available in this environment yet.
 
-The waitlist isn't open yet. Email toby@tobyegbuna.com and I'll add you.
+The waitlist isn’t open yet. Email toby@tobyegbuna.com and I’ll add you.
 
 Something went wrong. Try again.
 
@@ -1672,7 +1670,7 @@ People Builders: founding cohort
 
 <small>app/people-builders/founding/page.tsx</small>
 
-You're invited to the first cohort, free. In return, you build a real project, track a baseline number, and let me publish a case study once you and your employer approve it.
+You’re invited to the first cohort, free. In return, you build a real project, track a baseline number, and let me publish a case study once you and your employer approve it.
 
 Mondays Nov 16, Nov 23, Nov 30 and Dec 7, 2026. One live session and one office hour each week.
 
@@ -1706,19 +1704,25 @@ Every HR team needs a builder. I want it to be you.
 
 <small>app/about/page.tsx</small>
 
-I'm Toby Egbuna. I co-founded Chezie, an HR tech company, and I've spent the last 6 years building it.
+I’m Toby Egbuna. In 2021, I co-founded Chezie, an HR-tech platform for managing internal communities.
 
-I was in consulting when I built the first version of our product, and I built it with no-code tools. Like a lot of non-technical people, I was intimidated for a long time by building an app, setting up an automation, or doing anything that involved the word "code."
+When I started Chezie, I wasn’t technical. Like most non-technical people, I was intimidated for a long time by building an app, setting up an automation, or doing anything that involved the word “code.”
 
-Even as AI took off, I used ChatGPT and Claude for the same things most HR people use them for: emails, a thought partner, some writing. Then one day I clicked into Claude Code and asked Claude to teach me how to build an internal app for our product roadmap, because a bunch of our customers kept asking for it. It walked me through it, and I launched it. The whole thing took about an hour. My reaction was, "This is incredible."
+What I was, though, was resourceful. So I built the first version of Chezie by myself in a no-code platform. Today, we work with customers like Airbnb and the NBA, and though we’ve since brought on an engineering team, I still lead our technical work, using AI to turn things that used to be way too technical for me into things I can do.
 
-Six years of building Chezie showed me how under-resourced HR teams are. They're short-staffed, under-budgeted, and underfunded. Now that almost every company is handing out ChatGPT and Claude licenses, AI is the great equalizer for those teams. The resources are there. What's missing is the know-how.
+As AI exploded, I mostly used it for the same things most People leaders use it for: handling emails, acting as a thought partner for strategic work, maybe to draft a document to share externally. I knew it could handle coding for me, but talked myself out of using it because I’m not “technical.”
 
-I think every company should have someone on the team who acts as its internal product manager and internal builder. That person takes the problems the team has lived with for years and solves them with automations, custom apps, reusable skills, and AI. People Builders exists to make you that person, for yourself and for your team.
+Then one day I clicked into Claude Code and asked Claude to teach me how to build an internal app for our product roadmap, because a bunch of our customers kept asking for it. It took a few hours of back-and-forth, but that night, I got it live.
 
-Chezie has one product manager, and it's me. That's enough. With me as head of product and primary builder, we've grown to $1 million in revenue and work with customers like Airbnb, the NBA, and ServiceNow. A lot of that, especially in the last couple of years, comes from using AI to turn things that used to be way too technical for me into things I can do.
+(Section break: a thin horizontal rule, not a dash character.)
 
-I'm not an HR expert, and I won't teach you HR. You already know your job. Every skill in the library starts with something an HR leader shared publicly, in a talk, a post, or a podcast. I turn it into a skill you can run, and I credit them on the page.
+Having spoken to over 1,000 HR and People leaders since launching Chezie, I’ve seen just how under-resourced these teams are.
+
+However, now that almost every company is handing out ChatGPT and Claude licenses, things are changing. AI is the great equalizer for any team that didn’t have the resources to build an automation that saves hours every week, or a custom internal app that answers employees’ questions. The resources are finally here. What’s missing is the know-how.
+
+Every company should and will have someone on the team who acts as its internal product manager and internal builder. That person takes the problems the team has lived with for years and solves them with automations, custom apps, reusable skills, and AI. People Builders exists to make you that person, for yourself and for your team.
+
+I’ve been building HR tech for years. I know the work, and I know how to build for it with AI. People Builders teaches you to do the same, so you become the person your team goes to when something needs building.
 
 **Photo alt**
 
@@ -1758,13 +1762,13 @@ Your work email
 
 <small>app/about/page.tsx</small>
 
-Get this week's skill →
+Get this week’s skill →
 
 **Link**
 
 <small>app/about/page.tsx</small>
 
-Want to be your team's builder? See People Builders →
+Want to be your team’s builder? See People Builders →
 
 The form uses the same errors and "Check your email" state as the home form.
 
@@ -1808,7 +1812,7 @@ Log in or sign up
 
 <small>components/LoginModal.tsx</small>
 
-New or returning, you'll get the same sign-in link.
+New or returning, you’ll get the same sign-in link.
 
 **Placeholder**
 
@@ -1826,7 +1830,7 @@ Send my sign-in link
 
 <small>components/LoginModal.tsx</small>
 
-You'll also get one new skill every Tuesday. Unsubscribe anytime.
+You’ll also get one new skill every Tuesday. Unsubscribe anytime.
 
 ### From "See the full library", and from a download while logged out
 
@@ -1840,7 +1844,7 @@ Get the full library free
 
 <small>components/LoginModal.tsx</small>
 
-Enter your email and I'll send you a sign-in link. No password.
+Enter your email and I’ll send you a sign-in link. No password.
 
 **Button**
 
@@ -1852,7 +1856,7 @@ Send my sign-in link
 
 <small>components/LoginModal.tsx</small>
 
-You'll also get one new skill every Tuesday. Unsubscribe anytime.
+You’ll also get one new skill every Tuesday. Unsubscribe anytime.
 
 ### Second skill
 
@@ -1918,13 +1922,13 @@ Check your email
 
 <small>components/EmailSignup.tsx</small>
 
-I sent a sign-in link to {email} from toby@tobyegbuna.com. Open it on this device and you'll land back where you were.
+I sent a sign-in link to {email} from toby@tobyegbuna.com. Open it on this device and you’ll land back where you were.
 
 **Help**
 
 <small>components/EmailSignup.tsx</small>
 
-Didn't get it? Check spam, or send it again.
+Didn’t get it? Check spam, or send it again.
 
 ### Link expired or error
 
@@ -1932,7 +1936,7 @@ An expired, used, or invalid magic link returns to the page with the modal open.
 
 <small>components/LoginModal.tsx</small>
 
-That link expired. Enter your email and I'll send a new one.
+That link expired. Enter your email and I’ll send a new one.
 
 ## Welcome questions
 
@@ -1942,7 +1946,7 @@ Shown after the first sign-in, until the person saves or skips.
 
 <small>components/WelcomeModal.tsx</small>
 
-You're in. Your skill is ready.
+You’re in. Your skill is ready.
 
 **Body**
 
@@ -1954,7 +1958,7 @@ Three quick questions so I send you skills that fit your job. All optional.
 
 <small>components/WelcomeModal.tsx</small>
 
-What's your HR function?
+What’s your HR function?
 
 **Options**
 
@@ -2038,7 +2042,7 @@ Something went wrong. You can skip for now.
 
 <small>components/WelcomeModal.tsx</small>
 
-I couldn't store those answers yet. You can skip for now.
+I couldn’t store those answers yet. You can skip for now.
 
 **Error, network**
 
@@ -2054,7 +2058,7 @@ Logged out only. Hidden on People Builders, hidden for 30 days after dismiss, an
 
 <small>components/SignupBar.tsx</small>
 
-One free AI skill for HR, every Tuesday.
+One free AI skill for People leaders, every Tuesday.
 
 **Placeholder**
 
@@ -2134,4 +2138,4 @@ Your Skills for People sign-in link
 
 **Body**
 
-Click below to sign in to Skills for People. [Sign in] The link expires in 1 hour. If you didn't ask for it, you can ignore this email.
+Click below to sign in to Skills for People. [Sign in] The link expires in 1 hour. If you didn’t ask for it, you can ignore this email.

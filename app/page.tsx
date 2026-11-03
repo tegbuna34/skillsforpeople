@@ -16,9 +16,9 @@ import CohortPreview from "@/components/mockups/CohortPreview";
 import "@/components/mockups/visuals.css";
 
 const FAMILIAR = [
-  "I asked for a simple tool months ago and it's still in the IT queue.",
+  "I asked for a simple tool months ago and it’s still in the IT queue.",
   "Our HRIS has the data, but every Monday I export it to a spreadsheet and clean it by hand.",
-  "Leadership wants an AI plan for HR and I don't know where to start.",
+  "Leadership wants an AI plan for HR and I don’t know where to start.",
 ];
 
 export default async function LandingPage() {
@@ -38,7 +38,7 @@ export default async function LandingPage() {
             {name ? `Welcome back, ${name}.` : "Welcome back."}
           </h1>
           <p className="mb-6 max-w-[520px] text-[17px] text-navy/75">
-            {weekly ? `${weekly.name} is this week's skill.` : "A new skill lands every Tuesday."}
+            {weekly ? `${weekly.name} is this week’s skill.` : "A new skill lands every Tuesday."}
           </p>
           <div className="flex flex-wrap gap-3">
             {weekly && (
@@ -46,7 +46,7 @@ export default async function LandingPage() {
                 href={`/skills/${weekly.slug}`}
                 className="rounded-[10px] bg-navy px-5 py-3 text-[15px] font-bold text-white no-underline hover:bg-blue"
               >
-                Open this week&apos;s skill
+                Open this week’s skill
               </Link>
             )}
             <Link
@@ -80,7 +80,7 @@ export default async function LandingPage() {
   const excerpt = weekly
     ? await excerptForSkill(weekly)
     : {
-        name: "This week's skill",
+        name: "This week’s skill",
         filename: "skill.md",
         what: "A ready-to-use workflow an HR leader shared, written so you can run it in Claude or ChatGPT.",
         steps: [],
@@ -91,15 +91,15 @@ export default async function LandingPage() {
       <section className="band band--mint hero">
         <div className="container split">
           <div className="hero__copy">
-            <p className="eyebrow">AI skills for HR and People teams</p>
-            <h1 className="h1">Get this week&apos;s free AI skill for your HR team.</h1>
+            <p className="eyebrow">AI skills for People leaders</p>
+            <h1 className="h1">Get this week’s free AI skill for your HR team.</h1>
             <p className="lead">
               One ready-to-use skill every Tuesday, built from a workflow an HR leader shared. Drop
               it into Claude or ChatGPT and run it this week.
             </p>
             <EmailSignup
               designed
-              cta="Get this week's skill →"
+              cta="Get this week’s skill →"
               placeholder="Your work email"
               finePrint="Get this skill now, plus a new one every Tuesday. Unsubscribe anytime."
             />
@@ -164,7 +164,7 @@ export default async function LandingPage() {
               <p className="eyebrow">People Builders</p>
               <h2 className="h2">Want to build your own tools?</h2>
               <p className="lead">
-                A 4-week live program for HR teams on Claude or ChatGPT, capped at 10 people. You
+                A 4-week live program for People leaders on Claude or ChatGPT, capped at 10 people. You
                 build two automated workflows and two apps.
               </p>
             </div>
@@ -178,7 +178,7 @@ export default async function LandingPage() {
 
       <section className="band band--white founder">
         <div className="container">
-          <p className="eyebrow">Who&apos;s behind this</p>
+          <p className="eyebrow">Who’s behind this</p>
           <div className="founder__row">
             <Image
               src="/assets/toby-headshot.jpg"
@@ -190,12 +190,10 @@ export default async function LandingPage() {
             <div>
               <div className="founder__story">
                 <p>
-                  I&apos;m Toby Egbuna. I co-founded Chezie, an HR tech company, and I&apos;ve spent
-                  the last 6 years building it.
-                </p>
-                <p>
-                  Chezie has one product manager, and it&apos;s me. We&apos;ve grown to $1 million
-                  in revenue.
+                  I’m Toby Egbuna. In 2021 I co-founded Chezie, an HR-tech platform for managing
+                  internal communities, and built the first version myself in a no-code tool. Today
+                  we work with customers like Airbnb and the NBA, and I still lead our technical
+                  work, mostly by using AI to build things that used to be too technical for me.
                 </p>
               </div>
               <p className="founder__line">

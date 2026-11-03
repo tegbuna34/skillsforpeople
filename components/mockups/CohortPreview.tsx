@@ -85,7 +85,7 @@ export default function CohortPreview() {
           <div
             className="week__art"
             role="img"
-            aria-label="A demo slide with three headings: what I built, who uses it, and what I'd build next."
+            aria-label="A demo slide with three headings: what I built, who uses it, and what I’d build next."
           >
             <div className="slide" aria-hidden="true">
               <span className="slide__kicker">Demo day</span>
@@ -93,7 +93,7 @@ export default function CohortPreview() {
               <ul>
                 <li>What I built</li>
                 <li>Who uses it</li>
-                <li>What I&apos;d build next</li>
+                <li>What I’d build next</li>
               </ul>
             </div>
           </div>
@@ -105,7 +105,7 @@ export default function CohortPreview() {
         <ul className="chips">
           <li>2 automated workflows</li>
           <li>2 apps</li>
-          <li>A map of your team&apos;s work</li>
+          <li>A map of your team’s work</li>
           <li>A demo for your manager</li>
         </ul>
       </footer>
