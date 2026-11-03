@@ -82,7 +82,7 @@ export default async function LandingPage() {
     : {
         name: "This week’s skill",
         filename: "skill.md",
-        what: "A ready-to-use workflow an HR leader shared, written so you can run it in Claude or ChatGPT.",
+        what: "A ready-to-use workflow a People leader shared, written so you can run it in Claude or ChatGPT.",
         steps: [],
       };
 
@@ -92,9 +92,9 @@ export default async function LandingPage() {
         <div className="container split">
           <div className="hero__copy">
             <p className="eyebrow">AI skills for People leaders</p>
-            <h1 className="h1">Get this week’s free AI skill for your HR team.</h1>
+            <h1 className="h1">Get this week’s free AI skill for People leaders.</h1>
             <p className="lead">
-              One ready-to-use skill every Tuesday, built from a workflow an HR leader shared. Drop
+              One ready-to-use skill every Tuesday, built from a workflow a People leader shared. Drop
               it into Claude or ChatGPT and run it this week.
             </p>
             <EmailSignup
@@ -120,7 +120,7 @@ export default async function LandingPage() {
 
       <section className="band band--mint familiar">
         <div className="container split">
-          <div className="notes" aria-label="Three problems HR teams run into">
+          <div className="notes" aria-label="Three problems People teams run into">
             {FAMILIAR.map((line) => (
               <p key={line} className="note">
                 &ldquo;{line}&rdquo;

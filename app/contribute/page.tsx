@@ -20,7 +20,7 @@ const LOOKING_FOR = [
   },
   {
     title: "Reusable by others",
-    desc: "Should work for another HR team with different inputs, not just yours.",
+    desc: "Should work for another People team with different inputs, not just yours.",
   },
   {
     title: "Structured as a skill",
@@ -40,7 +40,7 @@ export default function ContributePage() {
         </h1>
         <p className="text-lg text-navy/75">
           Skills for People doesn’t write skills for you — it’s a place to publish the
-          ones HR leaders have already built and quietly kept to themselves. If you’ve
+          ones People leaders have already built and quietly kept to themselves. If you’ve
           formalized a workflow, submit it directly. If you haven’t yet, there’s
           probably one sitting in your chat history.
         </p>

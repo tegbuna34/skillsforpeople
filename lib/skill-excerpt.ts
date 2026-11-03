@@ -8,7 +8,7 @@ export interface SkillExcerpt {
 }
 
 const FALLBACK_WHAT =
-  "A ready-to-use workflow an HR leader shared, written so you can run it in Claude or ChatGPT.";
+  "A ready-to-use workflow a People leader shared, written so you can run it in Claude or ChatGPT.";
 
 function sectionAfter(markdown: string, heading: string): string {
   const pattern = new RegExp(`^##\\s+${heading}\\s*$`, "im");

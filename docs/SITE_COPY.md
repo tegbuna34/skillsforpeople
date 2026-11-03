@@ -110,7 +110,7 @@ About
 
 <small>app/about/page.tsx</small>
 
-Toby Egbuna on why every HR team needs a builder, and why Skills for People exists.
+Toby Egbuna on why every People team needs a builder, and why Skills for People exists.
 
 **Unknown URL title**
 
@@ -268,13 +268,13 @@ AI skills for People leaders
 
 <small>app/page.tsx</small>
 
-Get this week’s free AI skill for your HR team.
+Get this week’s free AI skill for People leaders.
 
 **Lead**
 
 <small>app/page.tsx</small>
 
-One ready-to-use skill every Tuesday, built from a workflow an HR leader shared. Drop it into Claude or ChatGPT and run it this week.
+One ready-to-use skill every Tuesday, built from a workflow a People leader shared. Drop it into Claude or ChatGPT and run it this week.
 
 **Email field placeholder**
 
@@ -334,7 +334,7 @@ This week’s skill
 
 skill.md
 
-A ready-to-use workflow an HR leader shared, written so you can run it in Claude or ChatGPT.
+A ready-to-use workflow a People leader shared, written so you can run it in Claude or ChatGPT.
 
 **How it works, eyebrow**
 
@@ -464,7 +464,7 @@ A chat reply: 14 initiatives found, 5 with no owner, with two rows of a results 
 
 <small>app/page.tsx</small>
 
-Three problems HR teams run into
+Three problems People teams run into
 
 **Notes**
 
@@ -1280,7 +1280,7 @@ People Builders · 4 weeks · live · 10 people max
 
 <small>app/people-builders/page.tsx</small>
 
-Think like a founder. Build your own HR tools.
+Think like a founder. Build your own tools.
 
 **Lead**
 
@@ -1404,7 +1404,7 @@ Why I teach this
 
 I’m Toby Egbuna. In 2021 I co-founded Chezie, an HR-tech platform for managing internal communities, and built the first version myself in a no-code tool. Today we work with customers like Airbnb and the NBA, and I still lead our technical work, mostly by using AI to build things that used to be too technical for me.
 
-For a long time I was intimidated by anything that involved the word “code.” Now I use AI to build things that used to be way too technical for me. People Builders teaches you to do the same for your team. You bring the HR expertise. I bring the building.
+For a long time I was intimidated by anything that involved the word “code.” Now I use AI to build things that used to be way too technical for me. People Builders teaches you to do the same for your team. You bring the People expertise. I bring the building.
 
 **Heading**
 
@@ -1422,7 +1422,7 @@ Most companies have an L&D or training budget that covers a program like this. H
 
 <small>app/people-builders/CopyNote.tsx</small>
 
-Hi [manager], I’d like to join People Builders, a 4-week live program that teaches HR teams to build with the Claude or ChatGPT licenses we already have. It costs $2,500. I’d spend about 2 hours a week in sessions and come out with two automated workflows and two apps for our team, starting with [workflow], which takes us about [hours] a week today. Can we use L&D budget for this? Details: skillsforpeople.com/people-builders
+Hi [manager], I’d like to join People Builders, a 4-week live program that teaches People teams to build with the Claude or ChatGPT licenses we already have. It costs $2,500. I’d spend about 2 hours a week in sessions and come out with two automated workflows and two apps for our team, starting with [workflow], which takes us about [hours] a week today. Can we use L&D budget for this? Details: skillsforpeople.com/people-builders
 
 **Copy button**
 
@@ -1698,7 +1698,7 @@ About
 
 <small>app/about/page.tsx</small>
 
-Every HR team needs a builder. I want it to be you.
+Every People team needs a builder. I want it to be you.
 
 **Body**
 

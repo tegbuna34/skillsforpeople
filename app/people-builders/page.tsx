@@ -83,7 +83,7 @@ export default function PeopleBuildersPage() {
           People Builders · 4 weeks · live · 10 people max
         </div>
         <h1 className="mb-4 text-[clamp(34px,4.6vw,50px)] font-bold leading-[1.1] tracking-tight">
-          Think like a founder. Build your own HR tools.
+          Think like a founder. Build your own tools.
         </h1>
         <p className="mb-7 max-w-[640px] text-[18px] text-navy/75">
           A 4-week live program for People leaders on Claude or ChatGPT. You walk out with two
@@ -180,7 +180,7 @@ export default function PeopleBuildersPage() {
         <p>
           For a long time I was intimidated by anything that involved the word “code.”
           Now I use AI to build things that used to be way too technical for me. People Builders
-          teaches you to do the same for your team. You bring the HR expertise. I bring the
+          teaches you to do the same for your team. You bring the People expertise. I bring the
           building.
         </p>
       </section>

@@ -6,7 +6,7 @@ import EmailSignup from "@/components/EmailSignup";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Toby Egbuna on why every HR team needs a builder, and why Skills for People exists.",
+    "Toby Egbuna on why every People team needs a builder, and why Skills for People exists.",
 };
 
 export default function AboutPage() {
@@ -15,7 +15,7 @@ export default function AboutPage() {
       <div className="mx-auto max-w-[820px] px-5 pb-6 pt-16 sm:px-8 md:pt-24 lg:px-16">
         <div className="mb-2.5 text-[13px] font-bold uppercase tracking-wider text-blue">About</div>
         <h1 className="text-[clamp(32px,4.4vw,46px)] font-bold leading-[1.12] tracking-tight">
-          Every HR team needs a builder. I want it to be you.
+          Every People team needs a builder. I want it to be you.
         </h1>
       </div>
 
